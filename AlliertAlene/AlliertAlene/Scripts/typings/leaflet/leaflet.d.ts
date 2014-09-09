@@ -1028,15 +1028,15 @@ declare module L {
         /**
           * Size of the icon image in pixels.
           */
-        iconSize?: Point;
-    
+        //iconSize?: Point;
+        iconSize?: any;
         /**
           * The coordinates of the "tip" of the icon (relative to its top left corner).
           * The icon will be aligned so that this point is at the marker's geographical
           * location. Centered by default if size is specified, also can be set in CSS
           * with negative margins.
           */
-        iconAnchor?: Point;
+        iconAnchor?: any;
     
         /**
           * The URL to the icon shadow image. If not specified, no shadow image will be
@@ -1065,7 +1065,8 @@ declare module L {
           * The coordinates of the point from which popups will "open", relative to the
           * icon anchor.
           */
-        popupAnchor?: Point;
+        //popupAnchor?: Point;
+        popupAnchor?: any;
     
         /**
           * A custom class name to assign to both icon and shadow images. Empty by default.
@@ -1267,6 +1268,8 @@ declare module L {
           * the DOM and removes listeners previously added in onAdd. Called on map.removeLayer(layer).
           */
         onRemove(map: Map): void;
+
+
     }
 }
 
@@ -1579,7 +1582,7 @@ declare module L {
           * Create a layer group, optionally given an initial set of layers.
           */
         constructor(layers?: T[]);
-    
+        addData(filtered: any): void;
         /**
           * Adds the group of layers to the map.
           */
@@ -1708,6 +1711,8 @@ declare module L {
           * The object that fired the event.
           */
         target: any;
+
+        layer:any;
     }
 }
  
@@ -2004,7 +2009,7 @@ declare module L {
           * animation options.
           */
         setView(center: LatLng, zoom?: number, options?: ZoomPanOptions): Map;
-    
+        setView(center: any, zoom?: number, options?: ZoomPanOptions): Map;
         /**
           * Sets the zoom of the map.
           */

@@ -42,7 +42,6 @@ d3.json('/Assets/dataPoints.geojson', function (err, data) {
     pointLayer.addData(data);
     pointLayer.on('layeradd', function (e) {
         var marker = e.layer, feature = marker.feature;
-
         marker.setIcon(L.icon(feature.properties.icon));
     });
     setBrush(data);

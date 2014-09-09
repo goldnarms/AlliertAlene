@@ -12,7 +12,7 @@ var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
 
 // Create a new layer with a special pointToLayer function
 // that'll generate scaled points.
-var pointLayer = L.geoJson(null, { pointToLayer: scaledPoint })
+var pointLayer: L.GeoJSON = <L.GeoJSON>L.geoJson(null, { pointToLayer: scaledPoint })
     .addTo(map);
 
 function pointColor(feature) {
@@ -45,7 +45,6 @@ d3.json('/Assets/dataPoints.geojson', function (err, data) {
     pointLayer.on('layeradd', function (e) {
         var marker = e.layer,
             feature = marker.feature;
-
         marker.setIcon(L.icon(feature.properties.icon));
     });
     setBrush(data);
@@ -66,11 +65,11 @@ function setMarker(markerType: app.MarkerType): L.Icon {
 
 function setBrush(data) {
     var container = d3.select('#brush'),
-        width = container.node().offsetWidth,
+        width = (<any>container.node()).offsetWidth,
         margin = { top: 0, right: 0, bottom: 0, left: 0 },
         height = 100;
 
-    var timeExtent = d3.extent(data.features, function (d) {
+    var timeExtent = d3.extent(data.features, function (d: any) {
         return new Date(d.properties.time);
     });
 

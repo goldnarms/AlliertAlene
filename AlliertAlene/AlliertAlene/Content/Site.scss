@@ -6,7 +6,7 @@ html{
     color: $fontColor;
 }
 body {
-    padding-top: 50px;
+    padding-top: 50px 0 20px 0;
     padding-bottom: 20px;
     background-color:$backgroundColor;
     color: $fontColor;
@@ -56,6 +56,11 @@ textarea {
 #map{
     height: 100%;
     min-height: $mapHeight;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+
 }
 @media only screen and (max-width: 767px) {
     .nofloat {

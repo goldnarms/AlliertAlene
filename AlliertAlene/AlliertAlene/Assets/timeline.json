@@ -1,9 +1,9 @@
 ﻿{
     "timeline":
     {
-        "headline":"The Main Timeline Headline Goes here",
+        "headline":"Alliert og alene",
         "type":"default",
-        "text":"<p>Intro body text goes here, some HTML is ok</p>",
+        "text":"<p></p>",
         "asset": {
             "media":"http://yourdomain_or_socialmedialink_goes_here.jpg",
             "credit":"Credit Name Goes Here",
@@ -11,10 +11,10 @@
         },
         "date": [
             {
-                "startDate": "2011,12,10",
-                "endDate": "2011,12,11",
-                "headline": "Headline Goes Here",
-                "text": "<p>Body text goes here, some HTML is OK</p>",
+                "startDate": "1940,4,8",
+                "endDate": "1940,4,9",
+                "headline": "Sørlandet",
+                "text": "<p>fefe</p>",
                 "tag": "This is Optional",
                 "classname": "optionaluniqueclassnamecanbeaddedhere",
                 "asset": {
@@ -27,8 +27,8 @@
         ],
         "era": [
             {
-                "startDate": "2011,12,10",
-                "endDate": "2011,12,11",
+                "startDate": "1940,4,8",
+                "endDate": "1940,4,9",
                 "headline": "Headline Goes Here",
                 "text": "<p>Body text goes here, some HTML is OK</p>",
                 "tag": "This is Optional"

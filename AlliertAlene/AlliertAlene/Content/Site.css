@@ -3,7 +3,7 @@
   color: #efefef; }
 
 body {
-  padding-top: 50px;
+  padding-top: 50px 0 20px 0;
   padding-bottom: 20px;
   background-color: #111111;
   color: #efefef; }
@@ -44,9 +44,15 @@ input, select, textarea {
 
 #map {
   height: 100%;
-  min-height: 500px; }
+  min-height: 500px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
 
 @media only screen and (max-width: 767px) {
   .nofloat {
     float: none;
     padding: 10px 15px; } }
+
+/*# sourceMappingURL=Site.css.map */
