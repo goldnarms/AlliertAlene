@@ -2,6 +2,7 @@
 /// <reference path="../scripts/typings/d3/d3.d.ts" />
 /// <reference path="../scripts/typings/mapbox/mapbox.d.ts" />
 /// <reference path="../scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="markertypes.ts" />
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ29sZG5hcm1zIiwiYSI6IkZKWHd2ZzgifQ.spTj9MJpcjX57EbN2fUDqQ';
 var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
     attributionControl: false,
@@ -22,12 +23,8 @@ function pointRadius(feature) {
 }
 
 function scaledPoint(feature, latlng) {
-    return L.circleMarker(latlng, {
-        radius: pointRadius(feature),
-        fillColor: pointColor(feature),
-        fillOpacity: 0.7,
-        weight: 0.5,
-        color: '#fff'
+    return L.marker(latlng, {
+        icon: setMarker(feature.properties.marker)
     }).on("click", function () {
         var infoBox = $("#infoBox");
         infoBox.children("h2").html(feature.properties.place);
@@ -43,8 +40,26 @@ function scaledPoint(feature, latlng) {
 // Request our data and add it to the earthquakesLayer.
 d3.json('/Assets/dataPoints.geojson', function (err, data) {
     earthquakesLayer.addData(data);
+    earthquakesLayer.on('layeradd', function (e) {
+        var marker = e.layer, feature = marker.feature;
+
+        marker.setIcon(L.icon(feature.properties.icon));
+    });
     setBrush(data);
 });
+
+function setMarker(markerType) {
+    switch (markerType) {
+        case 0 /* Ship */: {
+            return new L.Icon({
+                iconUrl: "/Content/Markers/battleship-3.png",
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                popupAnchor: [0, -11]
+            });
+        }
+    }
+}
 
 function setBrush(data) {
     var container = d3.select('#brush'), width = container.node().offsetWidth, margin = { top: 0, right: 0, bottom: 0, left: 0 }, height = 100;

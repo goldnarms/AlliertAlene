@@ -1,11 +1,26 @@
-﻿body {
+﻿html {
+  background-color: #111111;
+  color: #efefef; }
+
+body {
   padding-top: 50px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  background-color: #111111;
+  color: #efefef; }
+
+h1 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 5rem; }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
   padding-left: 15px;
   padding-right: 15px; }
+
+.header {
+  text-align: center;
+  border-bottom: 3px solid #ff0000; }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input, select, textarea {
@@ -16,11 +31,20 @@ input, select, textarea {
   padding-top: 20px; }
 
 #infoBox {
-  background-color: #00bfff;
-  min-height: 400px; }
+  background-color: #ee3333;
+  min-height: 500px;
+  overflow: auto; }
   #infoBox img {
     max-width: 100%;
     max-height: 100%; }
+
+.mapContainer {
+  height: 100%;
+  min-height: 500px; }
+
+#map {
+  height: 100%;
+  min-height: 500px; }
 
 @media only screen and (max-width: 767px) {
   .nofloat {

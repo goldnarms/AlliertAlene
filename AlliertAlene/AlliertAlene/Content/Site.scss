@@ -1,14 +1,32 @@
-﻿body {
+﻿$backgroundColor: #111111;
+$fontColor: #efefef;
+$mapHeight: 500px;
+html{
+    background-color:$backgroundColor;
+    color: $fontColor;
+}
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color:$backgroundColor;
+    color: $fontColor;
 }
 
+h1{
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 5rem;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
+.header{
+    text-align: center;
+    border-bottom: 3px solid #ff0000;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -22,12 +40,22 @@ textarea {
 }
 
 #infoBox{
-    background-color: #00bfff;
-    min-height: 400px;
+    background-color: #ee3333;
+    min-height: $mapHeight;
+    overflow:auto;
     img{
         max-width:100%;
         max-height:100%;
     }
+}
+
+.mapContainer{
+    height: 100%;
+    min-height: $mapHeight;
+}
+#map{
+    height: 100%;
+    min-height: $mapHeight;
 }
 @media only screen and (max-width: 767px) {
     .nofloat {
