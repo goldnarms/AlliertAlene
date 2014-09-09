@@ -224,9 +224,29 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="bower_components\d3\d3.js" />
+    <Content Include="bower_components\d3\d3.min.js" />
+    <Content Include="bower_components\mapbox.js\images\icons-000000%402x.png" />
+    <Content Include="bower_components\mapbox.js\images\icons-ffffff%402x.png" />
+    <Content Include="bower_components\mapbox.js\images\icons.svg" />
+    <Content Include="bower_components\mapbox.js\images\layers-2x.png" />
+    <Content Include="bower_components\mapbox.js\images\layers.png" />
+    <Content Include="bower_components\mapbox.js\images\marker-icon-2x.png" />
+    <Content Include="bower_components\mapbox.js\images\marker-icon.png" />
+    <Content Include="bower_components\mapbox.js\images\marker-shadow.png" />
+    <Content Include="bower_components\mapbox.js\mapbox.css" />
+    <Content Include="bower_components\mapbox.js\mapbox.internals.js" />
+    <Content Include="bower_components\mapbox.js\mapbox.js" />
+    <Content Include="bower_components\mapbox.js\mapbox.standalone.css" />
+    <Content Include="bower_components\mapbox.js\mapbox.standalone.js" />
+    <Content Include="bower_components\mapbox.js\mapbox.standalone.uncompressed.js" />
+    <Content Include="bower_components\mapbox.js\mapbox.uncompressed.css" />
+    <Content Include="bower_components\mapbox.js\mapbox.uncompressed.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.scss</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -254,6 +274,17 @@
     <Content Include="Assets\earthquakes.geojson" />
     <Content Include="Assets\dataPoints.json" />
     <Content Include="Assets\dataPoints.geojson" />
+    <Content Include="bower_components\d3\.bower.json" />
+    <Content Include="bower_components\d3\.spmignore" />
+    <Content Include="bower_components\d3\bower.json" />
+    <Content Include="bower_components\d3\composer.json" />
+    <Content Include="bower_components\d3\CONTRIBUTING.md" />
+    <Content Include="bower_components\d3\LICENSE" />
+    <Content Include="bower_components\d3\README.md" />
+    <Content Include="bower_components\mapbox.js\.bower.json" />
+    <Content Include="bower_components\mapbox.js\bower.json" />
+    <Content Include="bower_components\mapbox.js\images\render.sh" />
+    <Content Include="Content\Site.scss" />
     <None Include="Properties\PublishProfiles\AlliertAlene.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

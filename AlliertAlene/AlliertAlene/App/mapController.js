@@ -29,8 +29,11 @@ function scaledPoint(feature, latlng) {
         weight: 0.5,
         color: '#fff'
     }).on("click", function () {
-        $("#infoBox").html(feature.properties.text);
-    });
+        var infoBox = $("#infoBox");
+        infoBox.children("h2").html(feature.properties.place);
+        infoBox.children("div").html(feature.properties.text);
+        infoBox.children("img").attr("src", feature.properties.media.link);
+    }).bindPopup('<h3>' + feature.properties.place + "</h3>");
     //bindPopup(
     //'<h2>' + feature.properties.place + '</h2>' +
     //'<h3>' + new Date(feature.properties.time) + '</h3>' +

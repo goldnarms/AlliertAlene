@@ -10,16 +10,10 @@ namespace AlliertAlene
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
+                "~/bower_components/d3/d3.js",
+                "~/bower_components/mapbox.js/mapbox.js",
                 "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.unobtrusive*",
-                "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                "~/Scripts/knockout-{version}.js",
-                "~/Scripts/knockout.validation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 //"~/Scripts/sammy-{version}.js",
@@ -41,8 +35,11 @@ namespace AlliertAlene
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                 "~/Content/bootstrap.css",
-                 "~/Content/Site.css"));
+                "~/bower_components/mapbox.js/mapbox.css",
+                "~/Content/bootstrap.css",
+                "~/Content/Site.css"
+
+                 ));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

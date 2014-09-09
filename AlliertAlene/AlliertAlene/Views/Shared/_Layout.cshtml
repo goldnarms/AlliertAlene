@@ -4,8 +4,6 @@
     <meta charset=utf-8 />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css' rel='stylesheet' />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -26,7 +24,7 @@
 <body>
     <!-- This example requires d3 for AJAX and the brush,
          though you can bring your own library. -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js' charset="utf-8"></script>
+    @*<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js' charset="utf-8"></script>*@
     <style>
         .ui-brush {
             background: #f8f8f8;
@@ -50,7 +48,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/thirdparties")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/app")
     @RenderSection("Scripts", required: false)
