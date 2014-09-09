@@ -18,19 +18,104 @@ $RECYCLE.BIN/
 # Operating System Files
 # =========================
 
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+#nuget packages
+src/packages
+
+#Visual Studio files
+*.Publish.xml
+*.[Oo]bj
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.docstates
+*.opensdf
+*.vsp
+ipch/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+[Tt]estResults*/
+*.suo
+*.orig
+Log.txt
+src/_UpgradeReport_Files
+UpgradeLog.XML
+UpgradeLog.htm
+UpgradeLog2.XML
+UpgradeLog2.htm
+
+*.pubxml
+
+#Tooling
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+StyleCop.*
+TestResults/
+.sass-cache/
+#Tabs Studio Files
+*.tss
+
+#Sublime Text 2
+*.sublime-project
+*.sublime-workspace
+
+#type script stuff
+tscommand.tmp.txt
+!bin
+
+#CSS files are built with SASS at build time.
+#Node module stuff
+node_modules
+
+*.chk
+*.chk
+*.jrs
+*.ide
+*.jrs
+
 # OSX
 # =========================
 
-.DS_Store
 .AppleDouble
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
-
+Icon
 # Thumbnails
 ._*
 
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+*.chk
+*.jrs
+*.log
+AlliertAlene/bin/
+AlliertAlene/obj/
+AlliertAlene/bower_components/
+packages/
+dist/
+AlliertAlene.v12.suo
