@@ -12,6 +12,8 @@ namespace AlliertAlene
         {
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
                 "~/bower_components/d3/d3.js",
+                "~/Scripts/TimeLine/js/storyjs-embed.js",
+                "~/Scripts/TimeLine/js/timeline.js",
                 "~/bower_components/mapbox.js/mapbox.js",
                 "~/Scripts/jquery-{version}.js"));
 

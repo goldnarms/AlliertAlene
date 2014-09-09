@@ -11,7 +11,7 @@ var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
 
 // Create a new layer with a special pointToLayer function
 // that'll generate scaled points.
-var earthquakesLayer = L.geoJson(null, { pointToLayer: scaledPoint }).addTo(map);
+var pointLayer = L.geoJson(null, { pointToLayer: scaledPoint }).addTo(map);
 
 function pointColor(feature) {
     //return feature.properties.mag > 5 ? '#f55' : '#a00';
@@ -27,7 +27,7 @@ function scaledPoint(feature, latlng) {
         icon: setMarker(feature.properties.marker)
     }).on("click", function () {
         var infoBox = $("#infoBox");
-        infoBox.children("h2").html(feature.properties.place);
+        infoBox.children("h2").html(feature.properties.header);
         infoBox.children("div").html(feature.properties.text);
         infoBox.children("img").attr("src", feature.properties.media.link);
     }).bindPopup('<h3>' + feature.properties.place + "</h3>");
@@ -39,8 +39,8 @@ function scaledPoint(feature, latlng) {
 
 // Request our data and add it to the earthquakesLayer.
 d3.json('/Assets/dataPoints.geojson', function (err, data) {
-    earthquakesLayer.addData(data);
-    earthquakesLayer.on('layeradd', function (e) {
+    pointLayer.addData(data);
+    pointLayer.on('layeradd', function (e) {
         var marker = e.layer, feature = marker.feature;
 
         marker.setIcon(L.icon(feature.properties.icon));
@@ -97,7 +97,7 @@ function setBrush(data) {
             };
         }
         var filtered = data.features.filter(filter);
-        earthquakesLayer.clearLayers().addData(filtered);
+        pointLayer.clearLayers().addData(filtered);
     }
 }
 //# sourceMappingURL=mapController.js.map
