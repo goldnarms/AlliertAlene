@@ -1,0 +1,46 @@
+{
+    "type": "FeatureCollection",
+    "metadata": {
+        "generated": 1400518390000,
+        "title": "Alliert og alene",
+        "count": 1
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "place": "Sørlandet",
+                "time": -938224800000,
+                "text": "<p>På vei til Bergen blir det tyske troppetransportskipet \"Rio de Janeiro\" senket av den polske ubåten \"Orzel\" utenfor Lillesand. Soldater i full krigsutrustning og uniform fraktes til Lillesand i lokale båter. De hevdet de var på vei til Bergen for å hjelpe nordmennene - angivelig etter anmodning fra den norske regjering.<\/p><p>133 overlevende og 10 døde blir tatt inn til Lillesand. I Berlin fryktet man at den planlagte  aksjonen dagen etter var røpet, men sentrale norske myndigheter foretok seg ingenting da hendelsen ble rapportert.<\/p>",
+                "media": {
+                    "type": "img",
+                    "link": "http://upload.wikimedia.org/wikipedia/commons/c/c3/ORP_Orzel.jpg",
+                    "description": ""
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [58.250169,8.378711]
+            },
+            "id": "aa00001"
+        },
+		       {
+            "type": "Feature",
+            "properties": {
+                "place": "Test",
+                "time": -937400399000,
+                "text": "<p>På vei til Bergen blir det tyske troppetransportskipet \"Rio de Janeiro\" senket av den polske ubåten \"Orzel\" utenfor Lillesand. Soldater i full krigsutrustning og uniform fraktes til Lillesand i lokale båter. De hevdet de var på vei til Bergen for å hjelpe nordmennene - angivelig etter anmodning fra den norske regjering.<\/p><p>133 overlevende og 10 døde blir tatt inn til Lillesand. I Berlin fryktet man at den planlagte  aksjonen dagen etter var røpet, men sentrale norske myndigheter foretok seg ingenting da hendelsen ble rapportert.<\/p>",
+                "media": {
+                    "type": "img",
+                    "link": "http://upload.wikimedia.org/wikipedia/commons/c/c3/ORP_Orzel.jpg",
+                    "description": ""
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [58.250169,8.378711]
+            },
+            "id": "aa00001"
+        }
+    ]
+}
