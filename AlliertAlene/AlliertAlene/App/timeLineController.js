@@ -4,7 +4,7 @@ $(document).ready(function () {
         type: 'timeline',
         width: '800',
         height: '600',
-        source: '',
+        source: '/Assets/dataPoints.geojson',
         embed_id: 'my-timeline'
     });
 });

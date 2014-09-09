@@ -12,6 +12,8 @@ namespace AlliertAlene
         {
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
                 "~/bower_components/d3/d3.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/respond.js",
                 "~/Scripts/TimeLine/js/storyjs-embed.js",
                 "~/Scripts/TimeLine/js/timeline.js",
                 "~/bower_components/mapbox.js/mapbox.js",
@@ -32,11 +34,8 @@ namespace AlliertAlene
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Scripts/TimeLine/css/timeline.css",
                 "~/bower_components/mapbox.js/mapbox.css",
                 "~/Content/bootstrap.css",
                 "~/Content/Site.css"
