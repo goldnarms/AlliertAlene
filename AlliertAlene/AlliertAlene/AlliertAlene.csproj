@@ -46,12 +46,12 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -224,6 +224,8 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Assets\Images\1280px-Bluecher_sinkend.jpg" />
+    <Content Include="Assets\Videos\285863470.mp4" />
     <Content Include="bower_components\d3\d3.js" />
     <Content Include="bower_components\d3\d3.min.js" />
     <Content Include="bower_components\mapbox.js\images\icons-000000%402x.png" />
@@ -242,6 +244,13 @@
     <Content Include="bower_components\mapbox.js\mapbox.standalone.uncompressed.js" />
     <Content Include="bower_components\mapbox.js\mapbox.uncompressed.css" />
     <Content Include="bower_components\mapbox.js\mapbox.uncompressed.js" />
+    <Content Include="bower_components\video.js\font\vjs.svg" />
+    <Content Include="bower_components\video.js\video-js.css" />
+    <Content Include="bower_components\video.js\video-js.dev.css" />
+    <Content Include="bower_components\video.js\video-js.min.css" />
+    <Content Include="bower_components\video.js\video-js.swf" />
+    <Content Include="bower_components\video.js\video.dev.js" />
+    <Content Include="bower_components\video.js\video.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Markers\battleship-3.png" />
@@ -286,6 +295,14 @@
     <Content Include="bower_components\mapbox.js\bower.json" />
     <Content Include="bower_components\mapbox.js\images\render.sh" />
     <Content Include="Content\Site.scss" />
+    <Content Include="bower_components\video.js\.bower.json" />
+    <Content Include="bower_components\video.js\bower.json" />
+    <Content Include="bower_components\video.js\font\vjs.eot" />
+    <Content Include="bower_components\video.js\font\vjs.ttf" />
+    <Content Include="bower_components\video.js\font\vjs.woff" />
+    <Content Include="bower_components\video.js\LICENSE" />
+    <Content Include="bower_components\video.js\package.json" />
+    <Content Include="bower_components\video.js\README.md" />
     <None Include="Properties\PublishProfiles\AlliertAlene.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -17,6 +17,7 @@ namespace AlliertAlene
                 "~/Scripts/TimeLine/js/storyjs-embed.js",
                 "~/Scripts/TimeLine/js/timeline.js",
                 "~/bower_components/mapbox.js/mapbox.js",
+                "~/bower_components/video.js/video.js",
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
@@ -37,6 +38,7 @@ namespace AlliertAlene
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Scripts/TimeLine/css/timeline.css",
                 "~/bower_components/mapbox.js/mapbox.css",
+                "~/bower_components/video.js/video-js.css",
                 "~/Content/bootstrap.css",
                 "~/Content/Site.css"
 

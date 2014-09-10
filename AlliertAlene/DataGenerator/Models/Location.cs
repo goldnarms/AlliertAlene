@@ -1,0 +1,4 @@
+namespace DataGenerator.Models
+{
+
+}

@@ -78,7 +78,7 @@ function filterOnId(id) {
 function setInfoBox(data) {
     var infoBox = $("#infoBox");
     infoBox.children("h2").html(data.properties.header);
-    infoBox.children("div").html(data.properties.text);
+    infoBox.children("div").first().html(data.properties.text);
     infoBox.children("img").attr("src", data.properties.media.link);
 }
 
