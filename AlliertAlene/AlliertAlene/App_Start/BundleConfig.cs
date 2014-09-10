@@ -13,6 +13,7 @@ namespace AlliertAlene
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
                 "~/bower_components/d3/d3.js",
                 "~/Scripts/bootstrap.js",
+                "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/TimeLine/js/storyjs-embed.js",
                 "~/Scripts/TimeLine/js/timeline.js",
@@ -34,6 +35,9 @@ namespace AlliertAlene
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            //    "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Scripts/TimeLine/css/timeline.css",

@@ -40,7 +40,8 @@ input, select, textarea {
 
 .mapContainer {
   height: 100%;
-  min-height: 500px; }
+  min-height: 500px;
+  margin-right: 0; }
 
 #map {
   height: 100%;
