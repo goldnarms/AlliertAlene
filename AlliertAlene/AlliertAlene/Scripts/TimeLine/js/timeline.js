@@ -471,7 +471,7 @@ if(typeof VMM != 'undefined') {
 			_event_data = event_data;
 		}
 		
-		if( typeof( jQuery ) != 'undefined' ){
+		if (typeof (jQuery) != 'undefined') {
 			jQuery(element).bind(_event_type, _event_data, the_handler);
 			
 			//return e;
@@ -4492,7 +4492,6 @@ if(typeof VMM != 'undefined' && typeof VMM.MediaElement == 'undefined') {
 				m = VMM.MediaType(data.media); //returns an object with .type and .id
 				m.uid = uid;
 				_valid = true;
-				
 			// CREDIT
 				if (data.credit != null && data.credit != "") {
 					creditElem			=	"<div class='credit'>" + VMM.Util.linkify_with_twitter(data.credit, "_blank") + "</div>";
@@ -6117,7 +6116,8 @@ if (typeof VMM.Slider != 'undefined') {
 			if (data.asset != null && data.asset != "") {
 				if (data.asset.media != null && data.asset.media != "") {
 					c.has.media	= true;
-					$media		= VMM.appendAndGetElement($slide, "<div>", "media", VMM.MediaElement.create(data.asset, data.uniqueid));
+					$media = VMM.appendAndGetElement($slide, "<div>", "media", VMM.MediaElement.create(data.asset, data.uniqueid));
+
 				}
 			}
 			
@@ -7526,7 +7526,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Timeline == 'undefined') {
 						_date.slug				= data.date[i].slug;
 						_date.uniqueid			= VMM.Util.unique_ID(7);
 						_date.classname			= data.date[i].classname;
-						
+					    _date.id                = data.date[i].id;
 						
 						_dates.push(_date);
 					} 
@@ -7597,7 +7597,8 @@ if(typeof VMM != 'undefined' && typeof VMM.Timeline == 'undefined') {
 				_date.asset			= data.asset;
 				_date.slug			= false;
 				_date.needs_slug	= false;
-				_date.fulldate		= _date.startdate.getTime();
+				_date.fulldate      = _date.startdate.getTime();
+				_date.id            = _date.id;
 				
 				if (config.embed) {
 					VMM.fireEvent(global, config.events.headline, _date.headline);
@@ -7945,6 +7946,7 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 		function onMarkerClick(e) {
 			$dragslide.cancelSlide();
 			goToMarker(e.data.number);
+			filterOnId(e.data.id);
 			upDate();
 		};
 		
@@ -7976,7 +7978,7 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 			
 			// set marker style
 			for(var i = 0; i < markers.length; i++) {
-				VMM.Lib.removeClass(markers[i].marker, "active");
+			    VMM.Lib.removeClass(markers[i].marker, "active");
 			}
 			
 			if (config.start_page && markers[0].type == "start") {
@@ -7985,6 +7987,7 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 			}
 			
 			VMM.Lib.addClass(markers[current_marker].marker, "active");
+			filterOnId(markers[current_marker].id);
 			
 			// ANIMATE MARKER
 			VMM.Lib.stop($timenav);
@@ -9136,7 +9139,7 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 				VMM.Lib.attr(_marker, "id", ( "marker_" + data[i].uniqueid).toString() );
 				
 				// MARKER CLICK
-				VMM.bindEvent(_marker_flag, onMarkerClick, "", {number: i});
+				VMM.bindEvent(_marker_flag, onMarkerClick, "", {number: i, id: data[i].id}); // AJ
 				VMM.bindEvent(_marker_flag, onMarkerHover, "mouseenter mouseleave", {number: i, elem:_marker_flag});
 				
 				_marker_obj = {
@@ -9147,7 +9150,8 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 					full:				true,
 					relative_pos:		_marker_relative_pos,
 					tag:				data[i].tag,
-					pos_left:			0
+					pos_left:           0,
+                    id:                 data[i].id
 				};
 				
 				

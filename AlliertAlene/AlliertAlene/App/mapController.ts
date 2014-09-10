@@ -28,10 +28,7 @@ function scaledPoint(feature, latlng) {
     return L.marker(latlng, {
         icon: setMarker(feature.properties.marker)
     }).on("click", () => {
-            var infoBox = $("#infoBox");
-            infoBox.children("h2").html(feature.properties.header);
-            infoBox.children("div").html(feature.properties.text);
-            infoBox.children("img").attr("src", feature.properties.media.link);
+            setInfoBox(feature);
         }).bindPopup('<h3>' + feature.properties.place + "</h3>");
     //bindPopup(
     //'<h2>' + feature.properties.place + '</h2>' +
@@ -39,16 +36,17 @@ function scaledPoint(feature, latlng) {
     //feature.properties.text);
 }
 
-// Request our data and add it to the earthquakesLayer.
-d3.json('/Assets/dataPoints.geojson', function (err, data) {
-    pointLayer.addData(data);
-    pointLayer.on('layeradd', function (e) {
-        var marker = e.layer,
-            feature = marker.feature;
-        marker.setIcon(L.icon(feature.properties.icon));
-    });
-    setBrush(data);
-});
+filterOnId("aa0001");
+
+//d3.json('/Assets/dataPoints.geojson', function (err, data) {
+//    pointLayer.addData(data);
+//    pointLayer.on('layeradd', function (e) {
+//        var marker = e.layer,
+//            feature = marker.feature;
+//        marker.setIcon(L.icon(feature.properties.icon));
+//    });
+//    setBrush(data);
+//});
 
 function setMarker(markerType: app.MarkerType): L.Icon {
     switch (markerType) {
@@ -61,6 +59,31 @@ function setMarker(markerType: app.MarkerType): L.Icon {
             });
         }
     }
+}
+
+function filterOnId(id: string): void {
+    d3.json('/Assets/dataPoints.geojson', function (err, data) {
+        var filter = (feature) => {
+            return feature.properties.id == id;
+        };
+        var filtered = data.features.filter(filter);
+        if (filtered.length > 0) {
+            setInfoBox(filtered[0]);
+        }
+        pointLayer.clearLayers().addData(filtered);
+        pointLayer.on('layeradd', function (e) {
+            var marker = e.layer,
+                feature = marker.feature;
+            marker.setIcon(setMarker(feature.properties.marker));
+        });
+    });
+}
+
+function setInfoBox(data): void {
+    var infoBox = $("#infoBox");
+    infoBox.children("h2").html(data.properties.header);
+    infoBox.children("div").html(data.properties.text);
+    infoBox.children("img").attr("src", data.properties.media.link);
 }
 
 function setBrush(data) {

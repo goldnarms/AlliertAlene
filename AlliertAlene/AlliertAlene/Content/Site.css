@@ -32,7 +32,7 @@ input, select, textarea {
 
 #infoBox {
   background-color: #ee3333;
-  min-height: 500px;
+  height: 500px;
   overflow: auto; }
   #infoBox img {
     max-width: 100%;
@@ -54,5 +54,8 @@ input, select, textarea {
   .nofloat {
     float: none;
     padding: 10px 15px; } }
+
+.vco-slider {
+  display: none; }
 
 /*# sourceMappingURL=Site.css.map */

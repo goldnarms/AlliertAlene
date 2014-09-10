@@ -9,8 +9,9 @@
         {
             "type": "Feature",
             "properties": {
+                "id": "aa0001",
                 "place": "Lillesand",
-                "time": -938224800000,
+                "time": -938271600000,
                 "header": "Sørlandet",
                 "text": "<p>På vei til Bergen blir det tyske troppetransportskipet \"Rio de Janeiro\" senket av den polske ubåten \"Orzel\" utenfor Lillesand. Soldater i full krigsutrustning og uniform fraktes til Lillesand i lokale båter. De hevdet de var på vei til Bergen for å hjelpe nordmennene - angivelig etter anmodning fra den norske regjering.<\/p><p>133 overlevende og 10 døde blir tatt inn til Lillesand. I Berlin fryktet man at den planlagte  aksjonen dagen etter var røpet, men sentrale norske myndigheter foretok seg ingenting da hendelsen ble rapportert.<\/p>",
                 "media": {
@@ -24,13 +25,35 @@
                 "type": "Point",
                 "coordinates": [ 8.378711, 58.250169 ]
             },
-            "id": "aa00001"
+            "id": "aa0001a"
         },
         {
             "type": "Feature",
             "properties": {
+                "id": "aa0001",
+                "place": "Bergen",
+                "time": -938271600000,
+                "header": "Sørlandet",
+                "text": "<p>På vei til Bergen blir det tyske troppetransportskipet \"Rio de Janeiro\" senket av den polske ubåten \"Orzel\" utenfor Lillesand. Soldater i full krigsutrustning og uniform fraktes til Lillesand i lokale båter. De hevdet de var på vei til Bergen for å hjelpe nordmennene - angivelig etter anmodning fra den norske regjering.<\/p><p>133 overlevende og 10 døde blir tatt inn til Lillesand. I Berlin fryktet man at den planlagte  aksjonen dagen etter var røpet, men sentrale norske myndigheter foretok seg ingenting da hendelsen ble rapportert.<\/p>",
+                "media": {
+                    "type": "img",
+                    "link": "http://upload.wikimedia.org/wikipedia/commons/c/c3/ORP_Orzel.jpg",
+                    "description": ""
+                },
+                "marker": 0
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 5.323273, 60.392097 ]
+            },
+            "id": "aa0001b"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "id": "aa0002",
                 "place": "Oslofjorden",
-                "time": -938177999,
+                "time": -938185200000,
                 "header": "Østlandet",
                 "text": "<p>Tyskland angriper med krigsskip gjennom Oslofjorden. \"Blücher\" senkes og rundt 1000 tyskere mister livet. Tyske fly erobrer fornebu.<\/p>",
                 "media": {
@@ -44,7 +67,28 @@
                 "type": "Point",
                 "coordinates": [ 10.576736, 59.513925 ]
             },
-            "id": "aa00002"
+            "id": "aa0002a"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "id": "aa0003",
+                "place": "Kristiansand",
+                "time": -938185200000,
+                "header": "Sørlandet",
+                "text": "<p>Angrepene på Kristiansand og Arendal blir forsinket i flere timer grunnet tung tåke. Tyskerne møter hard motstand i Kristiansand og må gi seg for norske forsvarere to ganger. I tredje forsøk kommer tyskerne seg inn i havna med sine fartøyer. I Kristiansand lar man skipene passere fritt på grunnlag av feilaktig melding om at fartøyende førte fransk flagg. Dette ble en fatal misforståelse. Både granater fra skip og bomber fra fly angriper Kristiansand. 22 nordmenn mister livet. Arendal blir også okkupert.<\/p>",
+                "media": {
+                    "type": "img",
+                    "link": "http://commons.wikimedia.org/wiki/Category:Bl%C3%BCcher_(ship,_1908)?uselang=nb#mediaviewer/File:Bluecher_sinkend.jpg",
+                    "description": ""
+                },
+                "marker": 0
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 7.997216,58.147844]
+            },
+            "id": "aa0003a"
         }
     ]
 }

@@ -3,37 +3,35 @@
     {
         "headline":"Alliert og alene",
         "type":"default",
-        "text":"<p></p>",
-        "asset": {
-            "media":"http://yourdomain_or_socialmedialink_goes_here.jpg",
-            "credit":"Credit Name Goes Here",
-            "caption":"Caption text goes here"
-        },
+        "text":"",
         "date": [
             {
                 "startDate": "1940,4,8",
-                "endDate": "1940,4,9",
+                "endDate": "",
                 "headline": "Sørlandet",
-                "text": "<p>fefe</p>",
-                "tag": "This is Optional",
-                "classname": "optionaluniqueclassnamecanbeaddedhere",
-                "asset": {
-                    "media": "http://twitter.com/ArjunaSoriano/status/164181156147900416",
-                    "thumbnail": "optional-32x32px.jpg",
-                    "credit": "Credit Name Goes Here",
-                    "caption": "Caption text goes here"
-                }
-            }
-        ],
-        "era": [
+                "text": "",
+                "tag": "",
+                "classname": "",
+                "id":"aa0001"
+            },
             {
-                "startDate": "1940,4,8",
-                "endDate": "1940,4,9",
-                "headline": "Headline Goes Here",
-                "text": "<p>Body text goes here, some HTML is OK</p>",
-                "tag": "This is Optional"
+                "startDate": "1940,4,9",
+                "endDate": "",
+                "headline": "Østlandet",
+                "text": "",
+                "tag": "",
+                "classname": "",
+                "id":"aa0002"
+            },
+            {
+                "startDate": "1940,4,9",
+                "endDate": "",
+                "headline": "Sørlandet",
+                "text": "",
+                "tag": "",
+                "classname": "",
+                "id":"aa0003"
             }
-
         ]
     }
 }

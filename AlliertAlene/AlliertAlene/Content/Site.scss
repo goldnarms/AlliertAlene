@@ -41,7 +41,7 @@ textarea {
 
 #infoBox{
     background-color: #ee3333;
-    min-height: $mapHeight;
+    height: $mapHeight;
     overflow:auto;
     img{
         max-width:100%;
@@ -67,4 +67,8 @@ textarea {
         float: none;
         padding: 10px 15px;
     }
+}
+
+.vco-slider{
+    display: none;
 }
