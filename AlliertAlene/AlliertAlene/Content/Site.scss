@@ -1,6 +1,7 @@
 ﻿$backgroundColor: #111111;
 $fontColor: #efefef;
 $mapHeight: 500px;
+$textBackground: #393939;
 html{
     background-color:$backgroundColor;
     color: $fontColor;
@@ -40,9 +41,10 @@ textarea {
 }
 
 #infoBox{
-    background-color: #ee3333;
+    background-color: $textBackground;
     height: $mapHeight;
     overflow:auto;
+    padding-bottom: 30px;
     img{
         max-width:100%;
         max-height:100%;

@@ -32,6 +32,7 @@
         public string text { get; set; }
         public Media media { get; set; }
         public int marker { get; set; }
+        public float[] centerCoordinates { get; set; }
     }
 
     public class Media

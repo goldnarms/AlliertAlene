@@ -28,6 +28,8 @@ namespace DataGenerator
                 var dataFromDb = ctx.Datas
                     .Include("Locations")
                     .Include("Locations.Coordinate")
+                    .Include("CenterLocation")
+                    .Include("CenterLocation.Coordinate")
                     .Include("Media").ToList();
 
                 var jsonService = new JsonService();

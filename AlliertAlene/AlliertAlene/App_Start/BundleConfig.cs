@@ -14,6 +14,7 @@ namespace AlliertAlene
                 "~/bower_components/d3/d3.js",
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/TimeLine/js/storyjs-embed.js",
                 "~/Scripts/TimeLine/js/timeline.js",

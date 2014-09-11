@@ -34,17 +34,8 @@ function scaledPoint(feature, latlng) {
     //feature.properties.text);
 }
 
-filterOnId("aa0001");
+filterOnId("aa00001");
 
-//d3.json('/Assets/dataPoints.geojson', function (err, data) {
-//    pointLayer.addData(data);
-//    pointLayer.on('layeradd', function (e) {
-//        var marker = e.layer,
-//            feature = marker.feature;
-//        marker.setIcon(L.icon(feature.properties.icon));
-//    });
-//    setBrush(data);
-//});
 function setMarker(markerType) {
     switch (markerType) {
         case 0 /* Ship */: {
@@ -59,13 +50,14 @@ function setMarker(markerType) {
 }
 
 function filterOnId(id) {
-    d3.json('/Assets/dataPoints.geojson', function (err, data) {
+    $.getJSON('/Assets/dataPoints.geojson', function (data) {
         var filter = function (feature) {
             return feature.properties.id == id;
         };
         var filtered = data.features.filter(filter);
         if (filtered.length > 0) {
             setInfoBox(filtered[0]);
+            map.panTo(filtered[0].properties.centerCoordinates);
         }
         pointLayer.clearLayers().addData(filtered);
         pointLayer.on('layeradd', function (e) {
@@ -79,7 +71,8 @@ function setInfoBox(data) {
     var infoBox = $("#infoBox");
     infoBox.children("h2").html(data.properties.header);
     infoBox.children("div").first().html(data.properties.text);
-    infoBox.children("img").attr("src", data.properties.media.link);
+    infoBox.children(".pop-img").attr("href", data.properties.media.link);
+    infoBox.children(".pop-img").children("img").attr("src", data.properties.media.link);
 }
 
 function setBrush(data) {

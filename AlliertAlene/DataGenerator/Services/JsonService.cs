@@ -29,7 +29,7 @@ namespace DataGenerator.Services
                 {
                     classname = "",
                     endDate = "",
-                    headline = "",
+                    headline = baseData.Region,
                     id = string.Format("aa{0}", i.ToString("00000")),
                     startDate = baseData.Date.ToString("yyyy,MM,dd"),
                     tag = "",
@@ -61,14 +61,14 @@ namespace DataGenerator.Services
                                 link = baseData.Media.Reference,
                                 type = baseData.Media.MediaType == MediaType.Image ? "img" : "video"
                             },
-                            time = baseData.Date.ToUnixTime()
+                            time = baseData.Date.ToUnixTime(),
+                            centerCoordinates = new[] { baseData.CenterLocation.Coordinate.Lng, baseData.CenterLocation.Coordinate.Lat },
                         }
                     });
                     j++;
                 }
             }
-            var geoData = new List<GeoData>();
-            geoData.Add(new GeoData
+            var geoData = new GeoData
             {
                 features = featureList.ToArray(),
                 type = "FeatureCollection",
@@ -78,7 +78,7 @@ namespace DataGenerator.Services
                     generated = DateTime.Now.ToUnixTime(),
                     title = "Alliert og alene"
                 }
-            });
+            };
             var timelineData = new TimelineData { timeline = new Timeline { headline = "Alliert og alene", text = "", type = "default", date = dateList.ToArray() } };
 
             string geoJson = JsonConvert.SerializeObject(geoData);

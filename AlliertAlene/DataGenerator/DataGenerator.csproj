@@ -52,6 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201409101302102_InitialCreate.cs" />
+    <Compile Include="Migrations\201409101302102_InitialCreate.Designer.cs">
+      <DependentUpon>201409101302102_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409111302398_CenterLoc.cs" />
+    <Compile Include="Migrations\201409111302398_CenterLoc.Designer.cs">
+      <DependentUpon>201409111302398_CenterLoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseData.cs" />
     <Compile Include="Services\BaseDataService.cs" />
     <Compile Include="DAL\AlliedDbContext.cs" />
@@ -66,6 +75,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201409101302102_InitialCreate.resx">
+      <DependentUpon>201409101302102_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409111302398_CenterLoc.resx">
+      <DependentUpon>201409111302398_CenterLoc.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
@@ -44,24 +45,47 @@ namespace AlliertAlene.Controllers
         // GET: Feature/Create
         public ActionResult Create()
         {
-            return View();
+            var baseData = new BaseDataViewModel
+            {
+                CenterLocation = new DataLocation { VmCoordinate = new VmCoordinate()},
+                Locations = new List<DataLocation>
+            {
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()}
+            }
+            };
+            return View(baseData);
         }
 
         // POST: Feature/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Date,Region,Text,Media,Reference,Description")] BaseDataViewModel baseDataViewModel)
+        public async Task<ActionResult> Create(BaseDataViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Datas.Add(MapToBaseData(baseDataViewModel));
+                if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
+                {
+                    var uploadDir = "~/Uploads";
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.ImageUpload.FileName);
+                    var imageUrl = "Uploads" + "/" + model.ImageUpload.FileName;
+                    model.Text = model.Text.Replace("\"", "\\\"");
+                    model.ImageUpload.SaveAs(imagePath);
+                    model.Reference = imageUrl;
+                }
+
+                db.Datas.Add(MapToBaseData(model));
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(baseDataViewModel);
+            return View(model);
         }
 
         // GET: Feature/Edit/5
@@ -132,6 +156,20 @@ namespace AlliertAlene.Controllers
 
         private BaseData MapToBaseData(BaseDataViewModel viewModel)
         {
+            var locations =
+                viewModel.Locations.Where(l => l != null && !string.IsNullOrEmpty(l.Place)).Select(l => new BaseData.Location
+            {
+                Coordinate = new BaseData.Coordinate
+                {
+                    Lat = l.VmCoordinate.Lat,
+                    Lng = l.VmCoordinate.Lng
+                },
+                Id = l.Id,
+                Place = l.Place,
+                MarkerType = l.MarkerType,
+                
+            }
+                );
             return new BaseData
             {
                 Id = viewModel.Id,
@@ -139,15 +177,22 @@ namespace AlliertAlene.Controllers
                 Media = new BaseData.MediaAsset
                 {
                     Description = viewModel.Description,
-                    MediaType = (DataGenerator.Models.MediaType) viewModel.Media,
+                    MediaType = (DataGenerator.Models.MediaType)viewModel.Media,
                     Reference = viewModel.Reference
                 },
-                Locations = new List<BaseData.Location>
-                {
-
-                },
+                Locations = locations.ToList(),
                 Region = viewModel.Region,
-                Text = viewModel.Text
+                Text = viewModel.Text,
+                CenterLocation = new BaseData.Location
+                {
+                    Coordinate = new BaseData.Coordinate
+                    {
+                      Lat  = viewModel.CenterLocation.VmCoordinate.Lat,
+                      Lng = viewModel.CenterLocation.VmCoordinate.Lng
+                    },
+                    MarkerType = 0,
+                    Place = viewModel.Region
+                }
             };
         }
 

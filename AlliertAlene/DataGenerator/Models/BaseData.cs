@@ -11,6 +11,7 @@ namespace DataGenerator.Models
         public DateTime Date { get; set; }
         public string Region { get; set; }
         public string Text { get; set; }
+        public Location CenterLocation { get; set; }
         public List<Location> Locations { get; set; }
         public MediaAsset Media { get; set; }
 
