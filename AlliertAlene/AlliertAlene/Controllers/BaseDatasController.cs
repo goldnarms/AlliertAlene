@@ -13,109 +13,118 @@ using DataGenerator.Models;
 
 namespace AlliertAlene.Controllers
 {
-    public class FeatureController : Controller
+    public class BaseDatasController : Controller
     {
         private AlliedDbContext db = new AlliedDbContext();
 
-        // GET: Feature
-        public ActionResult Index()
+        // GET: BaseDatas
+        public async Task<ActionResult> Index()
         {
-            return View(db.Datas
-                .Include(d => d.Locations)
-                .Include(d => d.Media)
-                .Select(MapToViewModel));
+            return View(await db.Datas.ToListAsync());
         }
 
-        // GET: Feature/Details/5
+        // GET: BaseDatas/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var baseData = await db.Datas.FindAsync(id);
+            BaseData baseData = await db.Datas.FindAsync(id);
             if (baseData == null)
             {
                 return HttpNotFound();
             }
-            return View(MapToViewModel(baseData));
+            return View(baseData);
         }
 
-        // GET: Feature/Create
+        // GET: BaseDatas/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Feature/Create
+        // POST: BaseDatas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Date,Region,Text,Media,Reference,Description")] BaseDataViewModel baseDataViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Date,Region,Text")] BaseDataViewModel baseData)
         {
             if (ModelState.IsValid)
             {
-                db.Datas.Add(MapToBaseData(baseDataViewModel));
+                db.Datas.Add(new BaseData
+                {
+                    Date = baseData.Date,
+                    Media = new BaseData.MediaAsset
+                    {
+                        Description = baseData.Description,
+                        MediaType = (DataGenerator.Models.MediaType)baseData.Media,
+                        Reference = baseData.Reference
+                    },
+                    Region = baseData.Region,
+                    Text = baseData.Text,
+                    Locations = null
+                });
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(baseDataViewModel);
+            return View(baseData);
         }
 
-        // GET: Feature/Edit/5
+        // GET: BaseDatas/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var baseData = await db.Datas.FindAsync(id);
+            BaseData baseData = await db.Datas.FindAsync(id);
             if (baseData == null)
             {
                 return HttpNotFound();
             }
-            return View(MapToViewModel(baseData));
+            return View(baseData);
         }
 
-        // POST: Feature/Edit/5
+        // POST: BaseDatas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Date,Region,Text,Media,Reference,Description")] BaseDataViewModel baseDataViewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Date,Region,Text")] BaseData baseData)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(MapToBaseData(baseDataViewModel)).State = EntityState.Modified;
+                db.Entry(baseData).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(baseDataViewModel);
+            return View(baseData);
         }
 
-        // GET: Feature/Delete/5
+        // GET: BaseDatas/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var baseData = await db.Datas.FindAsync(id);
+            BaseData baseData = await db.Datas.FindAsync(id);
             if (baseData == null)
             {
                 return HttpNotFound();
             }
-            return View(MapToViewModel(baseData));
+            return View(baseData);
         }
 
-        // POST: Feature/Delete/5
+        // POST: BaseDatas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            var baseData = await db.Datas.FindAsync(id);
+            BaseData baseData = await db.Datas.FindAsync(id);
             db.Datas.Remove(baseData);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -128,41 +137,6 @@ namespace AlliertAlene.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private BaseData MapToBaseData(BaseDataViewModel viewModel)
-        {
-            return new BaseData
-            {
-                Id = viewModel.Id,
-                Date = viewModel.Date,
-                Media = new BaseData.MediaAsset
-                {
-                    Description = viewModel.Description,
-                    MediaType = (DataGenerator.Models.MediaType) viewModel.Media,
-                    Reference = viewModel.Reference
-                },
-                Locations = new List<BaseData.Location>
-                {
-
-                },
-                Region = viewModel.Region,
-                Text = viewModel.Text
-            };
-        }
-
-        private BaseDataViewModel MapToViewModel(BaseData baseData)
-        {
-            return new BaseDataViewModel
-            {
-                Date = baseData.Date,
-                Description = baseData.Media != null ? baseData.Media.Description : "",
-                Reference = baseData.Media != null ? baseData.Media.Reference : "",
-                Region = baseData.Region,
-                Text = baseData.Text,
-                Media = baseData.Media != null ? (int)baseData.Media.MediaType : 0,
-                Id = baseData.Id
-            };
         }
     }
 }
