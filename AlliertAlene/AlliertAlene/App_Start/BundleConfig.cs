@@ -27,12 +27,6 @@ namespace AlliertAlene
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
-                //"~/Scripts/sammy-{version}.js",
-                //"~/Scripts/app/common.js",
-                //"~/Scripts/app/app.datamodel.js",
-                //"~/Scripts/app/app.viewmodel.js",
-                //"~/Scripts/app/home.viewmodel.js",
-                //"~/Scripts/app/_run.js")
                 "~/App", "*.js"
                 ));
 
