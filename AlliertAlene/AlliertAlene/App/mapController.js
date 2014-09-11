@@ -9,18 +9,7 @@ var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
     infoControl: true
 }).setView([65.422, 11.931], 4);
 
-// Create a new layer with a special pointToLayer function
-// that'll generate scaled points.
 var pointLayer = L.geoJson(null, { pointToLayer: scaledPoint }).addTo(map);
-
-function pointColor(feature) {
-    //return feature.properties.mag > 5 ? '#f55' : '#a00';
-    return '#f55';
-}
-
-function pointRadius(feature) {
-    return 20;
-}
 
 function scaledPoint(feature, latlng) {
     return L.marker(latlng, {
@@ -57,7 +46,9 @@ function filterOnId(id) {
         var filtered = data.features.filter(filter);
         if (filtered.length > 0) {
             setInfoBox(filtered[0]);
-            map.panTo(filtered[0].properties.centerCoordinates);
+            var latLng = new L.LatLng(filtered[0].properties.centerCoordinates[1], filtered[0].properties.centerCoordinates[0]);
+            map.setZoom(8);
+            map.panTo(latLng);
         }
         pointLayer.clearLayers().addData(filtered);
         pointLayer.on('layeradd', function (e) {
@@ -69,66 +60,12 @@ function filterOnId(id) {
 
 function setInfoBox(data) {
     var infoBox = $("#infoBox");
-    infoBox.children("h2").html(data.properties.header);
-    infoBox.children("div").first().html(data.properties.text);
-    infoBox.children(".pop-img").attr("href", data.properties.media.link);
-    infoBox.children(".pop-img").children("img").attr("src", data.properties.media.link);
+    console.log(data.properties.header);
+    console.log(data.properties.media.link);
+    console.log(infoBox);
+    infoBox.children("h2").first().html(data.properties.header);
+    $("#content").html(data.properties.text);
+    $(".pop-img").attr("href", data.properties.media.link);
+    $(".pop-img").children("img").attr("src", data.properties.media.link);
 }
-//function setBrush(data) {
-//    var container = d3.select('#brush'),
-//        width = (<any>container.node()).offsetWidth,
-//        margin = { top: 0, right: 0, bottom: 0, left: 0 },
-//        height = 100;
-//    var timeExtent = d3.extent(data.features, function (d: any) {
-//        return new Date(d.properties.time);
-//    });
-//    var svg = container.append('svg')
-//        .attr('width', width + margin.left + margin.right)
-//        .attr('height', height + margin.top + margin.bottom);
-//    var context = svg.append('g')
-//        .attr('class', 'context')
-//        .attr('transform', 'translate(' +
-//        margin.left + ',' +
-//        margin.top + ')');
-//    var x = d3.time.scale()
-//        .range([0, width])
-//        .domain(timeExtent);
-//    var brush = d3.svg.brush()
-//        .x(x)
-//        .on('brushend', brushend);
-//    context.selectAll('circle.quake')
-//        .data(data.features)
-//        .enter()
-//        .append('circle')
-//        .attr('transform', function (d) {
-//            return 'translate(' + [x(new Date(d.properties.time)), height / 2] + ')';
-//        })
-//        .attr('r', pointRadius)
-//        .attr('opacity', 0.5)
-//        .attr('stroke', '#fff')
-//        .attr('stroke-width', 0.5)
-//        .attr('fill', pointColor);
-//    context.append('g')
-//        .attr('class', 'x brush')
-//        .call(brush)
-//        .selectAll('rect')
-//        .attr('y', -6)
-//        .attr('height', height);
-//    function brushend() {
-//        var filter;
-//        // If the user has selected no brush area, share everything.
-//        if (brush.empty()) {
-//            filter = function () { return true; }
-//                } else {
-//            // Otherwise, restrict features to only things in the brush extent.
-//            filter = function (feature) {
-//                return feature.properties.time > +brush.extent()[0] &&
-//                    feature.properties.time < (+brush.extent()[1]);
-//            };
-//        }
-//        var filtered = data.features.filter(filter);
-//        pointLayer.clearLayers()
-//            .addData(filtered);
-//    }
-//}
 //# sourceMappingURL=mapController.js.map
