@@ -14,6 +14,7 @@ namespace AlliertAlene
                 "~/bower_components/d3/d3.js",
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/TimeLine/js/storyjs-embed.js",
                 "~/Scripts/TimeLine/js/timeline.js",
@@ -22,12 +23,6 @@ namespace AlliertAlene
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
-                //"~/Scripts/sammy-{version}.js",
-                //"~/Scripts/app/common.js",
-                //"~/Scripts/app/app.datamodel.js",
-                //"~/Scripts/app/app.viewmodel.js",
-                //"~/Scripts/app/home.viewmodel.js",
-                //"~/Scripts/app/_run.js")
                 "~/App", "*.js"
                 ));
 
@@ -44,6 +39,7 @@ namespace AlliertAlene
                 "~/bower_components/mapbox.js/mapbox.css",
                 "~/bower_components/video.js/video-js.css",
                 "~/Content/bootstrap.css",
+                "~/bower_components/bootstrap-datepicker/css/datepicker.css",
                 "~/Content/Site.css"
 
                  ));

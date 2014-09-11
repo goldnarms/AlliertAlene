@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -8,12 +9,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AlliertAlene.Models;
+using Backload.Controllers;
 using DataGenerator.DAL;
 using DataGenerator.Models;
+using WebGrease.Css.Extensions;
 
 namespace AlliertAlene.Controllers
 {
-    public class FeatureController : Controller
+    public class FeatureController : BackloadController
     {
         private AlliedDbContext db = new AlliedDbContext();
 
@@ -44,7 +47,18 @@ namespace AlliertAlene.Controllers
         // GET: Feature/Create
         public ActionResult Create()
         {
-            return View();
+            var baseData = new BaseDataViewModel
+            {
+                Locations = new Collection<DataLocation>()
+            {
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()},
+                new DataLocation { VmCoordinate = new VmCoordinate()}
+            }
+            };
+            return View(baseData);
         }
 
         // POST: Feature/Create
@@ -60,6 +74,7 @@ namespace AlliertAlene.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ActionResult result = await base.HandleRequestAsync();
 
             return View(baseDataViewModel);
         }
@@ -132,6 +147,20 @@ namespace AlliertAlene.Controllers
 
         private BaseData MapToBaseData(BaseDataViewModel viewModel)
         {
+            var locations =
+                viewModel.Locations.Where(l => !string.IsNullOrEmpty(l.Place)).Select(l => new BaseData.Location
+            {
+                Coordinate = new BaseData.Coordinate
+                {
+                    Lat = l.VmCoordinate.Lat,
+                    Lng = l.VmCoordinate.Lng,
+                    Id = l.VmCoordinate.Id
+                },
+                Id = l.Id,
+                Place = l.Place,
+                MarkerType = l.MarkerType
+            }
+                );
             return new BaseData
             {
                 Id = viewModel.Id,
@@ -139,13 +168,10 @@ namespace AlliertAlene.Controllers
                 Media = new BaseData.MediaAsset
                 {
                     Description = viewModel.Description,
-                    MediaType = (DataGenerator.Models.MediaType) viewModel.Media,
+                    MediaType = (DataGenerator.Models.MediaType)viewModel.Media,
                     Reference = viewModel.Reference
                 },
-                Locations = new List<BaseData.Location>
-                {
-
-                },
+                Locations = locations.ToList(),
                 Region = viewModel.Region,
                 Text = viewModel.Text
             };
