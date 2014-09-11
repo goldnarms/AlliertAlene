@@ -11,7 +11,7 @@ namespace AlliertAlene
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
-                "~/bower_components/d3/d3.js",
+                //"~/bower_components/d3/d3.js",
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
                 "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
@@ -20,7 +20,11 @@ namespace AlliertAlene
                 "~/Scripts/TimeLine/js/timeline.js",
                 "~/bower_components/mapbox.js/mapbox.js",
                 "~/bower_components/video.js/video.js",
-                "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/jquery-{version}.js",
+                "~/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
+                "~/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"
+
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
                 //"~/Scripts/sammy-{version}.js",
@@ -45,8 +49,9 @@ namespace AlliertAlene
                 "~/bower_components/mapbox.js/mapbox.css",
                 "~/bower_components/video.js/video-js.css",
                 "~/Content/bootstrap.css",
+                "~/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
+                "~/bower_components/magnific-popup/dist/magnific-popup.css",
                 "~/Content/Site.css"
-
                  ));
 
             // Set EnableOptimizations to false for debugging. For more information,
