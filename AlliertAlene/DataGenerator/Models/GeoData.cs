@@ -40,6 +40,7 @@
         public string type { get; set; }
         public string link { get; set; }
         public string description { get; set; }
+        public string poster { get; set; }
     }
 
     public class Geometry

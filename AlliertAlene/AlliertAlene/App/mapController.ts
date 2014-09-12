@@ -3,6 +3,8 @@
 /// <reference path="../scripts/typings/mapbox/mapbox.d.ts" />
 /// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="markertypes.ts" />
+/// <reference path="../scripts/typings/videojs/videojs.d.ts" />
+
 declare var Lawnchair: any;
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ29sZG5hcm1zIiwiYSI6IkZKWHd2ZzgifQ.spTj9MJpcjX57EbN2fUDqQ';
 var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
@@ -13,16 +15,13 @@ var store = new Lawnchair({ name: 'alliedLS' }, () => { });
 var pointLayer: L.GeoJSON = <L.GeoJSON>L.geoJson(null, { pointToLayer: scaledPoint })
     .addTo(map);
 var lastLoc = new L.LatLng(65.422, 11.931);
+
 function scaledPoint(feature, latlng) {
     return L.marker(latlng, {
         icon: setMarker(feature.properties.marker)
     }).on("click", () => {
             setInfoBox(feature);
         }).bindPopup('<h3>' + feature.properties.place + "</h3>");
-    //bindPopup(
-    //'<h2>' + feature.properties.place + '</h2>' +
-    //'<h3>' + new Date(feature.properties.time) + '</h3>' +
-    //feature.properties.text);
 }
 
 loadJson();
@@ -71,19 +70,19 @@ function setMarker(markerType: app.MarkerType): L.Icon {
 
 function filterOnId(id: string): void {
     store.get(id, (data) => {
-        var features = data.features;
-        if (features.length > 0) {
-            setInfoBox(features[0]);
-            var latLng = new L.LatLng(features[0].properties.centerCoordinates[0], features[0].properties.centerCoordinates[1]);
-            //var latLng = features[0].properties.centerCoordinates;
+        var selectedFeatures = data.features;
+        if (selectedFeatures.length > 0) {
+            setInfoBox(selectedFeatures[0]);
+            var latLng = new L.LatLng(selectedFeatures[0].properties.centerCoordinates[1], selectedFeatures[0].properties.centerCoordinates[0]);
+            //var latLng = selectedFeatures[0].properties.centerCoordinates;
             if (lastLoc.lat !== latLng.lat || lastLoc.lng !== latLng.lng) {
-                map.setZoom(6);
+                map.setZoom(5);
                 lastLoc = latLng;
-                setTimeout(() => { map.setZoom(8); }, 500);
+                setTimeout(() => { map.setZoom(6); }, 500);
                 map.panTo(latLng);
             }
         }
-        pointLayer.clearLayers().addData(features);
+        pointLayer.clearLayers().addData(selectedFeatures);
         pointLayer.on('layeradd', (e) => {
             var marker = e.layer,
                 feature = marker.feature;
@@ -103,10 +102,17 @@ function setInfoBox(data): void {
         imgContainer.children("img").attr("src", data.properties.media.link);
         videoContainer.hide();
         imgContainer.show();
-    } else if (data.properties.media.type === "vid") {
+    } else if (data.properties.media.type === "video") {
+        var myPlayer = videojs('featureVideo');
+        myPlayer.src(data.properties.media.link);
+        myPlayer.poster(data.properties.media.poster);
+        //$("video").attr("poster", data.properties.media.poster);
+        //$("source").attr("src", data.properties.media.link);
         videoContainer.show();
         imgContainer.hide();
     } else if (data.properties.media.type === "diary") {
+        infoBox.addClass("diary");
+        //infoBox.css("background-color", "#32cd32");
         imgContainer.attr("href", data.properties.media.link);
         imgContainer.children("img").attr("src", data.properties.media.link);
         imgContainer.show();

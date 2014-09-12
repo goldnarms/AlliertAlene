@@ -16,5 +16,6 @@ namespace DataGenerator.DAL
         }
 
         public DbSet<BaseData> Datas { get; set; }
+        public DbSet<BaseData.Location> Locations { get; set; }
     }
 }

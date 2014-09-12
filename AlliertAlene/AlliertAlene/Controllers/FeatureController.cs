@@ -47,7 +47,7 @@ namespace AlliertAlene.Controllers
         {
             var baseData = new BaseDataViewModel
             {
-                CenterLocation = new DataLocation { VmCoordinate = new VmCoordinate()},
+                CenterLocation = new DataLocation { VmCoordinate = new VmCoordinate() },
                 Locations = new List<DataLocation>
             {
                 new DataLocation { VmCoordinate = new VmCoordinate()},
@@ -57,6 +57,18 @@ namespace AlliertAlene.Controllers
                 new DataLocation { VmCoordinate = new VmCoordinate()}
             }
             };
+            var regions = db.Locations
+                .Include(l => l.Coordinate)
+                .Include(l => l.MarkerType)
+                .Where(l => l.MarkerType == 3).Select(l => new SelectListItem {Text = l.Place, Value = l.Id.ToString()});
+            baseData.Regions = regions.ToList();
+            var mediaTypes = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Bilde", Value = "0"},
+                new SelectListItem {Text = "Video", Value = "1"},
+                new SelectListItem {Text = "Dagbok", Value = "2"}
+            };
+            baseData.MediaTypes = mediaTypes;
             return View(baseData);
         }
 
@@ -70,16 +82,23 @@ namespace AlliertAlene.Controllers
         {
             if (ModelState.IsValid)
             {
+                var uploadDir = "~/Uploads";
                 if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
                 {
-                    var uploadDir = "~/Uploads";
                     var imagePath = Path.Combine(Server.MapPath(uploadDir), model.ImageUpload.FileName);
                     var imageUrl = "Uploads" + "/" + model.ImageUpload.FileName;
                     model.Text = model.Text.Replace("\"", "\\\"");
                     model.ImageUpload.SaveAs(imagePath);
                     model.Reference = imageUrl;
                 }
-
+                if (model.PosterUpload != null && model.PosterUpload.ContentLength > 0)
+                {
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.PosterUpload.FileName);
+                    var imageUrl = "Uploads" + "/" + model.PosterUpload.FileName;
+                    model.Text = model.Text.Replace("\"", "\\\"");
+                    model.PosterUpload.SaveAs(imagePath);
+                    model.PosterReference = imageUrl;
+                }
                 db.Datas.Add(MapToBaseData(model));
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -166,8 +185,8 @@ namespace AlliertAlene.Controllers
                 },
                 Id = l.Id,
                 Place = l.Place,
-                MarkerType = l.MarkerType,
-                
+                MarkerType = viewModel.SelectedMediaId,
+
             }
                 );
             return new BaseData
@@ -177,22 +196,14 @@ namespace AlliertAlene.Controllers
                 Media = new BaseData.MediaAsset
                 {
                     Description = viewModel.Description,
-                    MediaType = (DataGenerator.Models.MediaType)viewModel.Media,
-                    Reference = viewModel.Reference
+                    MediaType = (DataGenerator.Models.MediaType)viewModel.SelectedMediaId,
+                    Reference = viewModel.Reference,
+                    Poster = viewModel.PosterReference
                 },
                 Locations = locations.ToList(),
-                Region = viewModel.Region,
+                Region = db.Locations.First(l => l.Id == viewModel.SelectedRegionId).Place,
                 Text = viewModel.Text,
-                CenterLocation = new BaseData.Location
-                {
-                    Coordinate = new BaseData.Coordinate
-                    {
-                      Lat  = viewModel.CenterLocation.VmCoordinate.Lat,
-                      Lng = viewModel.CenterLocation.VmCoordinate.Lng
-                    },
-                    MarkerType = 0,
-                    Place = viewModel.Region
-                }
+                CenterLocation = db.Locations.First(l => l.Id == viewModel.SelectedRegionId)
             };
         }
 

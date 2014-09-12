@@ -23,30 +23,54 @@ namespace DataGenerator
             //    data.ToList().ForEach(d => ctx.Datas.Add(d));
             //    ctx.SaveChanges();
             //}
-            //var locations = new List<BaseData.Location> {
-            //    new BaseData.Location
-            //{
-            //    Coordinate = new BaseData.Coordinate
-            //    {
-            //        Lat = 59.7f,
-            //        Lng = 10.6f
-            //    },
-            //    MarkerType = 0,
-            //    Place = "Østlandet"
-            //},
-            //new BaseData.Location
-            //{
-            //    Coordinate = new BaseData.Coordinate
-            //    {
-            //        Lat = 59.7f,
-            //        Lng = 10.6f
-            //    },
-            //    MarkerType = 0,
-            //    Place = "Vestlandet"
-            //},}
+            var locations = new List<BaseData.Location>
+            {
+                new BaseData.Location
+                {
+                    Coordinate = new BaseData.Coordinate
+                    {
+                        Lng = 59.7f,
+                        Lat = 10.6f
+                    },
+                    MarkerType = 3,
+                    Place = "Østlandet"
+                },
+                new BaseData.Location
+                {
+                    Coordinate = new BaseData.Coordinate
+                    {
+                        Lng = 59.7f,
+                        Lat = 10.6f
+                    },
+                    MarkerType = 3,
+                    Place = "Vestlandet"
+                },
+                new BaseData.Location
+                {
+                    Coordinate = new BaseData.Coordinate
+                    {
+                        Lng = 63.5f,
+                        Lat = 10.5f
+                    },
+                    MarkerType = 3,
+                    Place = "Trøndelag"
+                },
+                new BaseData.Location
+                {
+                    Coordinate = new BaseData.Coordinate
+                    {
+                        Lng = 68.4f,
+                        Lat = 17.4f
+                    },
+                    MarkerType = 3,
+                    Place = "Nord-Norge"
+                }
+            };
 
             using (var ctx = new AlliedDbContext())
             {
+                //ctx.Loacations.AddRange(locations);
+                //ctx.SaveChanges();
                 var dataFromDb = ctx.Datas
                     .Include("Locations")
                     .Include("Locations.Coordinate")

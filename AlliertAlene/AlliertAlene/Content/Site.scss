@@ -65,6 +65,16 @@ textarea {
     width: 100%;
 
 }
+.vjs-default-skin .vjs-big-play-button:before{  
+    line-height:1em;
+
+}
+.vjs-big-play-button{
+    border-radius: 0.4em !important;
+    font-size: 2.5em !important;
+    height: 1.2em !important;
+    width: 1.8em !important;
+}
 @media only screen and (max-width: 767px) {
     .nofloat {
         float: none;

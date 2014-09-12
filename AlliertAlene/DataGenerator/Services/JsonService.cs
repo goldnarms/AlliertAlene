@@ -43,7 +43,7 @@ namespace DataGenerator.Services
                     {
                         geometry = new Geometry
                         {
-                            coordinates = new[] { location.Coordinate.Lng, location.Coordinate.Lat },
+                            coordinates = new[] { location.Coordinate.Lat, location.Coordinate.Lng},
                             type = "Point"
                         },
                         id = string.Format("aa{0}{1}", i.ToString("00000"), alphabet[j]),
@@ -59,10 +59,12 @@ namespace DataGenerator.Services
                             {
                                 description = baseData.Media.Description,
                                 link = baseData.Media.Reference,
-                                type = baseData.Media.MediaType == MediaType.Image ? "img" : "video"
+                                type = baseData.Media.MediaType == MediaType.Image ? "img" : 
+                                        baseData.Media.MediaType == MediaType.Video ? "video" : "diary",
+                                poster = baseData.Media.Poster
                             },
                             time = baseData.Date.ToUnixTime(),
-                            centerCoordinates = new[] { baseData.CenterLocation.Coordinate.Lng, baseData.CenterLocation.Coordinate.Lat },
+                            centerCoordinates = new[] { baseData.CenterLocation.Coordinate.Lat, baseData.CenterLocation.Coordinate.Lng},
                         }
                     });
                     j++;

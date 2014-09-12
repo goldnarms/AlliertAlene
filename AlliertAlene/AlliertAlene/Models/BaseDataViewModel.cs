@@ -23,5 +23,13 @@ namespace AlliertAlene.Models
         [DataType(DataType.Upload)]
         public HttpPostedFileBase ImageUpload { get; set; }
         public DataLocation CenterLocation { get; set; }
+        public int SelectedRegionId { get; set; }
+        public IEnumerable<SelectListItem> Regions { get; set; }
+        public int SelectedMediaId { get; set; }
+        public IEnumerable<SelectListItem> MediaTypes { get; set; }
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase PosterUpload { get; set; }
+
+        public string PosterReference { get; set; }
     }
 }

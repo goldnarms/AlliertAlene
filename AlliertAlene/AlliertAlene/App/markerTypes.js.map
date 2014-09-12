@@ -1,1 +1,1 @@
-{"version":3,"file":"markerTypes.js","sourceRoot":"","sources":["markerTypes.ts"],"names":["app","app.MarkerType"],"mappings":"AAAA,IAAO,GAAG;AAIT,CAJD,UAAO,GAAG;KACNA,UAAYA,UAAUA;QAClBC,gCAAOA,CAACA,UAAAA;gDACXD;oCAAAA;AACLA,CAACA,qBAAA"}
+{"version":3,"file":"markerTypes.js","sourceRoot":"","sources":["markerTypes.ts"],"names":["app","app.MarkerType"],"mappings":"AAAA,IAAO,GAAG;AAOT,CAPD,UAAO,GAAG;KACNA,UAAYA,UAAUA;QAClBC,gCAAOA,CAACA,UAAAA;QACRA,iCAAQA,CAACA,WAAAA;QACTA,iCAAQA,CAACA,WAAAA;QACTA,kCAASA,CAACA,YAAAA;gDACbD;oCAAAA;AACLA,CAACA,qBAAA"}
