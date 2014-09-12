@@ -22,8 +22,22 @@ namespace AlliertAlene
                 "~/bower_components/video.js/video.js",
                 "~/Scripts/jquery-{version}.js",
                 "~/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
-                "~/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"
+                "~/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js",
+                "~/bower_components/underscore/underscore.js",
+                "~/bower_components/lawnchair/src/Lawnchair.js",
+                "~/bower_components/lawnchair/src/plugins/query.js",
+                //"~/bower_components/lawnchair/src/adapters/blackberry-persistent-storage.js",
+                //"~/bower_components/lawnchair/src/adapters/chrome-storage.js",
 
+                "~/bower_components/lawnchair/src/adapters/dom.js",
+                "~/bower_components/lawnchair/src/adapters/gears-sqlite.js",
+                "~/bower_components/lawnchair/src/adapters/html5-filesystem.js",
+                "~/bower_components/lawnchair/src/adapters/ie-userdata.js",
+                "~/bower_components/lawnchair/src/adapters/indexed-db.js",
+                "~/bower_components/lawnchair/src/adapters/memory.js",
+                "~/bower_components/lawnchair/src/adapters/touchdb-couchdb.js",
+                "~/bower_components/lawnchair/src/adapters/webkit-sqlite.js",
+                "~/bower_components/lawnchair/src/adapters/window-name.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
