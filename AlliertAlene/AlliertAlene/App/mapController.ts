@@ -13,8 +13,10 @@ var storeKeys: string[] = [];
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ29sZG5hcm1zIiwiYSI6IkZKWHd2ZzgifQ.spTj9MJpcjX57EbN2fUDqQ';
 var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
     attributionControl: false,
-    infoControl: true
-}).setView([65.422, 11.931], 4);
+    infoControl: true,
+    maxZoom: 7,
+    minZoom: 5
+}).setView([65.422, 11.931], 5);
 
 var isSmallScreen = window.innerWidth < 768;
 if (isSmallScreen) {
@@ -125,9 +127,11 @@ function filterOnId(id: string): void {
             var latLng = new L.LatLng(selectedFeatures[0].properties.centerCoordinates[1], selectedFeatures[0].properties.centerCoordinates[0]);
             //var latLng = selectedFeatures[0].properties.centerCoordinates;
             if (lastLoc.lat !== latLng.lat || lastLoc.lng !== latLng.lng) {
-                map.setZoom(5);
+                if (map.getZoom() !== 6) {
+                    map.setZoom(6);
+                    //setTimeout(() => { map.setZoom(6); }, 300);
+                }
                 lastLoc = latLng;
-                setTimeout(() => { map.setZoom(6); }, 500);
                 map.panTo(latLng);
             }
         }
