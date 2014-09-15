@@ -13,10 +13,19 @@ h1 {
   font-weight: 300;
   font-size: 5rem; }
 
+h2 {
+  font-family: 'Roboto Slab', serif; }
+
+h3 {
+  font-family: 'Roboto Slab', serif; }
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
-  padding-left: 15px;
-  padding-right: 15px; }
+  padding: 0; }
+  @media (min-width: 768px) {
+    .body-content {
+      padding-left: 15px;
+      padding-right: 15px; } }
 
 .header {
   text-align: center;
@@ -42,7 +51,19 @@ input, select, textarea {
 .mapContainer {
   height: 100%;
   min-height: 500px;
-  margin-right: 0; }
+  margin-right: 0;
+  margin-left: 0; }
+  .mapContainer > #mapBox {
+    padding: 0;
+    /*margin-right: 15px;
+        margin-left: -15px;
+        @media (min-width: 768px) {
+            margin-right: 0;
+            margin-left: 0;
+        }*/ }
+    @media (min-width: 768px) {
+      .mapContainer > #mapBox {
+        left: 15px; } }
 
 #map {
   height: 100%;
@@ -50,7 +71,13 @@ input, select, textarea {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100%; }
+  width: 100%;
+  left: 0; }
+  @media (min-width: 768px) {
+    #map {
+      left: -15px;
+      right: 0 !important;
+      margin-right: 0; } }
 
 .vjs-default-skin .vjs-big-play-button:before {
   line-height: 1em; }

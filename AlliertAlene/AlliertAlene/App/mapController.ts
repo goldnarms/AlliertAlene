@@ -92,11 +92,14 @@ function filterOnId(id: string): void {
 }
 
 function setInfoBox(data): void {
+    var date = new Date(data.properties.time);
     var infoBox = $("#infoBox");
     var videoContainer = $("#videoContainer");
     var imgContainer = $(".pop-img");
     infoBox.children("h2").first().html(data.properties.header);
+    var months: string[] = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
     $("#content").html(data.properties.text);
+    $("#featureDate").html(date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear());
     if (data.properties.media.type === "img") {
         imgContainer.attr("href", data.properties.media.link);
         imgContainer.children("img").attr("src", data.properties.media.link);

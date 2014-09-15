@@ -18,10 +18,19 @@ h1{
     font-weight: 300;
     font-size: 5rem;
 }
+h2{
+    font-family: 'Roboto Slab', serif;
+}
+h3{
+    font-family: 'Roboto Slab', serif;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0;
+    @media (min-width: 768px) {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 .header{
@@ -55,6 +64,20 @@ textarea {
     height: 100%;
     min-height: $mapHeight;
     margin-right: 0;
+    margin-left: 0;
+    & > #mapBox{    
+        @media (min-width: 768px) {
+            //margin-left: 15px;
+            left: 15px;
+        }
+        padding:0;
+        /*margin-right: 15px;
+        margin-left: -15px;
+        @media (min-width: 768px) {
+            margin-right: 0;
+            margin-left: 0;
+        }*/
+    }
 }
 #map{
     height: 100%;
@@ -63,7 +86,13 @@ textarea {
     top: 0;
     bottom: 0;
     width: 100%;
+    left:0;
+    @media (min-width: 768px) {
+        left: -15px;
+        right: 0 !important;
+        margin-right: 0;
 
+    }
 }
 .vjs-default-skin .vjs-big-play-button:before{  
     line-height:1em;
