@@ -6,11 +6,41 @@
 /// <reference path="../scripts/typings/videojs/videojs.d.ts" />
 
 declare var Lawnchair: any;
+declare var VMM: any;
+var currentKey: string;
+var currentIndex: number = 0;
+var storeKeys: string[] = [];
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ29sZG5hcm1zIiwiYSI6IkZKWHd2ZzgifQ.spTj9MJpcjX57EbN2fUDqQ';
 var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
     attributionControl: false,
     infoControl: true
 }).setView([65.422, 11.931], 4);
+
+var isSmallScreen = window.innerWidth < 768;
+if (isSmallScreen) {
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    $("#dragger").show();
+}
+
+$("#btnFeatureRight").on("click", () => {
+    var index = _.indexOf(storeKeys, currentKey);
+    if (index < storeKeys.length) {
+        index = index + 1;
+        filterOnId(storeKeys[index]);
+    }
+});
+
+$("#btnFeatureLeft").on("click", () => {
+    var index = _.indexOf(storeKeys, currentKey);
+    if (index > 0) {
+        index = index - 1;
+        filterOnId(storeKeys[index]);
+    }
+});
+
 var store = new Lawnchair({ name: 'alliedLS' }, () => { });
 var pointLayer: L.GeoJSON = <L.GeoJSON>L.geoJson(null, { pointToLayer: scaledPoint })
     .addTo(map);
@@ -33,7 +63,15 @@ function loadJson() {
         _.each(ids, (id: string) => {
             store.save({ key: id, features: _.filter(data.features, (f: any) => { return f.properties.id === id; }) });
         });
-        filterOnId("aa00001");
+        storeKeys = ids;
+        var initId = "aa00001";
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == "featureId") { initId = pair[1]; }
+        }
+        filterOnId(initId);
     });
 }
 function setMarker(markerType: app.MarkerType): L.Icon {
@@ -69,6 +107,17 @@ function setMarker(markerType: app.MarkerType): L.Icon {
 }
 
 function filterOnId(id: string): void {
+    currentKey = id;
+    currentIndex = _.indexOf(storeKeys, currentKey);
+    if (currentIndex === 0) {
+        $("#btnFeatureLeft").hide();
+    } else if (currentIndex === storeKeys.length) {
+        $("#btnFeatureRight").hide();
+    } else {
+        $("#btnFeatureLeft").show();
+        $("#btnFeatureRight").show();
+    }
+    //$("#" + "marker_" + currentKey.toString()).trigger("click");
     store.get(id, (data) => {
         var selectedFeatures = data.features;
         if (selectedFeatures.length > 0) {
@@ -109,8 +158,12 @@ function setInfoBox(data): void {
         var myPlayer = videojs('featureVideo');
         myPlayer.src(data.properties.media.link);
         myPlayer.poster(data.properties.media.poster);
-        //$("video").attr("poster", data.properties.media.poster);
-        //$("source").attr("src", data.properties.media.link);
+        myPlayer.ready(() => {
+            myPlayer.on('ended', () => {
+                $("#videoLinkContainer").show();
+                videoContainer.hide();
+            });
+        });
         videoContainer.show();
         imgContainer.hide();
     } else if (data.properties.media.type === "diary") {
@@ -121,4 +174,5 @@ function setInfoBox(data): void {
         imgContainer.show();
         videoContainer.hide();
     }
+    $("#videoLinkContainer").hide();
 }

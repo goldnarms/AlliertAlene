@@ -885,6 +885,14 @@
     <Content Include="Scripts\app\app.viewmodel.js" />
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\home.viewmodel.js" />
+    <Content Include="Uploads\1280px-Bluecher_sinkend.jpg" />
+    <Content Include="Uploads\1419880_10153549179375142_252531390_n-001.jpg" />
+    <Content Include="Uploads\285863470.mp4" />
+    <Content Include="Uploads\290114SigurdJul.PNG" />
+    <Content Include="Uploads\290114UrortLive.PNG" />
+    <Content Include="Uploads\6018_3568_450.jpeg" />
+    <Content Include="Uploads\Bluecher_sinkend.jpg" />
+    <Content Include="Uploads\ORP_Orzel.jpg" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ConfirmUser.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -926,7 +934,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -942,7 +949,7 @@
     <TypeScriptCompile Include="App\angular\mapService.ts" />
     <TypeScriptCompile Include="App\markerTypes.ts" />
     <TypeScriptCompile Include="App\timeLineController.ts" />
-    <None Include="Assets\timeline.json" />
+    <Content Include="Assets\timeline.json" />
     <TypeScriptCompile Include="App\angular\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

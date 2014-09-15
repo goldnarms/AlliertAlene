@@ -9136,7 +9136,8 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 				}
 				
 				// ADD ID
-				VMM.Lib.attr(_marker, "id", ( "marker_" + data[i].uniqueid).toString() );
+			    //VMM.Lib.attr(_marker, "id", ( "marker_" + data[i].uniqueid).toString() );
+				VMM.Lib.attr(_marker, "id", ("marker_" + data[i].id).toString()); // AJ
 				
 				// MARKER CLICK
 				VMM.bindEvent(_marker_flag, onMarkerClick, "", {number: i, id: data[i].id}); // AJ
