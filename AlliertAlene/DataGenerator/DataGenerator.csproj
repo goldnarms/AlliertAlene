@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201409160854143_onetomany.Designer.cs">
       <DependentUpon>201409160854143_onetomany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409161222425_lastupdate.cs" />
+    <Compile Include="Migrations\201409161222425_lastupdate.Designer.cs">
+      <DependentUpon>201409161222425_lastupdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseData.cs" />
     <Compile Include="Services\BaseDataService.cs" />
@@ -138,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409160854143_onetomany.resx">
       <DependentUpon>201409160854143_onetomany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409161222425_lastupdate.resx">
+      <DependentUpon>201409161222425_lastupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

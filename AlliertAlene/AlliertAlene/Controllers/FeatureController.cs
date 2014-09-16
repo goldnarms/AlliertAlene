@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AlliertAlene.Models;
 using DataGenerator.DAL;
@@ -58,11 +56,12 @@ namespace AlliertAlene.Controllers
                 new DataFeatureLocation()
             }
             };
-            baseData.Regions = db.Locations
-                .Where(l => l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).ToList();
-            baseData.LocationList = db.Locations
-                .Where(l => !l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).ToList();
-            baseData.MarkerList = Enum.GetNames(typeof(MarkerType)).Select(name => new SelectListItem { Value = Enum.Parse(typeof(MarkerType), name).ToString(), Text = name }).ToList();
+            baseData.Regions = new SelectList(db.Locations.Where(l => l.IsRegion).OrderBy(sl => sl.Place), "Id", "Place");
+            var locationList = db.Locations
+                .Where(l => !l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).OrderBy(l => l.Text).ToList();
+            locationList.Insert(0, new SelectListItem { Text = "Ingen ...", Value = "0"});
+            baseData.LocationList = locationList;
+            baseData.MarkerList = Enum.GetNames(typeof(Models.MarkerType)).Select(name => new SelectListItem { Value = Enum.Parse(typeof(Models.MarkerType), name).ToString(), Text = name }).ToList();
             var mediaTypes = new List<SelectListItem>
             {
                 new SelectListItem {Text = "Bilde", Value = "0"},
@@ -176,7 +175,7 @@ namespace AlliertAlene.Controllers
 
         private BaseData MapToBaseData(BaseDataViewModel viewModel)
         {
-            var locations = viewModel.Locations;
+            var locations = viewModel.Locations.Where(l => l.LocationId > 0);
             return new BaseData
             {
                 Id = viewModel.Id,
@@ -193,7 +192,7 @@ namespace AlliertAlene.Controllers
                 {
                     BaseDataId = viewModel.Id,
                     LocationId = l.LocationId,
-                    MarkerType = l.MarkerType
+                    MarkerType = (DataGenerator.Models.MarkerType)l.MarkerType
                 }).ToList(),
                 Text = viewModel.Text,
                 CenterLocation = db.Locations.First(l => l.Id == viewModel.SelectedRegionId)
@@ -205,12 +204,25 @@ namespace AlliertAlene.Controllers
             return new BaseDataViewModel
             {
                 Date = baseData.Date,
-                Description = baseData.MediaAssets != null ? baseData.MediaAssets.First().Description : "",
-                Reference = baseData.MediaAssets != null ? baseData.MediaAssets.First().Reference : "",
-                Region = baseData.CenterLocation.Place,
+                Description = baseData.MediaAssets != null && baseData.MediaAssets.Count > 0 ? baseData.MediaAssets.First().Description : "",
+                Reference = baseData.MediaAssets != null && baseData.MediaAssets.Count > 0 ? baseData.MediaAssets.First().Reference : "",
                 Text = baseData.Text,
-                Media = baseData.MediaAssets != null ? (int)baseData.MediaAssets.First().MediaType : 0,
-                Id = baseData.Id
+                Media = baseData.MediaAssets != null && baseData.MediaAssets.Count > 0 ? (int)baseData.MediaAssets.First().MediaType : 0,
+                Id = baseData.Id,
+                Locations = baseData.FeatureLocations.Select(fl => new DataFeatureLocation
+                {
+                    BaseDataId = fl.BaseDataId,
+                    LocationId = fl.LocationId,
+                    MarkerType = (Models.MarkerType)fl.MarkerType,
+                    Location = new DataLocation { Id = fl.LocationId, Place = fl.Location.Place, VmCoordinate = new VmCoordinate { Id = fl.Location.CoordinateId, Lat = fl.Location.Coordinate.Lat, Lng = fl.Location.Coordinate.Lng } }
+                }).ToList(),
+                CenterLocation = new DataLocation { Id = baseData.CenterLocationId, Place = baseData.CenterLocation.Place, VmCoordinate = new VmCoordinate
+                {
+                    Id = baseData.CenterLocation.CoordinateId, Lat = baseData.CenterLocation.Coordinate.Lat, Lng = baseData.CenterLocation.Coordinate.Lng
+                
+                } },
+                SelectedMediaId = baseData.MediaAssets != null && baseData.MediaAssets.Count > 0 ? baseData.MediaAssets.First().Id : 0,
+                SelectedRegionId = baseData.CenterLocationId
             };
         }
     }

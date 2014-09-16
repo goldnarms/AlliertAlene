@@ -1,5 +1,3 @@
-using DataGenerator.Models;
-
 namespace AlliertAlene.Models
 {
     public class DataFeatureLocation

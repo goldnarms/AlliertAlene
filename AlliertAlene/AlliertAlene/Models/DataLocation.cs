@@ -8,6 +8,5 @@ namespace AlliertAlene.Models
         public int Id { get; set; }
         public VmCoordinate VmCoordinate { get; set; }
         public string Place { get; set; }
-        public int MarkerType { get; set; }
     }
 }

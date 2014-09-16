@@ -15,19 +15,10 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Region)
+            @Html.DisplayNameFor(model => model.CenterLocation.Place)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Media)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Reference)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th></th>
     </tr>
@@ -38,19 +29,10 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Region)
+            @Html.DisplayFor(modelItem => item.CenterLocation.Place)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Media)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reference)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

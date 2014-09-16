@@ -1,4 +1,5 @@
-﻿@model AlliertAlene.Models.BaseDataViewModel
+﻿
+@model AlliertAlene.Models.BaseDataViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -22,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CenterLocation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.SelectedRegionId, Model.Regions)
             </div>

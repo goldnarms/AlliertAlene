@@ -13,7 +13,8 @@ var map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
     attributionControl: false,
     infoControl: true,
     maxZoom: 7,
-    minZoom: 5
+    minZoom: 5,
+    maxBounds: new L.LatLngBounds(new L.LatLng(57.569, 1.846), new L.LatLng(70.935, 30.828))
 }).setView([65.422, 11.931], 5);
 
 var isSmallScreen = window.innerWidth < 768;
@@ -154,7 +155,7 @@ function setInfoBox(data) {
     var infoBox = $("#infoBox");
     var videoContainer = $("#videoContainer");
     var imgContainer = $(".pop-img");
-    infoBox.children("h2").first().html(data.properties.header);
+    $("#infoHeader").html(data.properties.header);
     var months = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
     $("#content").html(data.properties.text);
     $("#featureDate").html(date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear());

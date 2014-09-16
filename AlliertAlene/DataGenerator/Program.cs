@@ -68,11 +68,9 @@ namespace DataGenerator
                 //ctx.Loacations.AddRange(locations);
                 //ctx.SaveChanges();
                 var dataFromDb = ctx.Datas
-                    .Include("Locations")
-                    .Include("Locations.Coordinate")
                     .Include("CenterLocation")
-                    .Include("CenterLocation.Coordinate")
-                    .Include("Media").ToList();
+                    .Include("FeatureLocations")
+                    .Include("MediaAssets").ToList();
 
                 var jsonService = new JsonService();
                 jsonService.GenerateJson(dataFromDb);
