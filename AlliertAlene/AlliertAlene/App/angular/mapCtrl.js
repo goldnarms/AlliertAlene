@@ -1,4 +1,4 @@
-﻿/// <reference path="_all.ts" />
+﻿/// <reference path="../_all.ts" />
 var Allied;
 (function (Allied) {
     'use strict';

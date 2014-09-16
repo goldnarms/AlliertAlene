@@ -11,7 +11,8 @@ namespace AlliertAlene
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
-                //"~/bower_components/d3/d3.js",
+//"~/bower_components/d3/d3.js",
+                "~/Scripts/angular.js",
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
                 "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
@@ -37,12 +38,14 @@ namespace AlliertAlene
                 "~/bower_components/lawnchair/src/adapters/memory.js",
                 "~/bower_components/lawnchair/src/adapters/touchdb-couchdb.js",
                 "~/bower_components/lawnchair/src/adapters/webkit-sqlite.js",
-                "~/bower_components/lawnchair/src/adapters/window-name.js"
+                "~/bower_components/lawnchair/src/adapters/window-name.js",
+                "~/bower_components/slick.js/slick/slick.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
-                "~/App", "*.js"
-                ));
+            bundles.Add(new ScriptBundle("~/bundles/app")
+                .IncludeDirectory("~/App/Controllers", "*.js")
+                .IncludeDirectory("~/App", "*.js")
+                );
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -59,6 +62,7 @@ namespace AlliertAlene
                 "~/Content/bootstrap.css",
                 "~/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
                 "~/bower_components/magnific-popup/dist/magnific-popup.css",
+                "~/bower_components/slick.js/slick/slick.css",
                 "~/Content/Site.css"
                  ));
 

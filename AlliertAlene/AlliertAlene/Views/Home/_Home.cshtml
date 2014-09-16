@@ -32,6 +32,11 @@
         </div>
     </div>
 </div>
+<div class="timeline-carousel" data-ng-controller="carouselCtrl as cc">
+    <div data-ng-repeat="feature in cc.timelineFetaures">
+        <a href="#" data-ng-click="cc.goto(feature.id)" data-ng-bind="feature.header"></a>
+    </div>
+</div>
 <div class="row" id="timeLine">
     <div class="col-xs-12">
         <div id='brush' class='ui-brush' style="display:none"></div>

@@ -8,6 +8,11 @@
         $(window).load(function () {
             $("#infoBox").mCustomScrollbar();
             $(".pop-img").magnificPopup({ type: 'image' });
+            $('.timeline-carousel').slick({
+                infinite: true,
+                slidesToShow: 2,
+                slidesToScroll: 1
+            });
         });
     })(jQuery);
 </script>

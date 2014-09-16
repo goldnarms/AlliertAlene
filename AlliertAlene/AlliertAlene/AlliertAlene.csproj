@@ -237,6 +237,27 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\angular\mapCtrl.js">
+      <DependentUpon>mapCtrl.ts</DependentUpon>
+    </Content>
+    <Content Include="App\angular\mapservice.js">
+      <DependentUpon>mapService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\app.js">
+      <DependentUpon>app.ts</DependentUpon>
+    </Content>
+    <Content Include="App\mapController.js">
+      <DependentUpon>mapController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\markerTypes.js">
+      <DependentUpon>markerTypes.ts</DependentUpon>
+    </Content>
+    <Content Include="App\timeLineController.js">
+      <DependentUpon>timeLineController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\_all.js">
+      <DependentUpon>_all.ts</DependentUpon>
+    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Assets\Images\1280px-Bluecher_sinkend.jpg" />
@@ -517,6 +538,24 @@
     <Content Include="bower_components\mapbox.js\mapbox.standalone.uncompressed.js" />
     <Content Include="bower_components\mapbox.js\mapbox.uncompressed.css" />
     <Content Include="bower_components\mapbox.js\mapbox.uncompressed.js" />
+    <Content Include="bower_components\slick.js\css\pacifico.svg" />
+    <Content Include="bower_components\slick.js\css\style.css" />
+    <Content Include="bower_components\slick.js\img\fonz1.png" />
+    <Content Include="bower_components\slick.js\img\fonz2.png" />
+    <Content Include="bower_components\slick.js\img\fonz3.png" />
+    <Content Include="bower_components\slick.js\img\lazyfonz1.png" />
+    <Content Include="bower_components\slick.js\img\lazyfonz2.png" />
+    <Content Include="bower_components\slick.js\img\lazyfonz3.png" />
+    <Content Include="bower_components\slick.js\img\lazyfonz4.png" />
+    <Content Include="bower_components\slick.js\img\lazyfonz5.png" />
+    <Content Include="bower_components\slick.js\img\lazyfonz6.png" />
+    <Content Include="bower_components\slick.js\img\slick.gif" />
+    <Content Include="bower_components\slick.js\js\scripts.js" />
+    <Content Include="bower_components\slick.js\slick\ajax-loader.gif" />
+    <Content Include="bower_components\slick.js\slick\fonts\slick.svg" />
+    <Content Include="bower_components\slick.js\slick\slick.css" />
+    <Content Include="bower_components\slick.js\slick\slick.js" />
+    <Content Include="bower_components\slick.js\slick\slick.min.js" />
     <Content Include="bower_components\underscore\.gitignore" />
     <Content Include="bower_components\underscore\underscore-min.js" />
     <Content Include="bower_components\underscore\underscore.js" />
@@ -773,6 +812,43 @@
     <Content Include="bower_components\underscore\package.json" />
     <Content Include="bower_components\underscore\README.md" />
     <Content Include="bower_components\underscore\underscore-min.map" />
+    <Content Include="bower_components\slick.js\.bower.json" />
+    <Content Include="bower_components\slick.js\bower.json" />
+    <Content Include="bower_components\slick.js\component.json" />
+    <Content Include="bower_components\slick.js\css\pacifico.eot" />
+    <Content Include="bower_components\slick.js\css\pacifico.ttf" />
+    <Content Include="bower_components\slick.js\css\pacifico.woff" />
+    <Content Include="bower_components\slick.js\LICENSE" />
+    <Content Include="bower_components\slick.js\Makefile" />
+    <Content Include="bower_components\slick.js\package.json" />
+    <Content Include="bower_components\slick.js\README.markdown" />
+    <Content Include="bower_components\slick.js\slick.jquery.json" />
+    <Content Include="bower_components\slick.js\slick\config.rb" />
+    <Content Include="bower_components\slick.js\slick\fonts\slick.eot" />
+    <Content Include="bower_components\slick.js\slick\fonts\slick.ttf" />
+    <Content Include="bower_components\slick.js\slick\fonts\slick.woff" />
+    <Content Include="bower_components\slick.js\slick\slick.scss" />
+    <Content Include="App\_all.js.map">
+      <DependentUpon>_all.ts</DependentUpon>
+    </Content>
+    <Content Include="App\app.js.map">
+      <DependentUpon>app.ts</DependentUpon>
+    </Content>
+    <Content Include="App\mapController.js.map">
+      <DependentUpon>mapController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\markerTypes.js.map">
+      <DependentUpon>markerTypes.ts</DependentUpon>
+    </Content>
+    <Content Include="App\timeLineController.js.map">
+      <DependentUpon>timeLineController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\angular\mapCtrl.js.map">
+      <DependentUpon>mapCtrl.ts</DependentUpon>
+    </Content>
+    <Content Include="App\angular\mapService.js.map">
+      <DependentUpon>mapService.ts</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\AlliertAlene.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -945,14 +1021,15 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\angular\app.ts" />
+    <TypeScriptCompile Include="App\app.ts" />
+    <TypeScriptCompile Include="App\Controllers\carouselCtrl.ts" />
     <TypeScriptCompile Include="App\mapController.ts" />
     <TypeScriptCompile Include="App\angular\mapCtrl.ts" />
     <TypeScriptCompile Include="App\angular\mapService.ts" />
     <TypeScriptCompile Include="App\markerTypes.ts" />
     <TypeScriptCompile Include="App\timeLineController.ts" />
     <Content Include="Assets\timeline.json" />
-    <TypeScriptCompile Include="App\angular\_all.ts" />
+    <TypeScriptCompile Include="App\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
