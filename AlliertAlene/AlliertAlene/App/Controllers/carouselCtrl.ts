@@ -7,13 +7,19 @@ module Allied.Controllers {
     }
 
     export class CarouselController implements ICarouselController {
-        public timelineFetaures: any[];
-        constructor() {
+        public timelineFeatures: any[];
+        static $inject = ["$scope", "$http"];
+
+        constructor(private scope: ng.IScope, private http: ng.IHttpService) {
             this.init();
         }
 
         private init(): void {
-            this.timelineFetaures = angular.fromJson("/Assets/timeline.json");
+            $.getJSON('/Assets/timeline.json', (data) => {
+                console.log(data.timeline.date);
+                this.timelineFeatures = data.timeline.date;
+                this.scope.$apply();
+            });
         }
     }
 }

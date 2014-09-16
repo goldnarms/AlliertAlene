@@ -1023,6 +1023,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\app.ts" />
     <TypeScriptCompile Include="App\Controllers\carouselCtrl.ts" />
+    <TypeScriptCompile Include="App\Directives\slideItem.ts" />
     <TypeScriptCompile Include="App\mapController.ts" />
     <TypeScriptCompile Include="App\angular\mapCtrl.ts" />
     <TypeScriptCompile Include="App\angular\mapService.ts" />

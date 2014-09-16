@@ -44,6 +44,7 @@ namespace AlliertAlene
 
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .IncludeDirectory("~/App/Controllers", "*.js")
+                .IncludeDirectory("~/App/Directives", "*.js")
                 .IncludeDirectory("~/App", "*.js")
                 );
 

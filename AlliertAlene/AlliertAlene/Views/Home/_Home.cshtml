@@ -32,9 +32,14 @@
         </div>
     </div>
 </div>
-<div class="timeline-carousel" data-ng-controller="carouselCtrl as cc">
-    <div data-ng-repeat="feature in cc.timelineFetaures">
-        <a href="#" data-ng-click="cc.goto(feature.id)" data-ng-bind="feature.header"></a>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="timeline-carousel" data-ng-controller="carouselCtrl as cc">
+            <div data-ng-repeat="feature in cc.timelineFeatures">
+                <div data-slide-item="" feature="feature"></div>
+                @*<a href="#" data-ng-click="cc.goto(feature.id)" data-ng-bind="feature.headline"></a>*@
+            </div>
+        </div>
     </div>
 </div>
 <div class="row" id="timeLine">

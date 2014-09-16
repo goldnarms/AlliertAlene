@@ -4,4 +4,5 @@
 /// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="app.ts" />
 /// <reference path="controllers/carouselctrl.ts" />
+/// <reference path="directives/slideitem.ts" />
  
