@@ -29,7 +29,7 @@ namespace DataGenerator.Services
                 {
                     classname = "",
                     endDate = "",
-                    headline = baseData.Region,
+                    headline = baseData.CenterLocation.Place,
                     id = string.Format("aa{0}", i.ToString("00000")),
                     startDate = baseData.Date.ToString("yyyy,MM,dd"),
                     tag = "",
@@ -37,31 +37,31 @@ namespace DataGenerator.Services
                 });
                 int j = 0;
                 char[] alphabet = { 'a', 'b', 'c', 'd', 'e' };
-                foreach (var location in baseData.Locations)
+                foreach (var location in baseData.FeatureLocations)
                 {
                     featureList.Add(new Feature
                     {
                         geometry = new Geometry
                         {
-                            coordinates = new[] { location.Coordinate.Lat, location.Coordinate.Lng},
+                            coordinates = new[] { location.Location.Coordinate.Lat, location.Location.Coordinate.Lng},
                             type = "Point"
                         },
                         id = string.Format("aa{0}{1}", i.ToString("00000"), alphabet[j]),
                         type = "Feature",
                         properties = new Properties
                         {
-                            header = baseData.Region,
+                            header = baseData.CenterLocation.Place,
                             id = string.Format("aa{0}", i.ToString("00000")),
-                            place = location.Place,
-                            marker = location.MarkerType,
+                            place = location.Location.Place,
+                            //marker = (int)location.,
                             text = baseData.Text,
                             media = new Media
                             {
-                                description = baseData.Media.Description,
-                                link = baseData.Media.Reference,
-                                type = baseData.Media.MediaType == MediaType.Image ? "img" : 
-                                        baseData.Media.MediaType == MediaType.Video ? "video" : "diary",
-                                poster = baseData.Media.Poster
+                                description = baseData.MediaAssets.First().Description,
+                                link = baseData.MediaAssets.First().Reference,
+                                type = baseData.MediaAssets.First().MediaType == MediaType.Image ? "img" : 
+                                        baseData.MediaAssets.First().MediaType == MediaType.Video ? "video" : "diary",
+                                poster = baseData.MediaAssets.First().Poster
                             },
                             time = baseData.Date.ToUnixTime(),
                             centerCoordinates = new[] { baseData.CenterLocation.Coordinate.Lat, baseData.CenterLocation.Coordinate.Lng},

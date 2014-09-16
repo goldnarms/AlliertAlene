@@ -64,6 +64,34 @@
     <Compile Include="Migrations\201409121154331_Poster.Designer.cs">
       <DependentUpon>201409121154331_Poster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409160716494_foreignkeys.cs" />
+    <Compile Include="Migrations\201409160716494_foreignkeys.Designer.cs">
+      <DependentUpon>201409160716494_foreignkeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409160737579_manytimany.cs" />
+    <Compile Include="Migrations\201409160737579_manytimany.Designer.cs">
+      <DependentUpon>201409160737579_manytimany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409160744532_virtual.cs" />
+    <Compile Include="Migrations\201409160744532_virtual.Designer.cs">
+      <DependentUpon>201409160744532_virtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409160804083_featurelocations.cs" />
+    <Compile Include="Migrations\201409160804083_featurelocations.Designer.cs">
+      <DependentUpon>201409160804083_featurelocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409160838045_markertypeMoved.cs" />
+    <Compile Include="Migrations\201409160838045_markertypeMoved.Designer.cs">
+      <DependentUpon>201409160838045_markertypeMoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409160842045_marker.cs" />
+    <Compile Include="Migrations\201409160842045_marker.Designer.cs">
+      <DependentUpon>201409160842045_marker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409160854143_onetomany.cs" />
+    <Compile Include="Migrations\201409160854143_onetomany.Designer.cs">
+      <DependentUpon>201409160854143_onetomany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseData.cs" />
     <Compile Include="Services\BaseDataService.cs" />
@@ -89,6 +117,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409121154331_Poster.resx">
       <DependentUpon>201409121154331_Poster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160716494_foreignkeys.resx">
+      <DependentUpon>201409160716494_foreignkeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160737579_manytimany.resx">
+      <DependentUpon>201409160737579_manytimany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160744532_virtual.resx">
+      <DependentUpon>201409160744532_virtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160804083_featurelocations.resx">
+      <DependentUpon>201409160804083_featurelocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160838045_markertypeMoved.resx">
+      <DependentUpon>201409160838045_markertypeMoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160842045_marker.resx">
+      <DependentUpon>201409160842045_marker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409160854143_onetomany.resx">
+      <DependentUpon>201409160854143_onetomany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

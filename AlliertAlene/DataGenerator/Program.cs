@@ -32,7 +32,6 @@ namespace DataGenerator
                         Lng = 59.7f,
                         Lat = 10.6f
                     },
-                    MarkerType = 3,
                     Place = "Østlandet"
                 },
                 new BaseData.Location
@@ -42,7 +41,6 @@ namespace DataGenerator
                         Lng = 59.7f,
                         Lat = 10.6f
                     },
-                    MarkerType = 3,
                     Place = "Vestlandet"
                 },
                 new BaseData.Location
@@ -52,7 +50,6 @@ namespace DataGenerator
                         Lng = 63.5f,
                         Lat = 10.5f
                     },
-                    MarkerType = 3,
                     Place = "Trøndelag"
                 },
                 new BaseData.Location
@@ -62,7 +59,6 @@ namespace DataGenerator
                         Lng = 68.4f,
                         Lat = 17.4f
                     },
-                    MarkerType = 3,
                     Place = "Nord-Norge"
                 }
             };

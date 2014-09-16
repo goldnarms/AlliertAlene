@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataGenerator.Models
 {
@@ -9,11 +10,12 @@ namespace DataGenerator.Models
         [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string Region { get; set; }
         public string Text { get; set; }
-        public Location CenterLocation { get; set; }
-        public List<Location> Locations { get; set; }
-        public MediaAsset Media { get; set; }
+        public int CenterLocationId { get; set; }
+        [ForeignKey("CenterLocationId")]
+        public virtual Location CenterLocation { get; set; }
+        public virtual ICollection<FeatureLocation> FeatureLocations { get; set; }
+        public virtual ICollection<MediaAsset> MediaAssets { get; set; }
 
         public class MediaAsset
         {
@@ -23,15 +25,21 @@ namespace DataGenerator.Models
             public string Poster { get; set; }
             public string Reference { get; set; }
             public string Description { get; set; }
+            public int BaseDataId { get; set; }
+            [ForeignKey("BaseDataId")]
+            public virtual BaseData BaseData { get; set; }
         }
 
         public class Location
         {
             [Key]
             public int Id { get; set; }
-            public Coordinate Coordinate { get; set; }
+            public int CoordinateId { get; set; }
             public string Place { get; set; }
-            public int MarkerType { get; set; }
+            public bool IsRegion { get; set; }
+            [ForeignKey("CoordinateId")]
+            public virtual Coordinate Coordinate { get; set; }
+            public virtual ICollection<FeatureLocation> FeatureLocations { get; set; }
         }
 
         public class Coordinate
@@ -41,6 +49,21 @@ namespace DataGenerator.Models
             public float Lat { get; set; }
             public float Lng { get; set; }
         }
+
+        public class FeatureLocation
+        {
+            [Key, Column(Order = 0)]
+            public int BaseDataId { get; set; }
+
+            [ForeignKey("BaseDataId")]
+            public virtual BaseData BaseData { get; set; }
+            [Key, Column(Order = 1)]
+            public int LocationId { get; set; }
+            [ForeignKey("LocationId")]
+            public virtual Location Location { get; set; }
+
+            public MarkerType MarkerType { get; set; }
+        }
     }
 
     public enum MediaType
@@ -48,5 +71,13 @@ namespace DataGenerator.Models
         Image,
         Video,
         Diary
+    }
+
+    public enum MarkerType
+    {
+        Ship = 0,
+        Video = 1,
+        Diary = 2,
+        Region = 3
     }
 }

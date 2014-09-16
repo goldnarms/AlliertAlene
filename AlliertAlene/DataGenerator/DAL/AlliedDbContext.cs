@@ -17,5 +17,18 @@ namespace DataGenerator.DAL
 
         public DbSet<BaseData> Datas { get; set; }
         public DbSet<BaseData.Location> Locations { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<BaseData>()
+            //    .HasMany(x => x.FeatureLocations)
+            //    .WithMany(x => x.BaseDatas)
+            //.Map(x =>
+            //{
+            //    x.ToTable("FeatureLocations"); // third table is named Cookbooks
+            //    x.MapLeftKey("BaseDataId");
+            //    x.MapRightKey("LocationId");
+            //});
+        }
     }
 }

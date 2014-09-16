@@ -19,7 +19,7 @@ namespace AlliertAlene.Models
         public int Media { get; set; }
         public string Reference { get; set; }
         public string Description { get; set; }
-        public List<DataLocation> Locations { get; set; }
+        public List<DataFeatureLocation> Locations { get; set; }
         [DataType(DataType.Upload)]
         public HttpPostedFileBase ImageUpload { get; set; }
         public DataLocation CenterLocation { get; set; }
@@ -31,5 +31,7 @@ namespace AlliertAlene.Models
         public HttpPostedFileBase PosterUpload { get; set; }
 
         public string PosterReference { get; set; }
+        public IEnumerable<SelectListItem> LocationList { get; set; }
+        public IEnumerable<SelectListItem> MarkerList { get; set; }
     }
 }

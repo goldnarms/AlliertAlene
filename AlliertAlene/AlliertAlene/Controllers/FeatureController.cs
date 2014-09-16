@@ -22,8 +22,8 @@ namespace AlliertAlene.Controllers
         public ActionResult Index()
         {
             return View(db.Datas
-                .Include(d => d.Locations)
-                .Include(d => d.Media)
+                .Include(d => d.FeatureLocations)
+                .Include(d => d.MediaAssets)
                 .Select(MapToViewModel));
         }
 
@@ -48,20 +48,21 @@ namespace AlliertAlene.Controllers
             var baseData = new BaseDataViewModel
             {
                 CenterLocation = new DataLocation { VmCoordinate = new VmCoordinate() },
-                Locations = new List<DataLocation>
+                Locations = new List<DataFeatureLocation>
             {
-                new DataLocation { VmCoordinate = new VmCoordinate()},
-                new DataLocation { VmCoordinate = new VmCoordinate()},
-                new DataLocation { VmCoordinate = new VmCoordinate()},
-                new DataLocation { VmCoordinate = new VmCoordinate()},
-                new DataLocation { VmCoordinate = new VmCoordinate()}
+                new DataFeatureLocation(),
+                new DataFeatureLocation(),
+                new DataFeatureLocation(),
+                new DataFeatureLocation(),
+                new DataFeatureLocation(),
+                new DataFeatureLocation()
             }
             };
-            var regions = db.Locations
-                .Include(l => l.Coordinate)
-                .Include(l => l.MarkerType)
-                .Where(l => l.MarkerType == 3).Select(l => new SelectListItem {Text = l.Place, Value = l.Id.ToString()});
-            baseData.Regions = regions.ToList();
+            baseData.Regions = db.Locations
+                .Where(l => l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).ToList();
+            baseData.LocationList = db.Locations
+                .Where(l => !l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).ToList();
+            baseData.MarkerList = Enum.GetNames(typeof(MarkerType)).Select(name => new SelectListItem { Value = Enum.Parse(typeof(MarkerType), name).ToString(), Text = name }).ToList();
             var mediaTypes = new List<SelectListItem>
             {
                 new SelectListItem {Text = "Bilde", Value = "0"},
@@ -175,33 +176,25 @@ namespace AlliertAlene.Controllers
 
         private BaseData MapToBaseData(BaseDataViewModel viewModel)
         {
-            var locations =
-                viewModel.Locations.Where(l => l != null && !string.IsNullOrEmpty(l.Place)).Select(l => new BaseData.Location
-            {
-                Coordinate = new BaseData.Coordinate
-                {
-                    Lat = l.VmCoordinate.Lat,
-                    Lng = l.VmCoordinate.Lng
-                },
-                Id = l.Id,
-                Place = l.Place,
-                MarkerType = viewModel.SelectedMediaId,
-
-            }
-                );
+            var locations = viewModel.Locations;
             return new BaseData
             {
                 Id = viewModel.Id,
                 Date = viewModel.Date,
-                Media = new BaseData.MediaAsset
+                MediaAssets = new List<BaseData.MediaAsset> {
+                new BaseData.MediaAsset
                 {
                     Description = viewModel.Description,
                     MediaType = (DataGenerator.Models.MediaType)viewModel.SelectedMediaId,
                     Reference = viewModel.Reference,
                     Poster = viewModel.PosterReference
-                },
-                Locations = locations.ToList(),
-                Region = db.Locations.First(l => l.Id == viewModel.SelectedRegionId).Place,
+                }},
+                FeatureLocations = locations.Select(l => new BaseData.FeatureLocation
+                {
+                    BaseDataId = viewModel.Id,
+                    LocationId = l.LocationId,
+                    MarkerType = l.MarkerType
+                }).ToList(),
                 Text = viewModel.Text,
                 CenterLocation = db.Locations.First(l => l.Id == viewModel.SelectedRegionId)
             };
@@ -212,11 +205,11 @@ namespace AlliertAlene.Controllers
             return new BaseDataViewModel
             {
                 Date = baseData.Date,
-                Description = baseData.Media != null ? baseData.Media.Description : "",
-                Reference = baseData.Media != null ? baseData.Media.Reference : "",
-                Region = baseData.Region,
+                Description = baseData.MediaAssets != null ? baseData.MediaAssets.First().Description : "",
+                Reference = baseData.MediaAssets != null ? baseData.MediaAssets.First().Reference : "",
+                Region = baseData.CenterLocation.Place,
                 Text = baseData.Text,
-                Media = baseData.Media != null ? (int)baseData.Media.MediaType : 0,
+                Media = baseData.MediaAssets != null ? (int)baseData.MediaAssets.First().MediaType : 0,
                 Id = baseData.Id
             };
         }
