@@ -7946,7 +7946,7 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 		function onMarkerClick(e) {
 			$dragslide.cancelSlide();
 			goToMarker(e.data.number);
-			filterOnId(e.data.id);
+			filterOnId(e.data.id); // AJ
 			upDate();
 		};
 		

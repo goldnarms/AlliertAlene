@@ -237,7 +237,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\angular\mapCtrl.js">
+    <Content Include="App\Controllers\mapCtrl.js">
       <DependentUpon>mapCtrl.ts</DependentUpon>
     </Content>
     <Content Include="App\angular\mapservice.js">
@@ -246,7 +246,7 @@
     <Content Include="App\app.js">
       <DependentUpon>app.ts</DependentUpon>
     </Content>
-    <Content Include="App\mapController.js">
+    <Content Include="App\angular\mapController.js">
       <DependentUpon>mapController.ts</DependentUpon>
     </Content>
     <Content Include="App\markerTypes.js">
@@ -834,7 +834,7 @@
     <Content Include="App\app.js.map">
       <DependentUpon>app.ts</DependentUpon>
     </Content>
-    <Content Include="App\mapController.js.map">
+    <Content Include="App\angular\mapController.js.map">
       <DependentUpon>mapController.ts</DependentUpon>
     </Content>
     <Content Include="App\markerTypes.js.map">
@@ -843,7 +843,7 @@
     <Content Include="App\timeLineController.js.map">
       <DependentUpon>timeLineController.ts</DependentUpon>
     </Content>
-    <Content Include="App\angular\mapCtrl.js.map">
+    <Content Include="App\Controllers\mapCtrl.js.map">
       <DependentUpon>mapCtrl.ts</DependentUpon>
     </Content>
     <Content Include="App\angular\mapService.js.map">
@@ -1024,8 +1024,8 @@
     <TypeScriptCompile Include="App\app.ts" />
     <TypeScriptCompile Include="App\Controllers\carouselCtrl.ts" />
     <TypeScriptCompile Include="App\Directives\slideItem.ts" />
-    <TypeScriptCompile Include="App\mapController.ts" />
-    <TypeScriptCompile Include="App\angular\mapCtrl.ts" />
+    <TypeScriptCompile Include="App\angular\mapController.ts" />
+    <TypeScriptCompile Include="App\Controllers\mapCtrl.ts" />
     <TypeScriptCompile Include="App\angular\mapService.ts" />
     <TypeScriptCompile Include="App\markerTypes.ts" />
     <TypeScriptCompile Include="App\timeLineController.ts" />

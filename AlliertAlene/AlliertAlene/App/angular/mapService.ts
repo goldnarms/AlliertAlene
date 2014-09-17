@@ -15,12 +15,12 @@ module Allied {
         }
 
         public setData(features: any[]): void {
-            pointLayer.clearLayers().addData(features);
-            pointLayer.on('layeradd', (e) => {
-                var marker = e.layer,
-                    feature = marker.feature;
-                marker.setIcon(setMarker(feature.properties.marker));
-            });
+            //this.layer.clearLayers().addData(features);
+            //this.layer.on('layeradd', (e) => {
+            //    var marker = e.layer,
+            //        feature = marker.feature;
+            //    marker.setIcon(setMarker(feature.properties.marker));
+            //});
         }
     }
 } 

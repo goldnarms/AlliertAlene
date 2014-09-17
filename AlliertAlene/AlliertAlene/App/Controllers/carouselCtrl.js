@@ -12,9 +12,10 @@
             }
             CarouselController.prototype.init = function () {
                 var _this = this;
-                $.getJSON('/Assets/timeline.json', function (data) {
-                    console.log(data.timeline.date);
-                    _this.timelineFeatures = data.timeline.date;
+                $.getJSON('/Assets/slickFeatures.json', function (data) {
+                    console.log(data.dates);
+                    _this.timelineFeatures = data.dates;
+
                     _this.scope.$apply();
                 });
             };

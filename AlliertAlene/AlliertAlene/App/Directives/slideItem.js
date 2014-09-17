@@ -1,22 +1,36 @@
 ﻿var Allied;
 (function (Allied) {
+    /// <reference path="../_all.ts" />
     (function (Directives) {
         "use strict";
 
         var SlideItem = (function () {
+            //public controller: string = "mapCtrl";
             function SlideItem() {
+                var _this = this;
                 this.restrict = "A";
+                this.replace = true;
+                this.transclude = false;
                 this.scope = {
                     feature: "="
                 };
-
-                //this.link = ($scope, element, attributes) => this.linkFn($scope, element, attributes);
-                this.template = "<span style='font-size:16px'>{{feature.headline}}</span> <span>{{feature.startDate}}</span>";
+                this.link = function ($scope, element, attributes) {
+                    return _this.linkFn($scope, element, attributes);
+                };
+                this.template = function (tElement, tAttrs) {
+                    return "<ul class='text-center'><li><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)'>{{f.header}}</a></li></ul>";
+                };
             }
             SlideItem.prototype.injection = function () {
                 return [function () {
                         return new SlideItem();
                     }];
+            };
+
+            SlideItem.prototype.linkFn = function (scope, element, attributes) {
+                scope.goTo = function (id) {
+                    //controller.filterOnId(id);
+                };
             };
             SlideItem.$inject = [];
             return SlideItem;
@@ -25,4 +39,4 @@
     })(Allied.Directives || (Allied.Directives = {}));
     var Directives = Allied.Directives;
 })(Allied || (Allied = {}));
-//# sourceMappingURL=slideitem.js.map
+//# sourceMappingURL=slideItem.js.map

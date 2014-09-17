@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseData.cs" />
+    <Compile Include="Models\SlickData.cs" />
     <Compile Include="Services\BaseDataService.cs" />
     <Compile Include="DAL\AlliedDbContext.cs" />
     <Compile Include="Extensions\EpochExtension.cs" />

@@ -3,7 +3,6 @@ module Allied.Controllers {
     "use strict";
 
     export interface ICarouselController {
-        
     }
 
     export class CarouselController implements ICarouselController {
@@ -15,9 +14,10 @@ module Allied.Controllers {
         }
 
         private init(): void {
-            $.getJSON('/Assets/timeline.json', (data) => {
-                console.log(data.timeline.date);
-                this.timelineFeatures = data.timeline.date;
+            $.getJSON('/Assets/slickFeatures.json', (data) => {
+                console.log(data.dates);
+                this.timelineFeatures = data.dates;
+
                 this.scope.$apply();
             });
         }

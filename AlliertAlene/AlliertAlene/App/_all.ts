@@ -5,4 +5,4 @@
 /// <reference path="app.ts" />
 /// <reference path="controllers/carouselctrl.ts" />
 /// <reference path="directives/slideitem.ts" />
- 
+declare var Lawnchair: any;
