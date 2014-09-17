@@ -3,7 +3,7 @@
     <div class="col-xs-12 visible-xs-block visible-sm-block text-center">
         <ul class="list-inline">
             <li><a href="#" id="btnFeatureLeft" class="feature-link"><i class="glyphicon glyphicon-chevron-left icon-large"></i></a></li>
-            <li><h3 id="featureDate"></h3></li>
+            <li><h3 id="featureDate" data-ng-bind="mc.selectedFeature.date"></h3></li>
             <li><a href="#" id="btnFeatureRight" class="feature-link"><i class="glyphicon glyphicon-chevron-right icon-large"></i></a></li>
         </ul>
     </div>
@@ -14,14 +14,14 @@
         <div id="dragger" style="display: none; background-color: transparent; position: absolute; z-index: 10; top:0;left:0;width: 100%;height: 350px"></div>
     </div>
     <div id="infoBox" class="col-xs-12 col-sm-4">
-        <h2 id="infoHeader"></h2>
-        <div id="content"></div>
-        <a class="pop-img">
-            <img />
+        <h2 data-ng-bind="mc.selectedFeature.header"></h2>
+        <div id="content" data-ng-bind-html="mc.selectedFeature.text"></div>
+        <a class="pop-img" data-ng-href="{{mc.selectedFeature.mediaSrc}}" data-ng-if="mc.selectedFeature.showImg">
+            <img data-ng-src="{{mc.selectedFeature.mediaSrc}}" />
         </a>
-        <div id="videoContainer" style="display: none">
+        <div id="videoContainer" data-ng-if="mc.selectedFeature.showVideo" data-ng-cloak="">
             <video class="video-js vjs-default-skin" controls
-                   preload="auto" width="320" height="132" id="featureVideo">
+                   preload="auto" width="320" height="132" id="featureVideo" data-ng-src="{{mc.selectedFeature.mediaSrc}}" data-poster="{{mc.selectedFeature.posterSrc}}">
                 <source type='video/mp4'>
                 @*<source src="MY_VIDEO.webm" type='video/webm'>*@
                 <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
@@ -39,12 +39,5 @@
                 <div data-slide-item="" feature="feature"></div>
             </div>
         </div>
-    </div>
-    <a href="" data-ng-click="cc.test()">Tsts</a>
-</div>
-<div class="row" id="timeLine">
-    <div class="col-xs-12">
-        <div id='brush' class='ui-brush' style="display:none"></div>
-        <div id="my-timeline"></div>
     </div>
 </div>

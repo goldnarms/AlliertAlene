@@ -1,7 +1,7 @@
 ﻿@section SPAViews {
-    <div data-ng-controller="mapCtrl as mc">
-        @Html.Partial("_Home")
-    </div>
+    <div data-ng-app="allied" data-ng-controller="mapCtrl as mc">
+    @Html.Partial("_Home")
+</div>
 }
 @section Scripts{
     @Scripts.Render("~/bundles/app")
@@ -11,9 +11,8 @@
                 $("#infoBox").mCustomScrollbar();
                 $(".pop-img").magnificPopup({ type: 'image' });
                 $('.timeline-carousel').slick({
-                    infinite: true,
-                    slidesToShow: 2,
-                    slidesToScroll: 1
+                    infinite: false,
+                    slidesToShow: 4
                 });
             });
         })(jQuery);

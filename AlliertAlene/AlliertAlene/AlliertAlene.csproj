@@ -240,19 +240,19 @@
     <Content Include="App\Controllers\mapCtrl.js">
       <DependentUpon>mapCtrl.ts</DependentUpon>
     </Content>
-    <Content Include="App\angular\mapservice.js">
+    <Content Include="App\Services\mapservice.js">
       <DependentUpon>mapService.ts</DependentUpon>
     </Content>
     <Content Include="App\app.js">
       <DependentUpon>app.ts</DependentUpon>
     </Content>
-    <Content Include="App\angular\mapController.js">
+    <Content Include="App\bck\mapController.js">
       <DependentUpon>mapController.ts</DependentUpon>
     </Content>
     <Content Include="App\markerTypes.js">
       <DependentUpon>markerTypes.ts</DependentUpon>
     </Content>
-    <Content Include="App\timeLineController.js">
+    <Content Include="App\bck\timeLineController.js">
       <DependentUpon>timeLineController.ts</DependentUpon>
     </Content>
     <Content Include="App\_all.js">
@@ -584,6 +584,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -834,23 +836,25 @@
     <Content Include="App\app.js.map">
       <DependentUpon>app.ts</DependentUpon>
     </Content>
-    <Content Include="App\angular\mapController.js.map">
+    <Content Include="App\bck\mapController.js.map">
       <DependentUpon>mapController.ts</DependentUpon>
     </Content>
     <Content Include="App\markerTypes.js.map">
       <DependentUpon>markerTypes.ts</DependentUpon>
     </Content>
-    <Content Include="App\timeLineController.js.map">
+    <Content Include="App\bck\timeLineController.js.map">
       <DependentUpon>timeLineController.ts</DependentUpon>
     </Content>
     <Content Include="App\Controllers\mapCtrl.js.map">
       <DependentUpon>mapCtrl.ts</DependentUpon>
     </Content>
-    <Content Include="App\angular\mapService.js.map">
+    <Content Include="App\Services\mapService.js.map">
       <DependentUpon>mapService.ts</DependentUpon>
     </Content>
+    <Content Include="Assets\slickFeatures.json" />
     <None Include="Properties\PublishProfiles\AlliertAlene.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -1011,6 +1015,7 @@
     <Content Include="Views\Shared\EditorTemplates\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\angular\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -1024,11 +1029,11 @@
     <TypeScriptCompile Include="App\app.ts" />
     <TypeScriptCompile Include="App\Controllers\carouselCtrl.ts" />
     <TypeScriptCompile Include="App\Directives\slideItem.ts" />
-    <TypeScriptCompile Include="App\angular\mapController.ts" />
+    <TypeScriptCompile Include="App\bck\mapController.ts" />
     <TypeScriptCompile Include="App\Controllers\mapCtrl.ts" />
-    <TypeScriptCompile Include="App\angular\mapService.ts" />
+    <TypeScriptCompile Include="App\Services\mapService.ts" />
     <TypeScriptCompile Include="App\markerTypes.ts" />
-    <TypeScriptCompile Include="App\timeLineController.ts" />
+    <TypeScriptCompile Include="App\bck\timeLineController.ts" />
     <Content Include="Assets\timeline.json" />
     <TypeScriptCompile Include="App\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />

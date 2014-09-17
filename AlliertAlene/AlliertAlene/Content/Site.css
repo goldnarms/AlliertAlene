@@ -112,4 +112,9 @@ input, select, textarea {
 #featureDate {
   font-size: 2em; }
 
+.leaflet-control-zoom {
+  margin-left: auto;
+  margin-right: auto;
+  left: 670px; }
+
 /*# sourceMappingURL=Site.css.map */

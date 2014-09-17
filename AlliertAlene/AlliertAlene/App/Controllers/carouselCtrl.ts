@@ -15,7 +15,6 @@ module Allied.Controllers {
 
         private init(): void {
             $.getJSON('/Assets/slickFeatures.json', (data) => {
-                console.log(data.dates);
                 this.timelineFeatures = data.dates;
 
                 this.scope.$apply();

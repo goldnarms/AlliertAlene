@@ -8,21 +8,34 @@ module Allied.Controllers {
         layer: L.GeoJSON;
         lastLoc: L.LatLng;
         filterOnId(id: string): void;
+        selectedFeature: IFeatureViewmodel;
+    }
+
+    export interface IFeatureViewmodel {
+        date: string;
+        text: string;
+        mediaSrc: string;
+        posterSrc?: string;
+        showImg: boolean;
+        showVideo: boolean;
+        header: string;
     }
 
     export class MapController implements IMapController {
-        public static $inject = [];
+        public static $inject = ["$scope", "mapService", "$timeout"];
 
         public map: L.Map;
         public layer: L.GeoJSON;
         public store: any;
         public lastLoc: L.LatLng;
+        public selectedFeature: IFeatureViewmodel;
 
         private currentKey: string;
         private currentIndex: number = 0;
         private storeKeys: string[] = [];
+        private timeIndices: { [id: string]: number };
 
-        constructor() {
+        constructor(private scope: ng.IScope, private mapService: Allied.Services.IMapService, private timeout: ng.ITimeoutService) {
             this.init();
         }
 
@@ -56,17 +69,7 @@ module Allied.Controllers {
         }
 
         private setupMap(): void {
-            if (!this.map) {
-                console.log("Init");
-                L.mapbox.accessToken = 'pk.eyJ1IjoiZ29sZG5hcm1zIiwiYSI6IkZKWHd2ZzgifQ.spTj9MJpcjX57EbN2fUDqQ';
-                this.map = L.mapbox.map('map', 'goldnarms.jd8kngde', {
-                    attributionControl: false,
-                    infoControl: true,
-                    maxZoom: 7,
-                    minZoom: 5,
-                    maxBounds: new L.LatLngBounds(new L.LatLng(57.569, 1.846), new L.LatLng(70.935, 30.828))
-                }).setView([65.422, 11.931], 5);
-            }
+            this.map = this.mapService.map;
             var isSmallScreen = window.innerWidth < 768;
             if (isSmallScreen) {
                 this.map.dragging.disable();
@@ -83,10 +86,13 @@ module Allied.Controllers {
 
         private loadData(): void {
             this.store.nuke();
+            this.timeIndices = {};
             $.getJSON('/Assets/dataPoints.geojson', (data) => {
                 var ids = _.uniq(_.map(data.features, (f: any) => { return f.properties.id; }));
+                var dates = _.uniq(_.map(data.features, (f: any) => { return f.properties.time; }));
                 _.each(ids, (id: string) => {
                     this.store.save({ key: id, features: _.filter(data.features, (f: any) => { return f.properties.id === id; }) });
+                    this.timeIndices[id] = _.indexOf(dates, _.find(data.features, (f: any) => { return f.properties.id === id; }).properties.time);
                 });
                 this.storeKeys = ids;
                 var initId = ids[0];
@@ -98,11 +104,15 @@ module Allied.Controllers {
                         initId = pair[1];
                     }
                 }
+                this.timeout(() => {
+                    //(<any>$('.timeline-carousel')).slickGoTo(this.timeIndices[initId]);
+                });
                 this.filterOnId(initId);
             });
         }
 
         public filterOnId(id: string): void {
+
             this.currentKey = id;
             this.currentIndex = _.indexOf(this.storeKeys, this.currentKey);
             if (this.currentIndex === 0) {
@@ -114,9 +124,7 @@ module Allied.Controllers {
                 $("#btnFeatureRight").show();
             }
 
-
             this.store.get(id, (data) => {
-                console.log(data);
                 var selectedFeatures = data.features;
                 if (selectedFeatures.length > 0) {
                     this.setInfoBox(selectedFeatures[0]);
@@ -131,9 +139,7 @@ module Allied.Controllers {
                     }
                 }
                 this.layer.clearLayers().addData(selectedFeatures);
-                console.log(selectedFeatures);
                 this.layer.on('layeradd', (e) => {
-                    console.log(e);
                     var marker = e.layer;
                     var feature = marker.feature;
                     marker.setIcon(this.setMarker(feature.properties.marker));
@@ -143,39 +149,16 @@ module Allied.Controllers {
 
         private setInfoBox(data): void {
             var date = new Date(data.properties.time);
-            var infoBox = $("#infoBox");
-            var videoContainer = $("#videoContainer");
-            var imgContainer = $(".pop-img");
-            $("#infoHeader").html(data.properties.header);
             var months: string[] = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
-            $("#content").html(data.properties.text);
-            $("#featureDate").html(date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear());
-            if (data.properties.media.type === "img") {
-                imgContainer.attr("href", data.properties.media.link);
-                imgContainer.children("img").attr("src", data.properties.media.link);
-                videoContainer.hide();
-                imgContainer.show();
-            } else if (data.properties.media.type === "video") {
-                var myPlayer = videojs('featureVideo');
-                myPlayer.src(data.properties.media.link);
-                myPlayer.poster(data.properties.media.poster);
-                myPlayer.ready(() => {
-                    myPlayer.on('ended', () => {
-                        $("#videoLinkContainer").show();
-                        videoContainer.hide();
-                    });
-                });
-                videoContainer.show();
-                imgContainer.hide();
-            } else if (data.properties.media.type === "diary") {
-                infoBox.addClass("diary");
-                //infoBox.css("background-color", "#32cd32");
-                imgContainer.attr("href", data.properties.media.link);
-                imgContainer.children("img").attr("src", data.properties.media.link);
-                imgContainer.show();
-                videoContainer.hide();
-            }
-            $("#videoLinkContainer").hide();
+            this.selectedFeature = <IFeatureViewmodel>{
+                date: date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear(),
+                header: data.properties.header,
+                text: data.properties.text,
+                showImg: data.properties.media.type === "img" || data.properties.media.type === "diary",
+                showVideo: data.properties.media.type === "video",
+                mediaSrc: data.properties.media.link,
+                posterSrc: data.properties.media.poster || ""
+            };
         }
 
         public pointer(feature: any, latlng: L.LatLng): L.Marker {
@@ -234,7 +217,6 @@ module Allied.Controllers {
         }
 
         private setMarker(markerType: app.MarkerType): L.Icon {
-            console.log("marker");
             var iconSize = [20, 20];
             var iconAnchor = [10, 10];
             var popupAnchor = [0, -11];

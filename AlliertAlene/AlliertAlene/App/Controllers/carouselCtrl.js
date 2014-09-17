@@ -13,7 +13,6 @@
             CarouselController.prototype.init = function () {
                 var _this = this;
                 $.getJSON('/Assets/slickFeatures.json', function (data) {
-                    console.log(data.dates);
                     _this.timelineFeatures = data.dates;
 
                     _this.scope.$apply();

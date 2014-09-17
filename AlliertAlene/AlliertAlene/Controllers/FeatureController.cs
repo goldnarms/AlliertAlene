@@ -21,7 +21,11 @@ namespace AlliertAlene.Controllers
         {
             return View(db.Datas
                 .Include(d => d.FeatureLocations)
+                .Include(d => d.FeatureLocations.Select(fl => fl.Location))
+                .Include(d => d.FeatureLocations.Select(fl => fl.Location).Select(l => l.Coordinate))
                 .Include(d => d.MediaAssets)
+                .Include(d => d.CenterLocation)
+                .Include(d => d.CenterLocation.Coordinate)
                 .Select(MapToViewModel));
         }
 

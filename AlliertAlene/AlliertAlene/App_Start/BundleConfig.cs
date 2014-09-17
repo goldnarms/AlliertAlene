@@ -13,12 +13,11 @@ namespace AlliertAlene
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
 //"~/bower_components/d3/d3.js",
                 "~/Scripts/angular.js",
+                "~/Scripts/angular-sanitize.js",
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
                 "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
                 "~/Scripts/respond.js",
-                "~/Scripts/TimeLine/js/storyjs-embed.js",
-                "~/Scripts/TimeLine/js/timeline.js",
                 "~/bower_components/mapbox.js/mapbox.js",
                 "~/bower_components/video.js/video.js",
                 "~/Scripts/jquery-{version}.js",
@@ -45,6 +44,7 @@ namespace AlliertAlene
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .IncludeDirectory("~/App/Controllers", "*.js")
                 .IncludeDirectory("~/App/Directives", "*.js")
+                .IncludeDirectory("~/App/Services", "*.js")
                 .IncludeDirectory("~/App", "*.js")
                 );
 

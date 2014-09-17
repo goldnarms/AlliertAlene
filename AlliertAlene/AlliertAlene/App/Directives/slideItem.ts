@@ -7,7 +7,7 @@ module Allied.Directives {
     }
 
     export class SlideItem implements ng.IDirective {
-        public link: ($scope: ng.IScope, element: JQuery, attributes: ISlideItemAttributes) => any;
+        public link: ($scope: ng.IScope, element: JQuery, attributes: ISlideItemAttributes, controller: Allied.Controllers.IMapController) => any;
         static $inject = [];
         public injection(): any[] {
             return [() => { return new SlideItem(); }];
@@ -17,20 +17,20 @@ module Allied.Directives {
         public replace: boolean = true;
         public scope: any;
         public transclude: boolean = false;
-        //public controller: string = "mapCtrl";
+        public controller: string = "mapCtrl";
         constructor() {
             this.scope = {
                 feature: "="
             };
-            this.link = ($scope, element, attributes) => this.linkFn($scope, element, attributes);
+            this.link = ($scope, element, attributes, controller) => this.linkFn($scope, element, attributes, controller);
             this.template = (tElement, tAttrs) => {
-                return "<ul class='text-center'><li><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)'>{{f.header}}</a></li></ul>";
+                return "<ul class='text-center' style='list-style:none'><li><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)'>{{f.header}}</a></li></ul>";
             };
         }
 
-        linkFn(scope, element, attributes) {
+        linkFn(scope, element, attributes, controller: Allied.Controllers.IMapController) {
             scope.goTo = (id: string) => {
-                //controller.filterOnId(id);
+                controller.filterOnId(id);
             };
         }
     }
