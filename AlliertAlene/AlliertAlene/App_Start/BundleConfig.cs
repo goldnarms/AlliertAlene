@@ -17,7 +17,7 @@ namespace AlliertAlene
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
                 "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
-                "~/Scripts/respond.js",
+                //"~/Scripts/respond.js",
                 "~/bower_components/mapbox.js/mapbox.js",
                 "~/bower_components/video.js/video.js",
                 "~/Scripts/jquery-{version}.js",
@@ -69,8 +69,8 @@ namespace AlliertAlene
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            //BundleTable.EnableOptimizations = true;
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = false;
         }
     }
 }

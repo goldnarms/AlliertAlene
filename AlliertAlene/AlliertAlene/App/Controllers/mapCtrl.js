@@ -5,38 +5,51 @@
         "use strict";
 
         var MapController = (function () {
-            function MapController(scope, mapService, timeout) {
+            function MapController($window, scope, mapService, timeout, $location) {
+                var _this = this;
+                this.$window = $window;
                 this.scope = scope;
                 this.mapService = mapService;
                 this.timeout = timeout;
+                this.$location = $location;
+                this.showStartArrow = false;
+                this.showEndArrow = true;
                 this.currentIndex = 0;
                 this.storeKeys = [];
                 this.init();
+                this.isSmallScreen = this.$window.innerWidth < 768;
+                $(window).on("resize", function () {
+                    var isSmallScreen = _this.$window.innerWidth < 768;
+                    if (_this.isSmallScreen !== isSmallScreen) {
+                        _this.isSmallScreen = isSmallScreen;
+                        _this.scope.$apply();
+                    }
+                });
+                scope.$on("$destroy", function () {
+                    $(window).off();
+                    _this.scope = scope = null;
+                });
             }
             MapController.prototype.init = function () {
                 this.setupMap();
-                this.setupHandlers();
                 this.initStore();
                 this.loadData();
             };
 
-            MapController.prototype.setupHandlers = function () {
-                var _this = this;
-                $("#btnFeatureRight").on("click", function () {
-                    var index = _.indexOf(_this.storeKeys, _this.currentKey);
-                    if (index < _this.storeKeys.length) {
-                        index = index + 1;
-                        _this.filterOnId(_this.storeKeys[index]);
-                    }
-                });
+            MapController.prototype.nextFeature = function () {
+                var index = _.indexOf(this.storeKeys, this.currentKey);
+                if (index < this.storeKeys.length) {
+                    index = index + 1;
+                    this.filterOnId(this.storeKeys[index]);
+                }
+            };
 
-                $("#btnFeatureLeft").on("click", function () {
-                    var index = _.indexOf(_this.storeKeys, _this.currentKey);
-                    if (index > 0) {
-                        index = index - 1;
-                        _this.filterOnId(_this.storeKeys[index]);
-                    }
-                });
+            MapController.prototype.previousFeature = function () {
+                var index = _.indexOf(this.storeKeys, this.currentKey);
+                if (index > 0) {
+                    index = index - 1;
+                    this.filterOnId(this.storeKeys[index]);
+                }
             };
 
             MapController.prototype.initStore = function () {
@@ -46,13 +59,12 @@
 
             MapController.prototype.setupMap = function () {
                 this.map = this.mapService.map;
-                var isSmallScreen = window.innerWidth < 768;
-                if (isSmallScreen) {
+                this.isSmallScreen = window.innerWidth < 768;
+                if (this.isSmallScreen) {
                     this.map.dragging.disable();
                     this.map.touchZoom.disable();
                     this.map.doubleClickZoom.disable();
                     this.map.scrollWheelZoom.disable();
-                    $("#dragger").show();
                 }
 
                 this.layer = L.geoJson(null, { pointToLayer: this.pointer }).addTo(this.map);
@@ -81,14 +93,13 @@
                     });
                     _this.storeKeys = ids;
                     var initId = ids[0];
-                    var query = window.location.search.substring(1);
-                    var vars = query.split("&");
-                    for (var i = 0; i < vars.length; i++) {
-                        var pair = vars[i].split("=");
-                        if (pair[0] == "featureId") {
-                            initId = pair[1];
-                        }
+                    var url = _this.$location.absUrl();
+                    var query = url.split("/");
+                    var queryValue = query[query.length - 1];
+                    if (queryValue.indexOf("aa00") > -1) {
+                        initId = query[query.length - 1];
                     }
+                    _this.totalFeatureCount = ids.length;
                     _this.timeout(function () {
                         //(<any>$('.timeline-carousel')).slickGoTo(this.timeIndices[initId]);
                     });
@@ -100,15 +111,8 @@
                 var _this = this;
                 this.currentKey = id;
                 this.currentIndex = _.indexOf(this.storeKeys, this.currentKey);
-                if (this.currentIndex === 0) {
-                    $("#btnFeatureLeft").hide();
-                } else if (this.currentIndex === this.storeKeys.length) {
-                    $("#btnFeatureRight").hide();
-                } else {
-                    $("#btnFeatureLeft").show();
-                    $("#btnFeatureRight").show();
-                }
-
+                this.showStartArrow = this.currentIndex > 0;
+                this.showEndArrow = (this.currentIndex + 1) < this.totalFeatureCount;
                 this.store.get(id, function (data) {
                     var selectedFeatures = data.features;
                     if (selectedFeatures.length > 0) {
@@ -148,14 +152,14 @@
             };
 
             MapController.prototype.pointer = function (feature, latlng) {
-                var _this = this;
+                var that = MapController.prototype;
                 var iconSize = [20, 20];
                 var iconAnchor = [10, 10];
                 var popupAnchor = [0, -11];
-                var marker;
+                var icon;
                 switch (feature.properties.marker) {
                     case 0 /* Ship */: {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/battleship-3.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -164,7 +168,7 @@
                         break;
                     }
                     case 1 /* Video */: {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/video.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -173,7 +177,7 @@
                         break;
                     }
                     case 2 /* Diary */: {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/text.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -182,7 +186,7 @@
                         break;
                     }
                     default: {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/battleship-3.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -193,9 +197,10 @@
                 }
 
                 return L.marker(latlng, {
-                    icon: marker
+                    icon: icon,
+                    zIndexOffset: 1000
                 }).on("click", function () {
-                    _this.setInfoBox(feature);
+                    that.setInfoBox(feature);
                 }).bindPopup('<strong>' + feature.properties.place + "</strong>");
             };
 
@@ -238,7 +243,7 @@
                     }
                 }
             };
-            MapController.$inject = ["$scope", "mapService", "$timeout"];
+            MapController.$inject = ["$window", "$scope", "mapService", "$timeout", "$location"];
             return MapController;
         })();
         Controllers.MapController = MapController;

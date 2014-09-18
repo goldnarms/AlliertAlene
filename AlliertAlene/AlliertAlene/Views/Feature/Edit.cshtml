@@ -1,73 +1,92 @@
 ﻿@model AlliertAlene.Models.BaseDataViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Endre";
 }
-
-<h2>Edit</h2>
-
-
+<link href="~/bower_components/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+<h2>Endre</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>BaseDataViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
+    <div class="form-horizontal">
+        <h4>Endre</h4>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control date" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CenterLocation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.SelectedRegionId, Model.Regions)
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Text, new { htmlAttributes = new { @class = "form-control", @cols = 80, @rows = 10, style = "width: 300px; height=150px" } })
                 @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Media, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Media, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Media, "", new { @class = "text-danger" })
+        <fieldset>
+            <legend>Media</legend>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Media, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.SelectedMediaId, new SelectList(Model.MediaTypes, "Value", "Text", Model.SelectedMediaId))
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Reference, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Reference, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Reference, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageUpload, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                    @Html.ValidationMessageFor(model => model.ImageUpload, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PosterUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PosterUpload, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                    @Html.ValidationMessageFor(model => model.PosterUpload, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Lokasjoner</legend>
+            @for (int i = 0; i < Model.Locations.Count(); i++)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Locations[i].Location.Place, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Locations[i].LocationId, new SelectList(Model.LocationList, "Value", "Text", Model.Locations[i].LocationId))
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Locations[i].MarkerType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Locations[i].MarkerType, new SelectList(Model.MarkerList, "Value", "Text", Model.Locations[i].MarkerType))
+                    </div>
+                </div>
+            }
+        </fieldset>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Oppdater" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -78,5 +97,16 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () { // will trigger when the document is ready
+            $('.date').datepicker({
+                language: "no",
+                format: 'dd.mm.yyyy',
+                startDate: '08.04.1940',
+                endDate: '08.07.1940',
+            }); //Initialise any date pickers
+        });
+    </script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
 }

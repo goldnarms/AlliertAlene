@@ -237,8 +237,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Controllers\carouselCtrl.js">
+      <DependentUpon>carouselCtrl.ts</DependentUpon>
+    </Content>
     <Content Include="App\Controllers\mapCtrl.js">
       <DependentUpon>mapCtrl.ts</DependentUpon>
+    </Content>
+    <Content Include="App\Directives\slideItem.js">
+      <DependentUpon>slideItem.ts</DependentUpon>
     </Content>
     <Content Include="App\Services\mapservice.js">
       <DependentUpon>mapService.ts</DependentUpon>
@@ -566,6 +572,7 @@
     <Content Include="bower_components\video.js\video-js.swf" />
     <Content Include="bower_components\video.js\video.dev.js" />
     <Content Include="bower_components\video.js\video.js" />
+    <Content Include="Content\489977-11-1263484930922.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Markers\battlefield-rifles.png" />
@@ -574,12 +581,16 @@
     <Content Include="Content\Markers\submarine-2.png" />
     <Content Include="Content\Markers\text.png" />
     <Content Include="Content\Markers\video.png" />
+    <Content Include="Content\redline.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.scss</DependentUpon>
     </Content>
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\tlBackground.png" />
+    <Content Include="Content\tlBackgroundDarker.png" />
+    <Content Include="Content\whiteMarker.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -852,6 +863,12 @@
       <DependentUpon>mapService.ts</DependentUpon>
     </Content>
     <Content Include="Assets\slickFeatures.json" />
+    <Content Include="App\Controllers\carouselCtrl.js.map">
+      <DependentUpon>carouselCtrl.ts</DependentUpon>
+    </Content>
+    <Content Include="App\Directives\slideItem.js.map">
+      <DependentUpon>slideItem.ts</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\AlliertAlene.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
@@ -967,14 +984,25 @@
     <Content Include="Scripts\app\app.viewmodel.js" />
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\home.viewmodel.js" />
+    <Content Include="Uploads\101387.jpg" />
     <Content Include="Uploads\1280px-Bluecher_sinkend.jpg" />
     <Content Include="Uploads\1419880_10153549179375142_252531390_n-001.jpg" />
+    <Content Include="Uploads\2301445003.jpg" />
     <Content Include="Uploads\285863470.mp4" />
     <Content Include="Uploads\290114SigurdJul.PNG" />
     <Content Include="Uploads\290114UrortLive.PNG" />
+    <Content Include="Uploads\49165.jpg" />
+    <Content Include="Uploads\5 redigert. Midtskogen 11.4.1940. Elverum brenner etter bombingen.jpg" />
     <Content Include="Uploads\6018_3568_450.jpeg" />
     <Content Include="Uploads\Bluecher_sinkend.jpg" />
+    <Content Include="Uploads\BS-FOL-01720_027a.jpg" />
+    <Content Include="Uploads\Bundesarchiv_Bild_101I-757-0038N-11A,_Norwegen,_Schwerer_Kreuzer.jpg" />
+    <Content Include="Uploads\Bundesarchiv_Bild_101I-760-0165N-26,_Norwegen,_Erhard_Milch_bei_Stuka-Staffel.jpg" />
+    <Content Include="Uploads\Bundesarchiv_Bild_101II-MW-5618-16,_Narvik,_Hafen,_gesunkene_Schiffe.jpg" />
+    <Content Include="Uploads\German_seaplanes_at_Stavanger_Sola_1940.jpg" />
+    <Content Include="Uploads\Konigsberg_h80979.jpg" />
     <Content Include="Uploads\ORP_Orzel.jpg" />
+    <Content Include="Uploads\The_wrecks_of_German_supply_ships_sunk_or_left_derelict_at_Narvik_in_Norway_after_the_Royal_Navy%27s_attack_on_13_April_1940._A42.jpg" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ConfirmUser.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />

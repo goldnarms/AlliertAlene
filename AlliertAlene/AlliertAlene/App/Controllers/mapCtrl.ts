@@ -7,8 +7,15 @@ module Allied.Controllers {
         store: any;
         layer: L.GeoJSON;
         lastLoc: L.LatLng;
-        filterOnId(id: string): void;
         selectedFeature: IFeatureViewmodel;
+        totalFeatureCount: number;
+        showStartArrow: boolean;
+        showEndArrow: boolean;
+        isSmallScreen: boolean;
+        filterOnId(id: string): void;
+        nextFeature(): void;
+        previousFeature(): void;
+        setInfoBox(data: any): void;
     }
 
     export interface IFeatureViewmodel {
@@ -22,46 +29,59 @@ module Allied.Controllers {
     }
 
     export class MapController implements IMapController {
-        public static $inject = ["$scope", "mapService", "$timeout"];
+        public static $inject = ["$window", "$scope", "mapService", "$timeout", "$location"];
 
         public map: L.Map;
         public layer: L.GeoJSON;
         public store: any;
         public lastLoc: L.LatLng;
         public selectedFeature: IFeatureViewmodel;
+        public totalFeatureCount: number;
+        public showStartArrow: boolean = false;
+        public showEndArrow: boolean = true;
+        public isSmallScreen: boolean;
 
         private currentKey: string;
         private currentIndex: number = 0;
         private storeKeys: string[] = [];
         private timeIndices: { [id: string]: number };
 
-        constructor(private scope: ng.IScope, private mapService: Allied.Services.IMapService, private timeout: ng.ITimeoutService) {
+        constructor(private $window: ng.IWindowService, private scope: ng.IScope, private mapService: Allied.Services.IMapService, private timeout: ng.ITimeoutService, private $location: ng.ILocationService) {
             this.init();
+            this.isSmallScreen = this.$window.innerWidth < 768;
+            $(window).on("resize", () => {
+                var isSmallScreen = this.$window.innerWidth < 768;
+                if (this.isSmallScreen !== isSmallScreen) { //only safeApply when there is an actual change
+                    this.isSmallScreen = isSmallScreen;
+                    this.scope.$apply();
+                }
+            });
+            scope.$on("$destroy", () => {
+                $(window).off();
+                this.scope = scope = null;
+            });
         }
 
         private init(): void {
             this.setupMap();
-            this.setupHandlers();
             this.initStore();
             this.loadData();
         }
 
-        private setupHandlers(): void {
-            $("#btnFeatureRight").on("click", () => {
-                var index = _.indexOf(this.storeKeys, this.currentKey);
-                if (index < this.storeKeys.length) {
-                    index = index + 1;
-                    this.filterOnId(this.storeKeys[index]);
-                }
-            });
+        public nextFeature(): void {
+            var index = _.indexOf(this.storeKeys, this.currentKey);
+            if (index < this.storeKeys.length) {
+                index = index + 1;
+                this.filterOnId(this.storeKeys[index]);
+            }
+        }
 
-            $("#btnFeatureLeft").on("click", () => {
-                var index = _.indexOf(this.storeKeys, this.currentKey);
-                if (index > 0) {
-                    index = index - 1;
-                    this.filterOnId(this.storeKeys[index]);
-                }
-            });
+        public previousFeature(): void {
+            var index = _.indexOf(this.storeKeys, this.currentKey);
+            if (index > 0) {
+                index = index - 1;
+                this.filterOnId(this.storeKeys[index]);
+            }
         }
 
         private initStore(): void {
@@ -70,13 +90,12 @@ module Allied.Controllers {
 
         private setupMap(): void {
             this.map = this.mapService.map;
-            var isSmallScreen = window.innerWidth < 768;
-            if (isSmallScreen) {
+            this.isSmallScreen = window.innerWidth < 768;
+            if (this.isSmallScreen) {
                 this.map.dragging.disable();
                 this.map.touchZoom.disable();
                 this.map.doubleClickZoom.disable();
                 this.map.scrollWheelZoom.disable();
-                $("#dragger").show();
             }
 
             this.layer = <L.GeoJSON>L.geoJson(null, { pointToLayer: this.pointer }).addTo(this.map);
@@ -96,14 +115,13 @@ module Allied.Controllers {
                 });
                 this.storeKeys = ids;
                 var initId = ids[0];
-                var query = window.location.search.substring(1);
-                var vars = query.split("&");
-                for (var i = 0; i < vars.length; i++) {
-                    var pair = vars[i].split("=");
-                    if (pair[0] == "featureId") {
-                        initId = pair[1];
-                    }
+                var url = this.$location.absUrl();
+                var query = url.split("/");
+                var queryValue = query[query.length - 1];
+                if (queryValue.indexOf("aa00") > -1) {
+                    initId = query[query.length - 1];
                 }
+                this.totalFeatureCount = ids.length;
                 this.timeout(() => {
                     //(<any>$('.timeline-carousel')).slickGoTo(this.timeIndices[initId]);
                 });
@@ -112,18 +130,10 @@ module Allied.Controllers {
         }
 
         public filterOnId(id: string): void {
-
             this.currentKey = id;
             this.currentIndex = _.indexOf(this.storeKeys, this.currentKey);
-            if (this.currentIndex === 0) {
-                $("#btnFeatureLeft").hide();
-            } else if (this.currentIndex === this.storeKeys.length) {
-                $("#btnFeatureRight").hide();
-            } else {
-                $("#btnFeatureLeft").show();
-                $("#btnFeatureRight").show();
-            }
-
+            this.showStartArrow = this.currentIndex > 0;
+            this.showEndArrow = (this.currentIndex + 1) < this.totalFeatureCount;
             this.store.get(id, (data) => {
                 var selectedFeatures = data.features;
                 if (selectedFeatures.length > 0) {
@@ -147,7 +157,7 @@ module Allied.Controllers {
             });
         }
 
-        private setInfoBox(data): void {
+        public setInfoBox(data: any): void {
             var date = new Date(data.properties.time);
             var months: string[] = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
             this.selectedFeature = <IFeatureViewmodel>{
@@ -162,14 +172,15 @@ module Allied.Controllers {
         }
 
         public pointer(feature: any, latlng: L.LatLng): L.Marker {
+            var that = MapController.prototype;
             var iconSize = [20, 20];
             var iconAnchor = [10, 10];
             var popupAnchor = [0, -11];
-            var marker: L.Icon;
+            var icon: L.Icon;
             switch (feature.properties.marker) {
                 case app.MarkerType.Ship:
                     {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/battleship-3.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -179,7 +190,7 @@ module Allied.Controllers {
                     }
                 case app.MarkerType.Video:
                     {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/video.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -189,7 +200,7 @@ module Allied.Controllers {
                     }
                 case app.MarkerType.Diary:
                     {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/text.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -199,7 +210,7 @@ module Allied.Controllers {
                     }
                 default:
                     {
-                        marker = new L.Icon({
+                        icon = new L.Icon({
                             iconUrl: "/Content/Markers/battleship-3.png",
                             iconSize: iconSize,
                             iconAnchor: iconAnchor,
@@ -210,10 +221,11 @@ module Allied.Controllers {
             }
 
             return L.marker(latlng, {
-                icon: marker
+                icon: icon,
+                zIndexOffset: 1000
             }).on("click", () => {
-                    this.setInfoBox(feature);
-                }).bindPopup('<strong>' + feature.properties.place + "</strong>");
+                that.setInfoBox(feature);
+            }).bindPopup('<strong>' + feature.properties.place + "</strong>");
         }
 
         private setMarker(markerType: app.MarkerType): L.Icon {

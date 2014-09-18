@@ -51,31 +51,53 @@ namespace AlliertAlene.Controllers
             {
                 CenterLocation = new DataLocation { VmCoordinate = new VmCoordinate() },
                 Locations = new List<DataFeatureLocation>
-            {
-                new DataFeatureLocation(),
-                new DataFeatureLocation(),
-                new DataFeatureLocation(),
-                new DataFeatureLocation(),
-                new DataFeatureLocation(),
-                new DataFeatureLocation()
-            }
+                {
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation()
+                },
+                Regions = BuildRegionList(),
+                LocationList = BuildLocationList(),
+                MarkerList = BuildMarkerList(),
+                MediaTypes = BuildMediaTypeList()
             };
-            baseData.Regions = new SelectList(db.Locations.Where(l => l.IsRegion).OrderBy(sl => sl.Place), "Id", "Place");
+            return View(baseData);
+        }
+
+        private IEnumerable<SelectListItem> BuildLocationList()
+        {
             var locationList = db.Locations
-                .Where(l => !l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).OrderBy(l => l.Text).ToList();
-            locationList.Insert(0, new SelectListItem { Text = "Ingen ...", Value = "0"});
-            baseData.LocationList = locationList;
-            baseData.MarkerList = Enum.GetNames(typeof(Models.MarkerType)).Select(name => new SelectListItem { Value = Enum.Parse(typeof(Models.MarkerType), name).ToString(), Text = name }).ToList();
-            var mediaTypes = new List<SelectListItem>
+     .Where(l => !l.IsRegion).Select(l => new SelectListItem { Text = l.Place, Value = l.Id.ToString() }).OrderBy(l => l.Text).ToList();
+            locationList.Insert(0, new SelectListItem { Text = "Ingen ...", Value = "0" });
+            return locationList;
+        }
+
+        private SelectList BuildRegionList(int? selectedValue = null)
+        {
+            if (selectedValue.HasValue)
+            {
+                return new SelectList(db.Locations.Where(l => l.IsRegion).OrderBy(sl => sl.Place), "Id", "Place", selectedValue.Value);
+            }
+            return new SelectList(db.Locations.Where(l => l.IsRegion).OrderBy(sl => sl.Place), "Id", "Place");
+        }
+
+        private IEnumerable<SelectListItem> BuildMarkerList()
+        {
+            return Enum.GetNames(typeof(Models.MarkerType)).Select(name => new SelectListItem { Value = Enum.Parse(typeof(Models.MarkerType), name).ToString(), Text = name }).ToList();
+        }
+
+        private IEnumerable<SelectListItem> BuildMediaTypeList()
+        {
+            return new List<SelectListItem>
             {
                 new SelectListItem {Text = "Bilde", Value = "0"},
                 new SelectListItem {Text = "Video", Value = "1"},
                 new SelectListItem {Text = "Dagbok", Value = "2"}
             };
-            baseData.MediaTypes = mediaTypes;
-            return View(baseData);
         }
-
         // POST: Feature/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -123,7 +145,12 @@ namespace AlliertAlene.Controllers
             {
                 return HttpNotFound();
             }
-            return View(MapToViewModel(baseData));
+            var viewModel = MapToViewModel(baseData);
+            viewModel.Regions = BuildRegionList(viewModel.SelectedRegionId);
+            viewModel.MarkerList = BuildMarkerList();
+            viewModel.LocationList = BuildLocationList();
+            viewModel.MediaTypes = BuildMediaTypeList();
+            return View(viewModel);
         }
 
         // POST: Feature/Edit/5
@@ -131,15 +158,32 @@ namespace AlliertAlene.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Date,Region,Text,Media,Reference,Description")] BaseDataViewModel baseDataViewModel)
+        public async Task<ActionResult> Edit(BaseDataViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(MapToBaseData(baseDataViewModel)).State = EntityState.Modified;
+                var uploadDir = "~/Uploads";
+                if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
+                {
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.ImageUpload.FileName);
+                    var imageUrl = "Uploads" + "/" + model.ImageUpload.FileName;
+                    model.Text = model.Text.Replace("\"", "\\\"");
+                    model.ImageUpload.SaveAs(imagePath);
+                    model.Reference = imageUrl;
+                }
+                if (model.PosterUpload != null && model.PosterUpload.ContentLength > 0)
+                {
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.PosterUpload.FileName);
+                    var imageUrl = "Uploads" + "/" + model.PosterUpload.FileName;
+                    model.Text = model.Text.Replace("\"", "\\\"");
+                    model.PosterUpload.SaveAs(imagePath);
+                    model.PosterReference = imageUrl;
+                }
+                db.Entry(MapToBaseData(model)).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(baseDataViewModel);
+            return View(model);
         }
 
         // GET: Feature/Delete/5
@@ -220,11 +264,18 @@ namespace AlliertAlene.Controllers
                     MarkerType = (Models.MarkerType)fl.MarkerType,
                     Location = new DataLocation { Id = fl.LocationId, Place = fl.Location.Place, VmCoordinate = new VmCoordinate { Id = fl.Location.CoordinateId, Lat = fl.Location.Coordinate.Lat, Lng = fl.Location.Coordinate.Lng } }
                 }).ToList(),
-                CenterLocation = new DataLocation { Id = baseData.CenterLocationId, Place = baseData.CenterLocation.Place, VmCoordinate = new VmCoordinate
+                CenterLocation = new DataLocation
                 {
-                    Id = baseData.CenterLocation.CoordinateId, Lat = baseData.CenterLocation.Coordinate.Lat, Lng = baseData.CenterLocation.Coordinate.Lng
-                
-                } },
+                    Id = baseData.CenterLocationId,
+                    Place = baseData.CenterLocation.Place,
+                    VmCoordinate = new VmCoordinate
+                    {
+                        Id = baseData.CenterLocation.CoordinateId,
+                        Lat = baseData.CenterLocation.Coordinate.Lat,
+                        Lng = baseData.CenterLocation.Coordinate.Lng
+
+                    }
+                },
                 SelectedMediaId = baseData.MediaAssets != null && baseData.MediaAssets.Count > 0 ? baseData.MediaAssets.First().Id : 0,
                 SelectedRegionId = baseData.CenterLocationId
             };

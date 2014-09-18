@@ -5,20 +5,20 @@
         "use strict";
 
         var SlideItem = (function () {
+            //public controller: string = "mapCtrl";
             function SlideItem() {
                 var _this = this;
                 this.restrict = "A";
                 this.replace = true;
                 this.transclude = false;
-                this.controller = "mapCtrl";
                 this.scope = {
                     feature: "="
                 };
-                this.link = function ($scope, element, attributes, controller) {
-                    return _this.linkFn($scope, element, attributes, controller);
+                this.link = function ($scope, element, attributes) {
+                    return _this.linkFn($scope, element, attributes);
                 };
                 this.template = function (tElement, tAttrs) {
-                    return "<ul class='text-center' style='list-style:none'><li><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)'>{{f.header}}</a></li></ul>";
+                    return "<ul class='text-center' style='list-style:none'><li class='timeline-date'><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)' class='timeline-item'>{{f.header}}</a></li></ul>";
                 };
             }
             SlideItem.prototype.injection = function () {
@@ -27,9 +27,9 @@
                     }];
             };
 
-            SlideItem.prototype.linkFn = function (scope, element, attributes, controller) {
+            SlideItem.prototype.linkFn = function (scope, element, attributes) {
                 scope.goTo = function (id) {
-                    controller.filterOnId(id);
+                    scope.$parent.$parent.mc.filterOnId(id);
                 };
             };
             SlideItem.$inject = [];
