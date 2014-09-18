@@ -61,6 +61,7 @@ namespace AlliertAlene
                 "~/bower_components/mapbox.js/mapbox.css",
                 "~/bower_components/video.js/video-js.css",
                 "~/Content/bootstrap.css",
+                "~/Content/fontello.css",
                 "~/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
                 "~/bower_components/magnific-popup/dist/magnific-popup.css",
                 "~/bower_components/slick.js/slick/slick.css",
