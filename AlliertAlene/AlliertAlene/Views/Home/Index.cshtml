@@ -6,10 +6,16 @@
 @section Scripts{
     @Scripts.Render("~/bundles/app")
     <script>
-        (function ($) {
-            $(window).load(function () {
-                $("#infoBox").mCustomScrollbar();
-                $(".pop-img").magnificPopup({ type: 'image' });
+        (function($) {
+            $(window).load(function() {
+                $("#infoContent").mCustomScrollbar();
+                $(".pop-img").magnificPopup(
+                {
+                    type: 'image',
+                    image: {
+                        titleSrc: 'title'
+                    }
+                });
                 $('.timeline-carousel').slick({
                     infinite: false,
                     slidesToShow: 5,

@@ -20,6 +20,6 @@ namespace DataGenerator.Models
     {
         public string id { get; set; }
         public string header { get; set; }
-
+        public int mediaType { get; set; }
     }
 }

@@ -1,6 +1,11 @@
 
+.icon-play-circled:before { content: '\e800'; } /* '' */
+.icon-right-open-big:before { content: '\e801'; } /* '' */
 .icon-facebook:before { content: '\e802'; } /* '' */
 .icon-facebook-rect:before { content: '\e803'; } /* '' */
+.icon-left-open-big:before { content: '\e804'; } /* '' */
 .icon-twitter-bird:before { content: '\e805'; } /* '' */
 .icon-instagram:before { content: '\e806'; } /* '' */
 .icon-instagram-filled:before { content: '\e807'; } /* '' */
+.icon-right-open:before { content: '\e808'; } /* '' */
+.icon-left-open:before { content: '\e809'; } /* '' */

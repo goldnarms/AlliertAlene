@@ -26,6 +26,7 @@ namespace AlliertAlene.Controllers
                 .Include(d => d.MediaAssets)
                 .Include(d => d.CenterLocation)
                 .Include(d => d.CenterLocation.Coordinate)
+                .OrderBy(d => d.Date)
                 .Select(MapToViewModel));
         }
 
@@ -179,7 +180,10 @@ namespace AlliertAlene.Controllers
                     model.PosterUpload.SaveAs(imagePath);
                     model.PosterReference = imageUrl;
                 }
-                db.Entry(MapToBaseData(model)).State = EntityState.Modified;
+                var baseModel = MapToBaseData(model);
+                //baseModel.CenterLocation = null;
+
+                db.Entry(baseModel).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -234,16 +238,18 @@ namespace AlliertAlene.Controllers
                     Description = viewModel.Description,
                     MediaType = (DataGenerator.Models.MediaType)viewModel.SelectedMediaId,
                     Reference = viewModel.Reference,
-                    Poster = viewModel.PosterReference
+                    Poster = viewModel.PosterReference,
+                    BaseDataId = viewModel.Id
                 }},
-                FeatureLocations = locations.Select(l => new BaseData.FeatureLocation
+                FeatureLocations = locations.Select(l => db.FeatureLocations.Any(fl => fl.BaseDataId == viewModel.Id && fl.LocationId == l.LocationId) ? db.FeatureLocations.First(fl => fl.BaseDataId == viewModel.Id && fl.LocationId == l.LocationId) : new BaseData.FeatureLocation
                 {
                     BaseDataId = viewModel.Id,
                     LocationId = l.LocationId,
                     MarkerType = (DataGenerator.Models.MarkerType)l.MarkerType
                 }).ToList(),
                 Text = viewModel.Text,
-                CenterLocation = db.Locations.First(l => l.Id == viewModel.SelectedRegionId)
+                CenterLocation = db.Locations.First(l => l.Id == viewModel.SelectedRegionId),
+                CenterLocationId = viewModel.SelectedRegionId
             };
         }
 

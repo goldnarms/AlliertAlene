@@ -2,7 +2,7 @@
 
 module Allied {
     'use strict';
-    var allied = angular.module('allied', ["ngSanitize"])
+    var allied = angular.module('allied', ["ngSanitize", "td.easySocialShare"])
         //.directive("slideItem", Allied.Directives.SlideItem)
         .service("mapService", Allied.Services.MapService)
         .controller("carouselCtrl", Allied.Controllers.CarouselController)

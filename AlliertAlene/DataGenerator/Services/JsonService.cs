@@ -62,7 +62,7 @@ namespace DataGenerator.Services
             foreach (var baseData in data)
             {
                 int j = 0;
-                char[] alphabet = { 'a', 'b', 'c', 'd', 'e' };
+                char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm' };
                 foreach (var location in baseData.FeatureLocations)
                 {
                     i++;
@@ -123,6 +123,7 @@ namespace DataGenerator.Services
                     {
                         header = bd.CenterLocation.Place,
                         id = string.Format("aa{0}", bd.Id.ToString("00000")),
+                        mediaType = bd.MediaAssets.Any(ma => ma.MediaType == MediaType.Video) ? (int)MediaType.Video : (int)MediaType.Image
                     })
                 }).ToList()
             };

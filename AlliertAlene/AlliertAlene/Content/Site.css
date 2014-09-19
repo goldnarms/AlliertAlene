@@ -10,6 +10,12 @@ body {
     body {
       padding: 0 0 20px 0; } }
 
+a {
+  font-family: 'Roboto Slab', serif;
+  color: #b30000; }
+  a:hover {
+    color: #ff0000; }
+
 h1 {
   font-family: 'Roboto Slab', serif;
   font-weight: 300;
@@ -43,7 +49,6 @@ input, select, textarea {
 
 #infoBox {
   background-color: #393939;
-  overflow: auto;
   padding-bottom: 30px; }
   #infoBox img {
     max-width: 100%;
@@ -51,6 +56,13 @@ input, select, textarea {
   @media (min-width: 768px) {
     #infoBox {
       height: 500px; } }
+
+@media (min-width: 768px) {
+  #infoContent {
+    overflow: auto;
+    height: 410px; } }
+#infoContent img {
+  margin-top: 10px; }
 
 .mapContainer {
   height: 100%;
@@ -167,5 +179,41 @@ input, select, textarea {
     color: #bcbcbc; }
   .btn-dark:visited {
     color: #bcbcbc; }
+
+.social-share {
+  text-align: right;
+  width: 100%;
+  float: right;
+  font-size: 1.2em; }
+  .social-share a {
+    color: #efefef; }
+    .social-share a:hover {
+      color: #ff0000;
+      text-decoration: none; }
+
+.desktop-header {
+  display: none; }
+  @media (min-width: 768px) {
+    .desktop-header {
+      display: block; } }
+
+.mobile-header {
+  background-color: #393939;
+  display: block; }
+  .mobile-header .list-inline {
+    margin-bottom: 0; }
+  @media (min-width: 768px) {
+    .mobile-header {
+      display: none; } }
+
+footer {
+  font-family: 'Roboto Slab', serif;
+  padding-bottom: 16px;
+  font-size: 1.6em;
+  background-color: #393939; }
+  @media (min-width: 768px) {
+    footer {
+      background-color: transparent;
+      font-size: 1.2em; } }
 
 /*# sourceMappingURL=Site.css.map */

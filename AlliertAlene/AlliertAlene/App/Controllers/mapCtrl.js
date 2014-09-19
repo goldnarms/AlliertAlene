@@ -146,8 +146,10 @@
                     text: data.properties.text,
                     showImg: data.properties.media.type === "img" || data.properties.media.type === "diary",
                     showVideo: data.properties.media.type === "video",
-                    mediaSrc: data.properties.media.link,
-                    posterSrc: data.properties.media.poster || ""
+                    mediaSrc: data.properties.media.link || "",
+                    posterSrc: data.properties.media.poster || "",
+                    id: data.properties.id,
+                    imgDesc: data.properties.media.description
                 };
             };
 

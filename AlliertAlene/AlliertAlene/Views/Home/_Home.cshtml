@@ -1,36 +1,56 @@
 ﻿<h1 class="header">Alliert og alene</h1>
-<div class="row visible-xs-block visible-sm-block">
-    <div class="col-xs-12 text-center">
-        <ul class="list-inline">
-            <li><a href="" data-ng-click="mc.previousFeature()" id="btnFeatureLeft" class="feature-link" data-ng-show="mc.showStartArrow"><i class="glyphicon glyphicon-chevron-left icon-large"></i></a></li>
-            <li><h3 id="featureDate" data-ng-bind="mc.selectedFeature.date"></h3></li>
-            <li><a href="" data-ng-click="mc.nextFeature()" id="btnFeatureRight" class="feature-link" data-ng-show="mc.showEndArrow"><i class="glyphicon glyphicon-chevron-right icon-large"></i></a></li>
-        </ul>
+<div class="desktop-header">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h3 id="featureDate" data-ng-bind="mc.selectedFeature.date"></h3>
+        </div>
     </div>
 </div>
 <div class="row mapContainer" style="position: relative">
     <div id="mapBox" class="col-xs-12 col-sm-8">
         <div id='map' class='dark'></div>
         <div id="dragger" data-ng-show="mc.isSmallScreen"></div>
-        <div class="series-link"><p><a href="#" class="btn btn-dark">Se Alliert og Alene</a></p>
-        <p><a href="#" class="btn btn-dark">Se bakommateriale</a></p></div>
-    </div>
-    <div id="infoBox" class="col-xs-12 col-sm-4">
-        <h2 data-ng-bind="mc.selectedFeature.header"></h2>
-        <div id="content" data-ng-bind-html="mc.selectedFeature.text"></div>
-        <a class="pop-img" data-ng-href="{{mc.selectedFeature.mediaSrc}}" data-ng-if="mc.selectedFeature.showImg">
-            <img data-ng-src="{{mc.selectedFeature.mediaSrc}}" class="img-responsive img-rounded" />
-        </a>
-        <div id="videoContainer" data-ng-if="mc.selectedFeature.showVideo" data-ng-cloak="">
-            <video class="video-js vjs-default-skin" controls
-                   preload="auto" width="320" height="132" id="featureVideo" data-ng-src="{{mc.selectedFeature.mediaSrc}}" data-poster="{{mc.selectedFeature.posterSrc}}">
-                <source type='video/mp4'>
-                @*<source src="MY_VIDEO.webm" type='video/webm'>*@
-                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-            </video>
+        <div class="series-link">
+            <p><a href="#" class="btn btn-dark">Se Alliert og Alene</a></p>
+            <p><a href="#" class="btn btn-dark">Se bakommateriale</a></p>
         </div>
-        <div id="videoLinkContainer" style="display: none; background-color: #000; width:320px; height:132px; padding-top: 50px" class="text-center">
-            <a href="#" style="color:white; font-size: 1.3em">Se hele serien</a>
+    </div>
+        <div class="mobile-header col-xs-12 text-center">
+            <ul class="list-inline">
+                <li><a href="" data-ng-click="mc.previousFeature()" id="btnFeatureLeft" class="feature-link" data-ng-show="mc.showStartArrow"><i class="icon-left-open-big icon-large"></i></a></li>
+                <li><h3 id="featureDate" data-ng-bind="mc.selectedFeature.date"></h3></li>
+                <li><a href="" data-ng-click="mc.nextFeature()" id="btnFeatureRight" class="feature-link" data-ng-show="mc.showEndArrow"><i class="icon-right-open-big icon-large"></i></a></li>
+            </ul>
+        </div>
+    <div id="infoBox" class="col-xs-12 col-sm-4">
+        <ul class="list-inline feature-header-list">
+            <li>
+                <h2 data-ng-bind="mc.selectedFeature.header"></h2>
+            </li>
+            <li>
+                <div class="social-share">
+                    <div share-links="Facebook, Twitter" feature="mc.selectedFeature"></div>
+                </div>
+            </li>
+        </ul>
+
+        <div id="infoContent">
+            <div id="content" data-ng-bind-html="mc.selectedFeature.text"></div>
+            <a class="pop-img" data-ng-href="{{mc.selectedFeature.mediaSrc}}" data-ng-if="mc.selectedFeature.showImg && mc.selectedFeature.mediaSrc !=''" title="{{mc.selectedFeature.imgDesc}}">
+                <img data-ng-src="{{mc.selectedFeature.mediaSrc}}" class="img-responsive img-rounded" />
+            </a>
+            <div id="videoContainer" data-ng-if="mc.selectedFeature.showVideo" data-ng-cloak="">
+                <video class="video-js vjs-default-skin" controls
+                       preload="auto" width="320" height="132" id="featureVideo" data-ng-src="{{mc.selectedFeature.mediaSrc}}" data-poster="{{mc.selectedFeature.posterSrc}}">
+                    <source type='video/mp4'>
+                    @*<source src="MY_VIDEO.webm" type='video/webm'>*@
+                    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                </video>
+            </div>
+
+            <div id="videoLinkContainer" style="display: none; background-color: #000; width:320px; height:132px; padding-top: 50px" class="text-center">
+                <a href="#" style="color:white; font-size: 1.3em">Se hele serien</a>
+            </div>
         </div>
     </div>
 </div>
@@ -43,6 +63,13 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-xs-12 text-center">Følg Alliert og Alene på: <a href="https://www.facebook.com/alliertogalene" target="_blank" title="Facebook"><i class="icon-facebook"></i></a>&nbsp;<a href="https://twitter.com/AlliertOgAlene" target="_blank" title="Twitter"><i class="icon-twitter-bird"></i></a>&nbsp;</div>
-</div>
+<footer>
+    <div class="row">
+        <div data-ng-class="{'col-xs-12 col-md-6': true, 'text-center': mc.isSmallScreen, 'text-right': !mc.isSmallScreen}">
+            Følg Alliert og Alene på:
+        </div>
+        <div data-ng-class="{'col-xs-12 col-md-6': true, 'text-center': mc.isSmallScreen, 'text-left': !mc.isSmallScreen}">
+            <a href="https://www.facebook.com/alliertogalene" target="_blank" title="Facebook"><i class="icon-facebook"></i></a>&nbsp;<a href="https://twitter.com/AlliertOgAlene" target="_blank" title="Twitter"><i class="icon-twitter-bird"></i></a>&nbsp;<a href="" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+        </div>
+    </div>
+</footer>

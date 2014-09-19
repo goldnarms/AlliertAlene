@@ -18,7 +18,7 @@
                     return _this.linkFn($scope, element, attributes);
                 };
                 this.template = function (tElement, tAttrs) {
-                    return "<ul class='text-center' style='list-style:none'><li class='timeline-date'><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)' class='timeline-item'>{{f.header}}</a></li></ul>";
+                    return "<ul class='text-center' style='list-style:none'><li class='timeline-date'><strong>{{feature.date}}</strong></li><li data-ng-repeat='f in feature.features'><a href='' data-ng-click='goTo(f.id)' class='timeline-item'>{{f.header}}</a><i class='icon-play-circled' data-ng-show='f.mediaType === 0'></i></li></ul>";
                 };
             }
             SlideItem.prototype.injection = function () {

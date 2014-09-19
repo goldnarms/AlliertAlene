@@ -17,6 +17,7 @@ namespace AlliertAlene
                 "~/Scripts/bootstrap.js",
                 "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
                 "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
+                "~/bower_components/angular-easy-social-share/easy-social-share.js",
                 //"~/Scripts/respond.js",
                 "~/bower_components/mapbox.js/mapbox.js",
                 "~/bower_components/video.js/video.js",

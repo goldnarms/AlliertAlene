@@ -12,17 +12,10 @@ namespace AlliertAlene
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            //routes.MapRoute(
-            //    name: "Uploads",
-            //    url: "Home/Uploads/{id}",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            //);
-
             routes.MapRoute(
                 name: "Feature",
                 url: "{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index"}, constraints: new { id = @"aa\d{5}" }
             );
             routes.MapRoute(
                 name: "Default",

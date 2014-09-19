@@ -17,6 +17,7 @@ namespace DataGenerator.DAL
 
         public DbSet<BaseData> Datas { get; set; }
         public DbSet<BaseData.Location> Locations { get; set; }
+        public DbSet<BaseData.FeatureLocation> FeatureLocations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
