@@ -1,4 +1,6 @@
-﻿namespace DataGenerator.Models
+﻿using System.Collections.Generic;
+
+namespace DataGenerator.Models
 {
 
     public class GeoData
@@ -30,7 +32,7 @@
         public long time { get; set; }
         public string header { get; set; }
         public string text { get; set; }
-        public Media media { get; set; }
+        public List<Media> media { get; set; }
         public int marker { get; set; }
         public float[] centerCoordinates { get; set; }
     }

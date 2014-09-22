@@ -141,15 +141,19 @@
                 var date = new Date(data.properties.time);
                 var months = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
                 this.selectedFeature = {
+                    id: data.properties.id,
                     date: date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear(),
                     header: data.properties.header,
                     text: data.properties.text,
-                    showImg: data.properties.media.type === "img" || data.properties.media.type === "diary",
-                    showVideo: data.properties.media.type === "video",
-                    mediaSrc: data.properties.media.link || "",
-                    posterSrc: data.properties.media.poster || "",
-                    id: data.properties.id,
-                    imgDesc: data.properties.media.description
+                    media: _.map(data.properties.media, function (m) {
+                        return {
+                            desc: m.description,
+                            src: m.link || "",
+                            posterSrc: m.poster || "",
+                            showImg: m.type === "img" || m.type === "diary",
+                            showVideo: m.type === "video"
+                        };
+                    })
                 };
             };
 

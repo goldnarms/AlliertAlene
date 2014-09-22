@@ -36,19 +36,20 @@
 
         <div id="infoContent">
             <div id="content" data-ng-bind-html="mc.selectedFeature.text"></div>
-            <a class="pop-img" data-ng-href="{{mc.selectedFeature.mediaSrc}}" data-ng-if="mc.selectedFeature.showImg && mc.selectedFeature.mediaSrc !=''" title="{{mc.selectedFeature.imgDesc}}">
-                <img data-ng-src="{{mc.selectedFeature.mediaSrc}}" class="img-responsive img-rounded" />
-            </a>
-            <div id="videoContainer" data-ng-if="mc.selectedFeature.showVideo" data-ng-cloak="">
-                <video class="video-js vjs-default-skin" controls
-                       preload="auto" width="320" height="132" id="featureVideo" data-ng-src="{{mc.selectedFeature.mediaSrc}}" data-poster="{{mc.selectedFeature.posterSrc}}">
-                    <source type='video/mp4'>
-                    @*<source src="MY_VIDEO.webm" type='video/webm'>*@
-                    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-                </video>
+            <div data-ng-repeat="m in mc.selectedFeature.media">
+                <a class="pop-img" data-ng-href="{{m.src}}" data-ng-if="m.showImg && m.src !=''" title="{{m.desc}}">
+                    <img data-ng-src="{{m.src}}" class="img-responsive img-rounded" />
+                </a>
+                <div class="video-container" data-ng-if="m.showVideo" data-ng-cloak="">
+                    <video class="video-js vjs-default-skin" controls
+                           preload="auto" width="320" height="132" id="featureVideo" data-ng-src="{{m.src}}" data-poster="{{m.posterSrc}}">
+                        <source type='video/mp4'>
+                        @*<source src="MY_VIDEO.webm" type='video/webm'>*@
+                        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                    </video>
+                </div>
             </div>
-
-            <div id="videoLinkContainer" style="display: none; background-color: #000; width:320px; height:132px; padding-top: 50px" class="text-center">
+            <div class="video-link-container" style="display: none; background-color: #000; width:320px; height:132px; padding-top: 50px" class="text-center">
                 <a href="#" style="color:white; font-size: 1.3em">Se hele serien</a>
             </div>
         </div>

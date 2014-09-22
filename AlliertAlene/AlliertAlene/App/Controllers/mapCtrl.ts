@@ -22,12 +22,16 @@ module Allied.Controllers {
         id: string;
         date: string;
         text: string;
-        mediaSrc: string;
+        media: IMediaObject[];
+        header: string;
+    }
+    
+    export interface IMediaObject {
+        src: string;
+        desc: string;
         posterSrc?: string;
         showImg: boolean;
         showVideo: boolean;
-        header: string;
-        imgDesc: string;
     }
 
     export class MapController implements IMapController {
@@ -163,15 +167,17 @@ module Allied.Controllers {
             var date = new Date(data.properties.time);
             var months: string[] = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
             this.selectedFeature = <IFeatureViewmodel>{
+                id: data.properties.id,
                 date: date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear(),
                 header: data.properties.header,
                 text: data.properties.text,
-                showImg: data.properties.media.type === "img" || data.properties.media.type === "diary",
-                showVideo: data.properties.media.type === "video",
-                mediaSrc: data.properties.media.link || "",
-                posterSrc: data.properties.media.poster || "",
-                id: data.properties.id,
-                imgDesc: data.properties.media.description
+                media: _.map(data.properties.media, (m: any) => { return <IMediaObject>{
+                    desc: m.description,
+                    src: m.link || "",
+                    posterSrc: m.poster || "",
+                    showImg: m.type === "img" || m.type === "diary",
+                    showVideo: m.type === "video"
+                }})
             };
         }
 

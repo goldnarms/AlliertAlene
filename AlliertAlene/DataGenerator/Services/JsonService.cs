@@ -82,15 +82,15 @@ namespace DataGenerator.Services
                             place = location.Location.Place,
                             //marker = (int)location.,
                             text = baseData.Text,
-                            media = new Media
+                            media = baseData.MediaAssets.Select(ma => new Media
                             {
-                                description = baseData.MediaAssets.First().Description,
-                                link = baseData.MediaAssets.First().Reference,
-                                type = baseData.MediaAssets.First().MediaType == MediaType.Image
+                                description = ma.Description,
+                                link = ma.Reference,
+                                type = ma.MediaType == MediaType.Image
                                     ? "img"
-                                    : baseData.MediaAssets.First().MediaType == MediaType.Video ? "video" : "diary",
-                                poster = baseData.MediaAssets.First().Poster
-                            },
+                                    : ma.MediaType == MediaType.Video ? "video" : "diary",
+                                poster = ma.Poster
+                            }).ToList(),
                             time = baseData.Date.ToUnixTime(),
                             centerCoordinates =
                                 new[] { baseData.CenterLocation.Coordinate.Lat, baseData.CenterLocation.Coordinate.Lng },
