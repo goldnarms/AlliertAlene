@@ -39,14 +39,16 @@ angular.module('td.easySocialShare', [])
                       shareLinks.push({ network: key, url: theLink, icon: icon });
                   }
               });
-
+              var html = '<ul class="list-inline">';
               for (i = 0; i < shareLinks.length; i++) {
-                  var anchor = '';
+                  var anchor = '<li>';
                   anchor += '<a href="' + shareLinks[i].url + '"';
-                  anchor += ' class="' + shareLinks[i].icon + '" target="_blank"';
-                  anchor += '></a>';
-                  elem.append(anchor);
+                  anchor += 'target="_blank"';
+                  anchor += '><div class="share-' + shareLinks[i].network + '"></div></a></li>';
+                  html = html + anchor;
               }
+              html = html + "</ul>";
+              elem.append(html);
           }
       };
   }]);

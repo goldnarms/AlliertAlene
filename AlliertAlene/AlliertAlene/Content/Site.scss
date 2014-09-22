@@ -8,6 +8,19 @@ $font: 'Roboto Slab', serif;
 $brightRed: #ff0000;
 $darkRed: darken(#ff0000, 15%);
 
+.share-button {
+    background: url("share-sprite-branded.png") no-repeat scroll left top transparent;
+    overflow: hidden;
+    background-size: 30px auto;
+    width: 30px;
+    height: 30px;
+    &:hover{
+        background: url("share-sprite-hover.png") no-repeat scroll left top transparent;
+        overflow: hidden;
+        background-size: 30px auto;
+    }
+}
+
 html{
     background-color:$backgroundColor;
     color: $fontColor;
@@ -23,7 +36,7 @@ body {
 
 a{
     font-family: $font;
-    color: $darkRed;
+    color: white;
     &:hover{
         color: $brightRed;
     }
@@ -101,6 +114,7 @@ textarea {
         min-height: $smMapHeight;
     }
 }
+
 #map{
     height: 100%;
     min-height: $smMapHeight;
@@ -114,7 +128,6 @@ textarea {
         left: -15px;
         right: 0 !important;
         margin-right: 0;
-
     }
 }
 
@@ -266,8 +279,38 @@ textarea {
     }
 }
 
-.selected-date{
-    color: #ff0000;
+.share-twitter-bird{
+    &:hover{
+        color: #00B0ED !important;
+    }
+}
+
+.share-facebook{
+    @extend .share-button;
+    background-position: 0 -106px;
+    &:hover{
+        background-position: 0 -106px;
+    }
+}
+
+.share-twitter{
+    @extend .share-button;
+    background-position: 0 -76px;
+    &:hover{
+        background-position: 0 -76px;
+    }
+}
+
+.share-facebook-rect, .share-facebook{
+    &:hover{
+        color: #3B5998 !important;
+    }
+}
+
+.icon-instagram{
+    &:hover{
+        color: #517fa4 !important;
+    }
 }
 
 footer{

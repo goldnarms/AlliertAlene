@@ -578,6 +578,7 @@
     <Content Include="bower_components\video.js\video.dev.js" />
     <Content Include="bower_components\video.js\video.js" />
     <Content Include="Content\489977-11-1263484930922.jpg" />
+    <Content Include="Content\aalogo.jpg" />
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bck\bootstrap.min.css" />
@@ -607,6 +608,10 @@
     <Content Include="Content\Markers\text.png" />
     <Content Include="Content\Markers\video.png" />
     <Content Include="Content\redline.png" />
+    <Content Include="Content\share-sprite-branded.png" />
+    <Content Include="Content\share-sprite-hover.png" />
+    <Content Include="Content\share-sprite-white.png" />
+    <Content Include="Content\share-sprite.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.scss</DependentUpon>
     </Content>

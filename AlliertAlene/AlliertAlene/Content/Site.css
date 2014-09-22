@@ -1,4 +1,15 @@
-﻿html {
+﻿.share-button, .share-facebook, .share-twitter {
+  background: url("share-sprite-branded.png") no-repeat scroll left top transparent;
+  overflow: hidden;
+  background-size: 30px auto;
+  width: 30px;
+  height: 30px; }
+  .share-button:hover, .share-facebook:hover, .share-twitter:hover {
+    background: url("share-sprite-hover.png") no-repeat scroll left top transparent;
+    overflow: hidden;
+    background-size: 30px auto; }
+
+html {
   background-color: #111111;
   color: #efefef; }
 
@@ -12,7 +23,7 @@ body {
 
 a {
   font-family: 'Roboto Slab', serif;
-  color: #b30000; }
+  color: white; }
   a:hover {
     color: #ff0000; }
 
@@ -216,8 +227,24 @@ input, select, textarea {
     color: white;
     font-size: 1.3em; }
 
-.selected-date {
-  color: #ff0000; }
+.share-twitter-bird:hover {
+  color: #00B0ED !important; }
+
+.share-facebook {
+  background-position: 0 -106px; }
+  .share-facebook:hover {
+    background-position: 0 -106px; }
+
+.share-twitter {
+  background-position: 0 -76px; }
+  .share-twitter:hover {
+    background-position: 0 -76px; }
+
+.share-facebook-rect:hover, .share-facebook:hover {
+  color: #3B5998 !important; }
+
+.icon-instagram:hover {
+  color: #517fa4 !important; }
 
 footer {
   font-family: 'Roboto Slab', serif;
