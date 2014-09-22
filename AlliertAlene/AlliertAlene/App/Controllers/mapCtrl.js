@@ -100,9 +100,6 @@
                         initId = query[query.length - 1];
                     }
                     _this.totalFeatureCount = ids.length;
-                    _this.timeout(function () {
-                        //(<any>$('.timeline-carousel')).slickGoTo(this.timeIndices[initId]);
-                    });
                     _this.filterOnId(initId);
                 });
             };
@@ -117,9 +114,7 @@
                     var selectedFeatures = data.features;
                     if (selectedFeatures.length > 0) {
                         _this.setInfoBox(selectedFeatures[0]);
-                        var latLng = new L.LatLng(selectedFeatures[0].properties.centerCoordinates[1], selectedFeatures[0].properties.centerCoordinates[0]);
-
-                        //var latLng = selectedFeatures[0].properties.centerCoordinates;
+                        var latLng = _this.calculaterCenterLocation(data.features);
                         if (_this.lastLoc.lat !== latLng.lat || _this.lastLoc.lng !== latLng.lng) {
                             if (_this.map.getZoom() !== 6) {
                                 _this.map.setZoom(6);
@@ -135,6 +130,9 @@
                         marker.setIcon(_this.setMarker(feature.properties.marker));
                     });
                 });
+                this.timeout(function () {
+                    $('.timeline-carousel').slickGoTo(_this.timeIndices[id]);
+                }, 100);
             };
 
             MapController.prototype.setInfoBox = function (data) {
@@ -142,6 +140,7 @@
                 var months = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
                 this.selectedFeature = {
                     id: data.properties.id,
+                    selected: true,
                     date: date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear(),
                     header: data.properties.header,
                     text: data.properties.text,
@@ -155,6 +154,15 @@
                         };
                     })
                 };
+                this.timeout(function () {
+                    $(".pop-img").magnificPopup({
+                        type: 'image',
+                        image: {
+                            titleSrc: 'title'
+                        }
+                    });
+                });
+                //this.scope.$apply();
             };
 
             MapController.prototype.pointer = function (feature, latlng) {
@@ -208,6 +216,16 @@
                 }).on("click", function () {
                     that.setInfoBox(feature);
                 }).bindPopup('<strong>' + feature.properties.place + "</strong>");
+            };
+
+            MapController.prototype.calculaterCenterLocation = function (features) {
+                var lngCoordinates = _.map(features, function (f) {
+                    return f.geometry.coordinates[0];
+                });
+                var latCoordinates = _.map(features, function (f) {
+                    return f.geometry.coordinates[1];
+                });
+                return new L.LatLng((_.min(latCoordinates) + _.max(latCoordinates)) / 2, (_.min(lngCoordinates) + _.max(lngCoordinates)) / 2);
             };
 
             MapController.prototype.setMarker = function (markerType) {

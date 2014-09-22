@@ -91,9 +91,7 @@ namespace DataGenerator.Services
                                     : ma.MediaType == MediaType.Video ? "video" : "diary",
                                 poster = ma.Poster
                             }).ToList(),
-                            time = baseData.Date.ToUnixTime(),
-                            centerCoordinates =
-                                new[] { baseData.CenterLocation.Coordinate.Lat, baseData.CenterLocation.Coordinate.Lng },
+                            time = baseData.Date.ToUnixTime()
                         }
                     });
                     j++;

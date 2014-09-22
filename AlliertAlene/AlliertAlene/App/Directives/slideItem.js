@@ -39,4 +39,4 @@
     })(Allied.Directives || (Allied.Directives = {}));
     var Directives = Allied.Directives;
 })(Allied || (Allied = {}));
-//# sourceMappingURL=slideItem.js.map
+//# sourceMappingURL=slideitem.js.map

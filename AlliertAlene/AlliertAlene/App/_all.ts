@@ -7,3 +7,4 @@
 /// <reference path="services/mapservice.ts" />
 /// <reference path="directives/slideitem.ts" />
 declare var Lawnchair: any;
+declare var slick: any;

@@ -20,12 +20,13 @@ module Allied.Controllers {
 
     export interface IFeatureViewmodel {
         id: string;
+        selected: boolean;
         date: string;
         text: string;
         media: IMediaObject[];
         header: string;
     }
-    
+
     export interface IMediaObject {
         src: string;
         desc: string;
@@ -128,9 +129,6 @@ module Allied.Controllers {
                     initId = query[query.length - 1];
                 }
                 this.totalFeatureCount = ids.length;
-                this.timeout(() => {
-                    //(<any>$('.timeline-carousel')).slickGoTo(this.timeIndices[initId]);
-                });
                 this.filterOnId(initId);
             });
         }
@@ -144,8 +142,7 @@ module Allied.Controllers {
                 var selectedFeatures = data.features;
                 if (selectedFeatures.length > 0) {
                     this.setInfoBox(selectedFeatures[0]);
-                    var latLng = new L.LatLng(selectedFeatures[0].properties.centerCoordinates[1], selectedFeatures[0].properties.centerCoordinates[0]);
-                    //var latLng = selectedFeatures[0].properties.centerCoordinates;
+                    var latLng = this.calculaterCenterLocation(data.features);
                     if (this.lastLoc.lat !== latLng.lat || this.lastLoc.lng !== latLng.lng) {
                         if (this.map.getZoom() !== 6) {
                             this.map.setZoom(6);
@@ -161,6 +158,9 @@ module Allied.Controllers {
                     marker.setIcon(this.setMarker(feature.properties.marker));
                 });
             });
+            this.timeout(() => {
+                (<any>$('.timeline-carousel')).slickGoTo(this.timeIndices[id]);
+            }, 100);
         }
 
         public setInfoBox(data: any): void {
@@ -168,6 +168,7 @@ module Allied.Controllers {
             var months: string[] = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
             this.selectedFeature = <IFeatureViewmodel>{
                 id: data.properties.id,
+                selected: true,
                 date: date.getDate() + "." + months[date.getMonth()] + " " + date.getFullYear(),
                 header: data.properties.header,
                 text: data.properties.text,
@@ -177,8 +178,19 @@ module Allied.Controllers {
                     posterSrc: m.poster || "",
                     showImg: m.type === "img" || m.type === "diary",
                     showVideo: m.type === "video"
-                }})
+                }
+                })
             };
+            this.timeout(() => {
+                (<any>$(".pop-img")).magnificPopup(
+                    {
+                        type: 'image',
+                        image: {
+                            titleSrc: 'title'
+                        }
+                    });
+            });
+            //this.scope.$apply();
         }
 
         public pointer(feature: any, latlng: L.LatLng): L.Marker {
@@ -234,8 +246,14 @@ module Allied.Controllers {
                 icon: icon,
                 zIndexOffset: 1000
             }).on("click", () => {
-                that.setInfoBox(feature);
-            }).bindPopup('<strong>' + feature.properties.place + "</strong>");
+                    that.setInfoBox(feature);
+                }).bindPopup('<strong>' + feature.properties.place + "</strong>");
+        }
+
+        private calculaterCenterLocation(features: any[]): L.LatLng {
+            var lngCoordinates = _.map(features, (f: any) => { return f.geometry.coordinates[0]; });
+            var latCoordinates = _.map(features, (f: any) => { return f.geometry.coordinates[1]; });
+            return new L.LatLng((_.min(latCoordinates) + _.max(latCoordinates)) / 2, (_.min(lngCoordinates) + _.max(lngCoordinates)) / 2);
         }
 
         private setMarker(markerType: app.MarkerType): L.Icon {

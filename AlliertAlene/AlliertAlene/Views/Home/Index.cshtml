@@ -1,22 +1,14 @@
-﻿@section SPAViews {
-    <div data-ng-app="allied" data-ng-controller="mapCtrl as mc">
+﻿<div data-ng-app="allied" data-ng-controller="mapCtrl as mc">
     @Html.Partial("_Home")
 </div>
-}
+
 @section Scripts{
-    @Scripts.Render("~/bundles/app")
     <script>
-        (function($) {
-            $(window).load(function() {
+        (function ($) {
+            $(window).load(function () {
                 $("#infoContent").mCustomScrollbar();
-                $(".pop-img").magnificPopup(
-                {
-                    type: 'image',
-                    image: {
-                        titleSrc: 'title'
-                    }
-                });
                 $('.timeline-carousel').slick({
+                    centerMode: true,
                     infinite: false,
                     slidesToShow: 5,
                     dots: true
@@ -24,4 +16,5 @@
             });
         })(jQuery);
     </script>
+    @Scripts.Render("~/bundles/app")
 }
