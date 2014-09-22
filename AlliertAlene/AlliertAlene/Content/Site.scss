@@ -1,6 +1,6 @@
 ﻿$backgroundColor: #111111;
 $fontColor: #efefef;
-$mapHeight: 500px;
+$mapHeight: 400px;
 $smMapHeight: 350px;
 $textBackground: #393939;
 $elementBackground: #303030;
@@ -44,12 +44,19 @@ a{
 h1{
     font-family: $font;
     font-weight: 300;
-    font-size: 5rem;
+    font-size: 3.5rem;
+    margin-top: 12px;
 }
 h2{
     font-family: $font;
 }
 h3{
+    font-family: $font;
+}
+h4{
+    font-family: $font;
+}
+h5{
     font-family: $font;
 }
 /* Set padding to keep content from hitting the edges */
@@ -186,10 +193,6 @@ textarea {
     }
 }
 
-#featureDate{
-    font-size: 2em;
-}
-
 .leaflet-control-zoom{
     float:right;
     right: 20px;
@@ -238,7 +241,7 @@ textarea {
     text-align: right;
     width: 100%;
     float:right;
-    font-size: 1.2em;
+    height: 30px;
     a{
         color: $fontColor;
         &:hover{
@@ -279,7 +282,7 @@ textarea {
     }
 }
 
-.share-twitter-bird{
+.icon-twitter-bird{
     &:hover{
         color: #00B0ED !important;
     }
@@ -301,7 +304,7 @@ textarea {
     }
 }
 
-.share-facebook-rect, .share-facebook{
+.icon-facebook-rect, .icon-facebook{
     &:hover{
         color: #3B5998 !important;
     }

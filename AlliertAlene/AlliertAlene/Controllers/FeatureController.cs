@@ -58,6 +58,12 @@ namespace AlliertAlene.Controllers
                     new DataFeatureLocation(),
                     new DataFeatureLocation(),
                     new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
+                    new DataFeatureLocation(),
                     new DataFeatureLocation()
                 },
                 Regions = BuildRegionList(),

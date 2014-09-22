@@ -11,14 +11,10 @@ namespace AlliertAlene
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/thirdparties").Include(
-//"~/bower_components/d3/d3.js",
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-sanitize.js",
                 "~/Scripts/bootstrap.js",
-                "~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                "~/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.no.js",
                 "~/bower_components/angular-easy-social-share/easy-social-share.js",
-                //"~/Scripts/respond.js",
                 "~/bower_components/mapbox.js/mapbox.js",
                 "~/bower_components/video.js/video.js",
                 "~/Scripts/jquery-{version}.js",
@@ -27,17 +23,14 @@ namespace AlliertAlene
                 "~/bower_components/underscore/underscore.js",
                 "~/bower_components/lawnchair/src/Lawnchair.js",
                 "~/bower_components/lawnchair/src/plugins/query.js",
-                //"~/bower_components/lawnchair/src/adapters/blackberry-persistent-storage.js",
-                //"~/bower_components/lawnchair/src/adapters/chrome-storage.js",
-
                 "~/bower_components/lawnchair/src/adapters/dom.js",
-                "~/bower_components/lawnchair/src/adapters/gears-sqlite.js",
+                                "~/bower_components/lawnchair/src/adapters/gears-sqlite.js",
                 "~/bower_components/lawnchair/src/adapters/html5-filesystem.js",
                 "~/bower_components/lawnchair/src/adapters/ie-userdata.js",
                 "~/bower_components/lawnchair/src/adapters/indexed-db.js",
                 "~/bower_components/lawnchair/src/adapters/memory.js",
                 "~/bower_components/lawnchair/src/adapters/touchdb-couchdb.js",
-                "~/bower_components/lawnchair/src/adapters/webkit-sqlite.js",
+                //"~/bower_components/lawnchair/src/adapters/webkit-sqlite.js",
                 "~/bower_components/lawnchair/src/adapters/window-name.js",
                 "~/bower_components/slick.js/slick/slick.js"
                 ));
@@ -71,7 +64,7 @@ namespace AlliertAlene
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
             //BundleTable.EnableOptimizations = false;
         }
     }

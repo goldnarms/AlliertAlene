@@ -1717,11 +1717,11 @@
     $.fn.slickGoTo = function(slide) {
         var _ = this;
         return _.each(function(index, element) {
-
-            var asNavFor = element.slick.options.asNavFor != null ? $(element.slick.options.asNavFor) : null;
-            if(asNavFor != null) asNavFor.slickGoTo(slide);
-            element.slick.slideHandler(slide);
-
+            if (!!element.slick) {
+                var asNavFor = element.slick.options.asNavFor != null ? $(element.slick.options.asNavFor) : null;
+                if (asNavFor != null) asNavFor.slickGoTo(slide);
+                element.slick.slideHandler(slide);
+            }
         });
     };
 

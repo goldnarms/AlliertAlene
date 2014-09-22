@@ -214,8 +214,8 @@
                     icon: icon,
                     zIndexOffset: 1000
                 }).on("click", function () {
-                    that.setInfoBox(feature);
-                }).bindPopup('<strong>' + feature.properties.place + "</strong>");
+                    //that.setInfoBox(feature);
+                }).bindPopup('<strong>' + feature.properties.place[0].toUpperCase() + feature.properties.place.substring(1).toLowerCase() + "</strong>");
             };
 
             MapController.prototype.calculaterCenterLocation = function (features) {

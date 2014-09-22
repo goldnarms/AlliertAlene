@@ -1,11 +1,4 @@
 ﻿<h1 class="header">Alliert og alene</h1>
-<div class="desktop-header">
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            <h3 id="featureDate" data-ng-bind="mc.selectedFeature.date"></h3>
-        </div>
-    </div>
-</div>
 <div class="row mapContainer" style="position: relative">
     <div id="mapBox" class="col-xs-12 col-sm-8">
         <div id='map' class='dark'></div>
@@ -25,8 +18,9 @@
     <div id="infoBox" class="col-xs-12 col-sm-4">
         <ul class="list-inline feature-header-list">
             <li>
-                <h2 data-ng-bind="mc.selectedFeature.header"></h2>
+                <h3 data-ng-bind="mc.selectedFeature.header"></h3>
             </li>
+            <li data-ng-hide="mc.isSmallScreen"><h5 data-ng-bind="mc.selectedFeature.date"></h5></li>
             <li>
                 <div class="social-share">
                     <div share-links="Facebook, Twitter" feature="mc.selectedFeature"></div>

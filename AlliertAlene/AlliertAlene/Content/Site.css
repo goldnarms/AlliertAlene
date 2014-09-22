@@ -30,12 +30,19 @@ a {
 h1 {
   font-family: 'Roboto Slab', serif;
   font-weight: 300;
-  font-size: 5rem; }
+  font-size: 3.5rem;
+  margin-top: 12px; }
 
 h2 {
   font-family: 'Roboto Slab', serif; }
 
 h3 {
+  font-family: 'Roboto Slab', serif; }
+
+h4 {
+  font-family: 'Roboto Slab', serif; }
+
+h5 {
   font-family: 'Roboto Slab', serif; }
 
 /* Set padding to keep content from hitting the edges */
@@ -66,18 +73,18 @@ input, select, textarea {
     max-height: 100%; }
   @media (min-width: 768px) {
     #infoBox {
-      height: 500px; } }
+      height: 400px; } }
 
 @media (min-width: 768px) {
   #infoContent {
     overflow: auto;
-    height: 410px; } }
+    height: 310px; } }
 #infoContent img {
   margin-top: 10px; }
 
 .mapContainer {
   height: 100%;
-  min-height: 500px;
+  min-height: 400px;
   margin-right: 0;
   margin-left: 0; }
   .mapContainer > #mapBox {
@@ -87,7 +94,7 @@ input, select, textarea {
     @media (min-width: 768px) {
       .mapContainer > #mapBox {
         left: 15px;
-        min-height: 500px; } }
+        min-height: 400px; } }
 
 #map {
   height: 100%;
@@ -99,7 +106,7 @@ input, select, textarea {
   left: 0; }
   @media (min-width: 768px) {
     #map {
-      min-height: 500px;
+      min-height: 400px;
       left: -15px;
       right: 0 !important;
       margin-right: 0; } }
@@ -149,9 +156,6 @@ input, select, textarea {
     .feature-link {
       display: none; } }
 
-#featureDate {
-  font-size: 2em; }
-
 .leaflet-control-zoom {
   float: right;
   right: 20px;
@@ -195,7 +199,7 @@ input, select, textarea {
   text-align: right;
   width: 100%;
   float: right;
-  font-size: 1.2em; }
+  height: 30px; }
   .social-share a {
     color: #efefef; }
     .social-share a:hover {
@@ -227,7 +231,7 @@ input, select, textarea {
     color: white;
     font-size: 1.3em; }
 
-.share-twitter-bird:hover {
+.icon-twitter-bird:hover {
   color: #00B0ED !important; }
 
 .share-facebook {
@@ -240,7 +244,7 @@ input, select, textarea {
   .share-twitter:hover {
     background-position: 0 -76px; }
 
-.share-facebook-rect:hover, .share-facebook:hover {
+.icon-facebook-rect:hover, .icon-facebook:hover {
   color: #3B5998 !important; }
 
 .icon-instagram:hover {

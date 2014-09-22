@@ -13,7 +13,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://alliertalene.azurewebsites.net/" />
     <meta property="og:title" content="Alliert og alene" />
-    <meta property="og:image" content="http://alliertalene.azurewebsites.net/Content/aalogo.jpg" />
+    <meta property="og:image" content="http://alliertalene.azurewebsites.net/Content/fbaalogo.jpg" />
     <title>Alliert og alene</title>
 </head>
     <body>
@@ -99,9 +99,9 @@
                 </div>
             </div>
             <script>
-if (window.require) {
-require(['Serum.Masthead']);
-}
+                if (window.require) {
+                    require(['Serum.Masthead']);
+                }
             </script>
         </div>
         <!-- This example requires d3 for AJAX and the brush,
@@ -112,6 +112,14 @@ require(['Serum.Masthead']);
         </div>
 
         @Scripts.Render("~/bundles/thirdparties")
+        <script type="text/javascript">
+            if (window.chrome && !!chrome.storage) {
+                var fileref = document.createElement('script');
+                fileref.setAttribute("type", "text/javascript");
+                fileref.setAttribute("src", "bower_components/lawnchair/src/adapters/chrome-storage.js");
+                document.getElementsByTagName("body")[0].appendChild(fileref);
+            }
+        </script>
         @RenderSection("Scripts", required: false)
     </body>
 </html>

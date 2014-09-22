@@ -7,8 +7,8 @@
 //
 // Oh, what a tangled web we weave when a callback is what we use to receive - jrschifa
 //
-Lawnchair.adapter('chrome-storage', (function() {
-    var storage = chrome.storage.local
+Lawnchair.adapter('chrome-storage', (function () {
+    var storage = chrome.storage.local;
 
     var indexer = function(name) {
         return {

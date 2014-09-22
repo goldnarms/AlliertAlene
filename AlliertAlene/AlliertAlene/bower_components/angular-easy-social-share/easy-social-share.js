@@ -43,7 +43,7 @@ angular.module('td.easySocialShare', [])
               for (i = 0; i < shareLinks.length; i++) {
                   var anchor = '<li>';
                   anchor += '<a href="' + shareLinks[i].url + '"';
-                  anchor += 'target="_blank"';
+                  anchor += 'target="_blank" title="Del p&aring ' + shareLinks[i].network[0].toUpperCase() + shareLinks[i].network.substring(1) + '"';
                   anchor += '><div class="share-' + shareLinks[i].network + '"></div></a></li>';
                   html = html + anchor;
               }
